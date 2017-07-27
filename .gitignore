@@ -1,2 +1,2 @@
-**/**/*appsettings.Staging
-Amesc.WebApp/Properties/PublishProfiles/*
+*appsettings.Staging
+/PublishProfiles
