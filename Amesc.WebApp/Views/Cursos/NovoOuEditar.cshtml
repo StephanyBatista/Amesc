@@ -1,0 +1,101 @@
+﻿@model Amesc.WebApp.ViewModels.CursoParaCadastroViewModel
+@{
+    ViewData["Title"] = "Cursos";
+}
+
+<div id="pad-wrapper">
+
+    <div class="row">
+        <div class="col-md-12">
+            <a href="/Cursos" class="btn">Voltar</a>
+        </div>
+    </div>
+    <div class="row header">
+        <div class="col-md-1">
+            <h3>Cursos</h3>
+        </div>
+    </div>
+    <div class="row form-wrapper">
+        <div class="col-md-12">
+            <form id="form" class="form-horizontal" asp-action="Salvar" asp-controller="Cursos" asp-anti-forgery
+                  data-ajax="true" data-ajax-method="POST" data-ajax-failure="formQuandoFalha" data-ajax-success="window.location = '/Cursos'">
+                <input type="hidden" class="form-control" asp-for="Id">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Nome</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" asp-for="Nome">
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Descrição</label>
+                    <div class="col-md-8">
+                        <textarea type="text" class="form-control" asp-for="Descricao"></textarea>
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Preço sugerido</label>
+                    <div class="col-md-2">
+                        <input class="form-control" asp-for="PrecoSugerido" id="precoSugerido">
+                        <span asp-validation-for="PrecoSugerido" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Publico</label>
+                    <div class="col-md-2">
+                        <input type="checkbox" name="PublicosAlvo" value="Médico(a)" @Model.ChecarPublicoAlvoParaInputHtml("Médico(a)")> Médico(a)<br />
+                        <input type="checkbox" name="PublicosAlvo" value="Aluno 6° ano de medicina" @Model.ChecarPublicoAlvoParaInputHtml("Aluno 6° ano de medicina")> Aluno 6° ano de medicina<br />
+                        <input type="checkbox" name="PublicosAlvo" value="Enfermeiro(a)" @Model.ChecarPublicoAlvoParaInputHtml("Enfermeiro(a)")> Enfermeiro(a)<br />
+                        <input type="checkbox" name="PublicosAlvo" value="Bombeiro(a)" @Model.ChecarPublicoAlvoParaInputHtml("Bombeiro(a)")> Bombeiro(a)<br />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Requisitos</label>
+                    <div class="col-md-8">
+                        <textarea type="text" class="form-control" asp-for="Requisitos"></textarea>
+                        <span asp-validation-for="Requisitos" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Período válido</label>
+                    <div class="col-md-1">
+                        <select class="form-control" asp-for="PeriodoValidoEmAno">
+                            <option></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <button class="btn btn-success">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.validate.unobtrusive.js"></script>
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="/js/jquery.priceformat.min.js"></script>
+    <script src="/js/excecaoDeDominio.js"></script>
+    <script>
+        $(function() {
+            $('#precoSugerido').priceFormat({
+                prefix: '',
+                centsSeparator: ',',
+                thousandsSeparator: '.'
+            });
+        });
+    </script>
+}
+
+    
+
+
+
+

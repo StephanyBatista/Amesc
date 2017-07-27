@@ -1,0 +1,3 @@
+C:\source\Amesc\Amesc\Amesc.DominioTestes\bin\Debug\netstandard1.6\Amesc.DominioTestes.deps.json
+C:\source\Amesc\Amesc\Amesc.DominioTestes\obj\Debug\netstandard1.6\Amesc.DominioTestes.csprojResolveAssemblyReference.cache
+C:\source\Amesc\Amesc\Amesc.DominioTestes\obj\Debug\netstandard1.6\Amesc.DominioTestes.AssemblyInfo.cs

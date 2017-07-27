@@ -1,0 +1,93 @@
+﻿using Amesc.Data.Contexts;
+using Amesc.Data.Repositorios;
+using Amesc.Dominio;
+using Amesc.Dominio.Alunos;
+using Amesc.Dominio.Cursos;
+using Amesc.WebApp.Filters;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
+namespace Amesc.WebApp
+{
+    public class Startup
+    {
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
+
+        public IConfigurationRoot Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped(typeof(IRepositorio<>), typeof(RepositorioBase<>));
+            services.AddScoped(typeof(IRepositorio<Curso>), typeof(CursoRepositorio));
+            services.AddScoped(typeof(IAlunoRepositorio), typeof(AlunoRepositorio));
+            services.AddScoped(typeof(ICursoComMatriculaAbertaRepositorio), typeof(CursoComMatriculaAbertaRepositorio));
+            services.AddScoped(typeof(ArmazenadorDeAluno));
+            services.AddScoped(typeof(ArmazenadorDeCurso));
+            services.AddScoped(typeof(ArmazenadorDeCursoComMatriculaAberta));
+
+            services.AddMvc(config => {
+                config.Filters.Add(typeof(CustomExceptionFilter));
+            });
+
+            // Add framework services.
+            services.AddMvc();
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            app.Use(async (context, next) =>
+            {
+                //Request
+                await next.Invoke();
+
+                var applicationDbContext = (ApplicationDbContext)context.RequestServices.GetService(typeof(ApplicationDbContext));
+                //Response
+                await applicationDbContext.Commit();
+            });
+
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
+            //if (env.IsDevelopment())
+            //{
+            app.UseDeveloperExceptionPage();
+            app.UseBrowserLink();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            //}
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("pt-BR")
+            });
+
+            app.UseStaticFiles();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+        }
+    }
+}

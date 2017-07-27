@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>AMESC @ViewData["Title"]</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- bootstrap -->
+    <link href="/css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="/css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
+    <!-- libraries -->
+    <link href="/css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />
+    <link href="/css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="/css/compiled/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/css/compiled/elements.css" />
+    <link rel="stylesheet" type="text/css" href="/css/compiled/icons.css" />
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="/css/compiled/index.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <!-- open sans font -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+    <!-- lato font -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- navbar -->
+    <header class="navbar navbar-inverse" role="banner">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <img src="/images/logo.png" alt="logo" />
+            </a>
+        </div>
+        <ul class="nav navbar-nav pull-right hidden-xs">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                    Fulano
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Personal info</a></li>
+                    <li><a href="#">Conta</a></li>
+                    <li><a href="#">Sair</a></li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <!-- end navbar -->
+    <!-- sidebar -->
+    <div id="sidebar-nav">
+        <ul id="dashboard-menu">
+            <li class="active">
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <a href="/">
+                    <i class="icon-home"></i>
+                    <span>Home</span>
+                </a>                
+            </li>
+            <li>
+                <a href="/Cursos">
+                    <i class="icon-edit"></i>
+                    <span>Cursos</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Alunos">
+                    <i class="icon-edit"></i>
+                    <span>Alunos</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+    <!-- main container -->
+    <div class="content">
+        @RenderBody()
+    </div>
+
+    <!-- scripts -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery-ui-1.10.2.custom.min.js"></script>
+    <!-- knob -->
+    <script src="/js/jquery.knob.js"></script>
+    <!-- flot charts -->
+    <script src="/js/jquery.flot.js"></script>
+    <script src="/js/jquery.flot.stack.js"></script>
+    <script src="/js/jquery.flot.resize.js"></script>
+    <script src="/js/theme.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
