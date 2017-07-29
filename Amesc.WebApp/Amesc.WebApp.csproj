@@ -10,12 +10,27 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\NewFolder\**" />
+    <Compile Remove="Css\**" />
     <Content Remove="Controllers\NewFolder\**" />
+    <Content Remove="Css\**" />
     <EmbeddedResource Remove="Controllers\NewFolder\**" />
+    <EmbeddedResource Remove="Css\**" />
     <None Remove="Controllers\NewFolder\**" />
+    <None Remove="Css\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Js\excecaoDeDominio.js" />
+    <Content Include="Js\jquery.maskedinput.min.js" />
+    <Content Include="Js\jquery.priceformat.min.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Js\site.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Js\site.min.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot\css\bootstrap\bootstrap-overrides.css" />
     <Content Include="wwwroot\css\bootstrap\bootstrap.css" />
     <Content Include="wwwroot\css\bootstrap\bootstrap.min.css" />
@@ -81,29 +96,18 @@
     <Content Include="wwwroot\font\glyphicons-halflings-regular.svg" />
     <Content Include="wwwroot\font\glyphicons-halflings-regular.ttf" />
     <Content Include="wwwroot\font\glyphicons-halflings-regular.woff" />
-    <Content Include="wwwroot\js\ace\ace.js" />
-    <Content Include="wwwroot\js\ace\mode-javascript.js" />
     <Content Include="wwwroot\js\bootstrap.datepicker.js" />
     <Content Include="wwwroot\js\bootstrap.js" />
-    <Content Include="wwwroot\js\bootstrap.min.js" />
     <Content Include="wwwroot\js\excecaoDeDominio.js" />
-    <Content Include="wwwroot\js\fuelux.wizard.js" />
     <Content Include="wwwroot\js\fullcalendar.min.js" />
     <Content Include="wwwroot\js\gcal.js" />
     <Content Include="wwwroot\js\jquery-ui-1.10.2.custom.min.js" />
-    <Content Include="wwwroot\js\jquery.dataTables.js" />
-    <Content Include="wwwroot\js\jquery.flot.js" />
     <Content Include="wwwroot\js\jquery.flot.resize.js" />
-    <Content Include="wwwroot\js\jquery.flot.stack.js" />
     <Content Include="wwwroot\js\jquery.knob.js" />
     <Content Include="wwwroot\js\jquery.maskedinput.min.js" />
-    <Content Include="wwwroot\js\jquery.tmpl.min.js" />
-    <Content Include="wwwroot\js\jquery.uniform.min.js" />
     <Content Include="wwwroot\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="wwwroot\js\jquery.validate.min.js" />
     <Content Include="wwwroot\js\jquery.validate.unobtrusive.js" />
-    <Content Include="wwwroot\js\morris.min.js" />
-    <Content Include="wwwroot\js\select2.min.js" />
     <Content Include="wwwroot\js\theme.js" />
     <Content Include="wwwroot\js\wysihtml5-0.3.0.js" />
   </ItemGroup>
@@ -122,10 +126,6 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Css\" />
-    <Folder Include="Js\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Amesc.Data\Amesc.Data.csproj" />

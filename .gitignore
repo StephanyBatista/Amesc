@@ -1,2 +1,3 @@
-*appsettings.Staging
+*appsettings.Staging.son
 /PublishProfiles
+/node_modules
