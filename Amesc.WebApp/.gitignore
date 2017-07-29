@@ -1,3 +1,5 @@
-﻿*.Staging.json
+﻿# .gitignore
+# Project files and directories
+*.Staging.json
 Properties/PublishProfiles/
 node_modules/
