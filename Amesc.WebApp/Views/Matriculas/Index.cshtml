@@ -1,0 +1,59 @@
+@model List<Amesc.WebApp.ViewModels.MatriculaParaListaViewModel>
+@{
+    ViewData["Title"] = "Matriculas";
+}
+
+<div id="pad-wrapper">
+
+    <div class="row header">
+        <div class="col-md-1">
+            <h3>Matriculas</h3>
+        </div>
+    </div>
+    <div class="row">
+        <a href="/Matriculas/Novo" class="btn btn-primary">Novo</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Aluno</th>
+                    <th>CPF</th>
+                    <th>Curso</th>
+                    <th>Data do curso</th>
+                    <th>Pago?</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Aluno
+                        </td>
+                        <td>
+                            @item.Cpf
+                        </td>
+                        <td>
+                            @item.Curso
+                        </td>
+                        <td>
+                            @item.DataDoCurso.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @item.EstaPago
+                        </td>
+                        <td>
+                            <a href="/Matriculas/Gerenciar/@item.Id" class="btn">Gerenciar</a>
+                        </td>
+                    </tr>   
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

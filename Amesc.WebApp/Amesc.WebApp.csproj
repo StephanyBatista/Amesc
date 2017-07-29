@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="appsettings.Staging.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Js\excecaoDeDominio.js" />
     <Content Include="Js\jquery.maskedinput.min.js" />
     <Content Include="Js\jquery.priceformat.min.js">
@@ -31,62 +35,6 @@
     <Content Include="Js\site.min.js">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="wwwroot\css\bootstrap\bootstrap-overrides.css" />
-    <Content Include="wwwroot\css\bootstrap\bootstrap.css" />
-    <Content Include="wwwroot\css\bootstrap\bootstrap.min.css" />
-    <Content Include="wwwroot\css\compiled\calendar.css" />
-    <Content Include="wwwroot\css\compiled\chart-showcase.css" />
-    <Content Include="wwwroot\css\compiled\code-editor.css" />
-    <Content Include="wwwroot\css\compiled\datatables.css" />
-    <Content Include="wwwroot\css\compiled\elements.css" />
-    <Content Include="wwwroot\css\compiled\form-showcase.css" />
-    <Content Include="wwwroot\css\compiled\form-wizard.css" />
-    <Content Include="wwwroot\css\compiled\gallery.css" />
-    <Content Include="wwwroot\css\compiled\grids.css" />
-    <Content Include="wwwroot\css\compiled\icons.css" />
-    <Content Include="wwwroot\css\compiled\index.css" />
-    <Content Include="wwwroot\css\compiled\layout.css" />
-    <Content Include="wwwroot\css\compiled\new-user.css" />
-    <Content Include="wwwroot\css\compiled\personal-info.css" />
-    <Content Include="wwwroot\css\compiled\signin.css" />
-    <Content Include="wwwroot\css\compiled\signup.css" />
-    <Content Include="wwwroot\css\compiled\skins\dark.css" />
-    <Content Include="wwwroot\css\compiled\tables.css" />
-    <Content Include="wwwroot\css\compiled\ui-elements.css" />
-    <Content Include="wwwroot\css\compiled\user-list.css" />
-    <Content Include="wwwroot\css\compiled\user-profile.css" />
-    <Content Include="wwwroot\css\compiled\web-app-icons.css" />
-    <Content Include="wwwroot\css\lib\bootstrap.datepicker.css" />
-    <Content Include="wwwroot\css\lib\font-awesome.css" />
-    <Content Include="wwwroot\css\lib\fullcalendar.css" />
-    <Content Include="wwwroot\css\lib\fullcalendar.print.css" />
-    <Content Include="wwwroot\css\lib\jquery-ui-1.10.2.custom.css" />
-    <Content Include="wwwroot\css\lib\jquery.dataTables.css" />
-    <Content Include="wwwroot\css\lib\morris.css" />
-    <Content Include="wwwroot\css\lib\select2.css" />
-    <Content Include="wwwroot\css\lib\uniform.default.css" />
-    <Content Include="wwwroot\css\scss\calendar.scss" />
-    <Content Include="wwwroot\css\scss\chart-showcase.scss" />
-    <Content Include="wwwroot\css\scss\code-editor.scss" />
-    <Content Include="wwwroot\css\scss\datatables.scss" />
-    <Content Include="wwwroot\css\scss\elements.scss" />
-    <Content Include="wwwroot\css\scss\form-showcase.scss" />
-    <Content Include="wwwroot\css\scss\form-wizard.scss" />
-    <Content Include="wwwroot\css\scss\gallery.scss" />
-    <Content Include="wwwroot\css\scss\grids.scss" />
-    <Content Include="wwwroot\css\scss\icons.scss" />
-    <Content Include="wwwroot\css\scss\index.scss" />
-    <Content Include="wwwroot\css\scss\layout.scss" />
-    <Content Include="wwwroot\css\scss\new-user.scss" />
-    <Content Include="wwwroot\css\scss\personal-info.scss" />
-    <Content Include="wwwroot\css\scss\signin.scss" />
-    <Content Include="wwwroot\css\scss\signup.scss" />
-    <Content Include="wwwroot\css\scss\skins\dark.scss" />
-    <Content Include="wwwroot\css\scss\tables.scss" />
-    <Content Include="wwwroot\css\scss\ui-elements.scss" />
-    <Content Include="wwwroot\css\scss\user-list.scss" />
-    <Content Include="wwwroot\css\scss\user-profile.scss" />
-    <Content Include="wwwroot\css\scss\web-app-icons.scss" />
     <Content Include="wwwroot\font\fontawesome-webfont.eot" />
     <Content Include="wwwroot\font\fontawesome-webfont.svg" />
     <Content Include="wwwroot\font\fontawesome-webfont.ttf" />
@@ -96,20 +44,12 @@
     <Content Include="wwwroot\font\glyphicons-halflings-regular.svg" />
     <Content Include="wwwroot\font\glyphicons-halflings-regular.ttf" />
     <Content Include="wwwroot\font\glyphicons-halflings-regular.woff" />
-    <Content Include="wwwroot\js\bootstrap.datepicker.js" />
-    <Content Include="wwwroot\js\bootstrap.js" />
+    <Content Include="wwwroot\js\bootstrap.min.js" />
     <Content Include="wwwroot\js\excecaoDeDominio.js" />
-    <Content Include="wwwroot\js\fullcalendar.min.js" />
-    <Content Include="wwwroot\js\gcal.js" />
-    <Content Include="wwwroot\js\jquery-ui-1.10.2.custom.min.js" />
-    <Content Include="wwwroot\js\jquery.flot.resize.js" />
-    <Content Include="wwwroot\js\jquery.knob.js" />
     <Content Include="wwwroot\js\jquery.maskedinput.min.js" />
     <Content Include="wwwroot\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="wwwroot\js\jquery.validate.min.js" />
     <Content Include="wwwroot\js\jquery.validate.unobtrusive.js" />
-    <Content Include="wwwroot\js\theme.js" />
-    <Content Include="wwwroot\js\wysihtml5-0.3.0.js" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
@@ -130,6 +70,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Amesc.Data\Amesc.Data.csproj" />
     <ProjectReference Include="..\Amesc.Dominio\Amesc.Dominio.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
 </Project>

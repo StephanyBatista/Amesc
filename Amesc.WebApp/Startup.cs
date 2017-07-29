@@ -3,6 +3,7 @@ using Amesc.Data.Repositorios;
 using Amesc.Dominio;
 using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
+using Amesc.Dominio.Matriculas;
 using Amesc.WebApp.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,10 +37,13 @@ namespace Amesc.WebApp
             services.AddScoped(typeof(IRepositorio<>), typeof(RepositorioBase<>));
             services.AddScoped(typeof(IRepositorio<Curso>), typeof(CursoRepositorio));
             services.AddScoped(typeof(IAlunoRepositorio), typeof(AlunoRepositorio));
-            services.AddScoped(typeof(ICursoComMatriculaAbertaRepositorio), typeof(CursoComMatriculaAbertaRepositorio));
+            services.AddScoped(typeof(ICursoAbertoRepositorio), typeof(CursoAbertoRepositorio));
+            services.AddScoped(typeof(IMatriculaRepositorio), typeof(MatriculaRepositorio));
             services.AddScoped(typeof(ArmazenadorDeAluno));
             services.AddScoped(typeof(ArmazenadorDeCurso));
-            services.AddScoped(typeof(ArmazenadorDeCursoComMatriculaAberta));
+            services.AddScoped(typeof(ArmazenadorDeCursoAberto));
+            services.AddScoped(typeof(CriacaoDeMatricula));
+            services.AddScoped(typeof(AlteracaoDeDadosDaMatricula));
 
             services.AddMvc(config => {
                 config.Filters.Add(typeof(CustomExceptionFilter));

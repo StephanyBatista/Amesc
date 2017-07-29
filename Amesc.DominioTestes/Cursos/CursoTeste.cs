@@ -42,6 +42,14 @@ namespace Amesc.DominioTestes.Cursos
         }
 
         [TestMethod]
+        public void DeveInformarQueCursoContemPublicoAlvo()
+        {
+            var curso = new Curso(_nome, _descricao, _precoSugerido, _publicosAlvo, _requisitos, _periodoValidoEmAno);
+
+            Assert.IsTrue(curso.ContemPublicoAlvo("Médico(a)"));
+        }
+
+        [TestMethod]
         public void DeveCriarUmCursoSemPublicoAlvo()
         {
             var curso = new Curso(_nome, _descricao, _precoSugerido, null, _requisitos, _periodoValidoEmAno);

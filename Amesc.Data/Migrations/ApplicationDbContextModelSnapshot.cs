@@ -70,7 +70,7 @@ namespace Amesc.Data.Migrations
                     b.ToTable("Curso");
                 });
 
-            modelBuilder.Entity("Amesc.Dominio.Cursos.CursoComMatriculaAberta", b =>
+            modelBuilder.Entity("Amesc.Dominio.Cursos.CursoAberto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -89,7 +89,7 @@ namespace Amesc.Data.Migrations
 
                     b.HasIndex("CursoId");
 
-                    b.ToTable("CursoComMatriculaAberta");
+                    b.ToTable("CursoAberto");
                 });
 
             modelBuilder.Entity("Amesc.Dominio.Cursos.PublicoAlvoParaCurso", b =>
@@ -108,6 +108,32 @@ namespace Amesc.Data.Migrations
                     b.ToTable("PublicoAlvoParaCurso");
                 });
 
+            modelBuilder.Entity("Amesc.Dominio.Matriculas.Matricula", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("AlunoId");
+
+                    b.Property<int?>("CursoAbertoId");
+
+                    b.Property<DateTime>("DataDeCriacao");
+
+                    b.Property<bool>("EstaPago");
+
+                    b.Property<float?>("NotaDoAlunoNoCurso");
+
+                    b.Property<string>("Observacao");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlunoId");
+
+                    b.HasIndex("CursoAbertoId");
+
+                    b.ToTable("Matricula");
+                });
+
             modelBuilder.Entity("Amesc.Dominio.Alunos.Aluno", b =>
                 {
                     b.HasOne("Amesc.Dominio.Alunos.Contato", "Contato")
@@ -115,7 +141,7 @@ namespace Amesc.Data.Migrations
                         .HasForeignKey("ContatoId");
                 });
 
-            modelBuilder.Entity("Amesc.Dominio.Cursos.CursoComMatriculaAberta", b =>
+            modelBuilder.Entity("Amesc.Dominio.Cursos.CursoAberto", b =>
                 {
                     b.HasOne("Amesc.Dominio.Cursos.Curso", "Curso")
                         .WithMany()
@@ -127,6 +153,17 @@ namespace Amesc.Data.Migrations
                     b.HasOne("Amesc.Dominio.Cursos.Curso")
                         .WithMany("PublicosAlvo")
                         .HasForeignKey("CursoId");
+                });
+
+            modelBuilder.Entity("Amesc.Dominio.Matriculas.Matricula", b =>
+                {
+                    b.HasOne("Amesc.Dominio.Alunos.Aluno", "Aluno")
+                        .WithMany()
+                        .HasForeignKey("AlunoId");
+
+                    b.HasOne("Amesc.Dominio.Cursos.CursoAberto", "CursoAberto")
+                        .WithMany()
+                        .HasForeignKey("CursoAbertoId");
                 });
         }
     }

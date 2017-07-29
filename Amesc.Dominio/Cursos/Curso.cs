@@ -44,5 +44,10 @@ namespace Amesc.Dominio.Cursos
             ExcecaoDeDominio.Quando(string.IsNullOrEmpty(descricao), "Descrição é obrigatório");
             ExcecaoDeDominio.Quando(string.IsNullOrEmpty(requisitos), "Requisitos são obrigatórios");
         }
+
+        public bool ContemPublicoAlvo(string publicoAlvo)
+        {
+            return PublicosAlvo.Exists(p => p.Nome == publicoAlvo);
+        }
     }
 }

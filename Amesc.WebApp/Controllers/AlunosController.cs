@@ -1,5 +1,4 @@
 using System.Linq;
-using Amesc.Dominio;
 using Amesc.Dominio.Alunos;
 using Microsoft.AspNetCore.Mvc;
 using Amesc.WebApp.ViewModels;
@@ -19,11 +18,10 @@ namespace Amesc.WebApp.Controllers
 
         public IActionResult Index()
         {
-            var cursos = _alunoRepositorio.Consultar();
-            var cursosViewModel =
-                cursos.Select(c => new AlunoParaListaViewModel {Id = c.Id, Nome = c.Nome, Cpf = c.Cpf, TipoDePublico = c.TipoDePublico}).ToList();
+            var alunos = _alunoRepositorio.Consultar();
+            var alunosViewModel = alunos.Select(c => new AlunoParaListaViewModel(c)).ToList();
 
-            return View(cursosViewModel);
+            return View(alunosViewModel);
         }
 
         public IActionResult Novo()
@@ -38,16 +36,7 @@ namespace Amesc.WebApp.Controllers
             if (aluno == null)
                 return RedirectToAction("Index");
 
-            return View("NovoOuEditar", 
-                new AlunoParaCadastroViewModel
-                {
-                    Id = aluno.Id,
-                    Nome = aluno.Nome,
-                    Cpf = aluno.Cpf,
-                    Telefone = aluno.Contato.Telefone,
-                    Endereco = aluno.Contato.Endereco,
-                    TipoDePublico = aluno.TipoDePublico
-                });
+            return View("NovoOuEditar", new AlunoParaCadastroViewModel(aluno));
         }
 
         [HttpPost]
@@ -56,7 +45,7 @@ namespace Amesc.WebApp.Controllers
             _armazenadorDeAluno.Armazenar(
                 model.Id, model.Nome, model.Cpf, model.Telefone, model.Endereco, model.TipoDePublico);
 
-            return RedirectToAction("Index");
+            return Ok();
         }
     }
 }

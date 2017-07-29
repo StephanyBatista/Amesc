@@ -25,7 +25,7 @@ namespace Amesc.Data.Repositorios
             return query.Any() ? query.First() : null;
         }
 
-        public List<TEntidade> Consultar()
+        public virtual List<TEntidade> Consultar()
         {
             var entidades = Context.Set<TEntidade>().ToList();
             if (entidades.Any())

@@ -38,17 +38,7 @@ namespace Amesc.WebApp.Controllers
             if (curso == null)
                 return RedirectToAction("Index");
 
-            return View("NovoOuEditar", 
-                new CursoParaCadastroViewModel
-                {
-                    Id = curso.Id,
-                    Nome = curso.Nome,
-                    Descricao = curso.Descricao,
-                    Requisitos = curso.Requisitos,
-                    PeriodoValidoEmAno = curso.PeriodoValidoEmAno,
-                    PrecoSugerido = curso.PrecoSugerido.ToString(),
-                    PublicosAlvo = curso.PublicosAlvo?.Select(publico => publico.Nome).ToList()
-                });
+            return View("NovoOuEditar", new CursoParaCadastroViewModel(curso));
         }
 
         [HttpPost]

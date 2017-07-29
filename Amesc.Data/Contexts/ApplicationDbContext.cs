@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
+using Amesc.Dominio.Matriculas;
 using Microsoft.EntityFrameworkCore;
 
 namespace Amesc.Data.Contexts
@@ -14,15 +15,17 @@ namespace Amesc.Data.Contexts
 
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Curso> Cursos { get; set; }
-        public DbSet<CursoComMatriculaAberta> CursosComMatriculasAbertas { get; set; }
+        public DbSet<CursoAberto> CursosAbertos { get; set; }
+        public DbSet<Matricula> Matriculas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Aluno>().ToTable("Aluno");
             modelBuilder.Entity<Contato>().ToTable("Contato");
             modelBuilder.Entity<Curso>().ToTable("Curso");
-            modelBuilder.Entity<CursoComMatriculaAberta>().ToTable("CursoComMatriculaAberta");
+            modelBuilder.Entity<CursoAberto>().ToTable("CursoAberto");
             modelBuilder.Entity<PublicoAlvoParaCurso>().ToTable("PublicoAlvoParaCurso");
+            modelBuilder.Entity<Matricula>().ToTable("Matricula");
         }
 
         public async Task Commit()

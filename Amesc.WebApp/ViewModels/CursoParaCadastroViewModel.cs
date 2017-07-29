@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Amesc.Dominio.Cursos;
 using Microsoft.AspNetCore.Http.Features;
 
 namespace Amesc.WebApp.ViewModels
@@ -18,6 +19,19 @@ namespace Amesc.WebApp.ViewModels
         [Required(ErrorMessage = "Requisitos é obrigatório")]
         public string Requisitos { get; set; }
         public int? PeriodoValidoEmAno { get; set; }
+
+        public CursoParaCadastroViewModel() { }
+
+        public CursoParaCadastroViewModel(Curso entidade)
+        {
+            Id = entidade.Id;
+            Nome = entidade.Nome;
+            Descricao = entidade.Descricao;
+            Requisitos = entidade.Requisitos;
+            PeriodoValidoEmAno = entidade.PeriodoValidoEmAno;
+            PrecoSugerido = entidade.PrecoSugerido.ToString();
+            PublicosAlvo = entidade.PublicosAlvo?.Select(publico => publico.Nome).ToList();
+        }
 
         public string ChecarPublicoAlvoParaInputHtml(string publico)
         {
