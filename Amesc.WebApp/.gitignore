@@ -1,5 +1,5 @@
 ﻿# .gitignore
 # Project files and directories
 appsettings.Staging.json
-Properties\PublishProfiles\
+Properties/PublishProfiles
 node_modules
