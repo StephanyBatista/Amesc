@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Amesc.Data.Contexts;
+using Amesc.Dominio.Cursos;
 
 namespace Amesc.Data.Migrations
 {
@@ -84,6 +85,8 @@ namespace Amesc.Data.Migrations
                     b.Property<DateTime>("DataDoCurso");
 
                     b.Property<decimal>("Preco");
+
+                    b.Property<int>("Tipo");
 
                     b.HasKey("Id");
 

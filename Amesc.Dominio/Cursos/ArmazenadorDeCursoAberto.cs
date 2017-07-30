@@ -14,20 +14,41 @@ namespace Amesc.Dominio.Cursos
             _cursoAbertoRepositorio = cursoAbertoRepositorio;
         }
 
-        public void Armazenar(int id, int idCurso, string precoEmString, DateTime dataDeAbertura, DateTime dataDeFechamento, DateTime dataDoCurso)
+        public void Armazenar(
+            int id, 
+            int idCurso, 
+            string precoEmString, 
+            string tipoDeCursoAbertoEmString, 
+            DateTime dataDeAbertura, 
+            DateTime dataDeFechamento, 
+            DateTime dataDoCurso)
         {
             var curso = _cursoRepositorio.ObterPorId(idCurso);
             ExcecaoDeDominio.Quando(!decimal.TryParse(precoEmString, out decimal preco), "Preço inválido");
+            ExcecaoDeDominio.Quando(!Enum.TryParse(tipoDeCursoAbertoEmString, out TipoDeCursoAberto tipo), "Tipo de curso inválido");
 
             CursoAberto cursoAberto = null;
             if (id > 0)
             {
                 cursoAberto = _cursoAbertoRepositorio.ObterPorId(id);
-                cursoAberto.Editar(curso, preco, dataDeAbertura, dataDeFechamento, dataDoCurso);
+                cursoAberto.Editar(
+                    curso, 
+                    preco,
+                    tipo, 
+                    dataDeAbertura, 
+                    dataDeFechamento, 
+                    dataDoCurso);
             }
             else
             {
-                cursoAberto = new CursoAberto(curso, preco, dataDeAbertura, dataDeFechamento, dataDoCurso);
+                cursoAberto = new CursoAberto(
+                    curso, 
+                    preco,
+                    tipo, 
+                    dataDeAbertura, 
+                    dataDeFechamento, 
+                    dataDoCurso);
+
                 _cursoAbertoRepositorio.Adicionar(cursoAberto);
             }
         }

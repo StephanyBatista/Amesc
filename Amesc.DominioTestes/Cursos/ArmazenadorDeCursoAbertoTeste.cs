@@ -1,10 +1,10 @@
-﻿using System;
-using Amesc.Dominio;
+﻿using Amesc.Dominio;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio._Base;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using Nosbor.FluentBuilder.Lib;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Amesc.DominioTestes.Cursos
 {
@@ -19,6 +19,7 @@ namespace Amesc.DominioTestes.Cursos
         private Mock<IRepositorio<Curso>> _cursoRepositorio;
         private Mock<IRepositorio<CursoAberto>> _cursoAbertoRepositorio;
         private ArmazenadorDeCursoAberto _armazenador;
+        private string _tipoDeCursoEmString;
 
         [TestInitialize]
         public void Setup()
@@ -28,6 +29,7 @@ namespace Amesc.DominioTestes.Cursos
             _dataDeAbertura = DateTime.Now.AddDays(-10);
             _dataDeFechamento = DateTime.Now.AddDays(-1);
             _dataDoCurso = DateTime.Now;
+            _tipoDeCursoEmString = "Privado";
 
             _cursoRepositorio = new Mock<IRepositorio<Curso>>();
             _cursoRepositorio.Setup(repositorio => repositorio.ObterPorId(_idCurso))
@@ -40,7 +42,7 @@ namespace Amesc.DominioTestes.Cursos
         public void DeveSalvarCursoAberto()
         {
             const int id = 0;
-            _armazenador.Armazenar(id, _idCurso, _preco, _dataDeAbertura, _dataDeFechamento, _dataDoCurso);
+            _armazenador.Armazenar(id, _idCurso, _preco, _tipoDeCursoEmString, _dataDeAbertura, _dataDeFechamento, _dataDoCurso);
 
             _cursoAbertoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<CursoAberto>()));
         }
@@ -52,7 +54,7 @@ namespace Amesc.DominioTestes.Cursos
             _cursoAbertoRepositorio.Setup(repositorio => repositorio.ObterPorId(id))
                 .Returns(FluentBuilder<CursoAberto>.New().Build());
 
-            _armazenador.Armazenar(id, _idCurso, _preco, _dataDeAbertura, _dataDeFechamento, _dataDoCurso);
+            _armazenador.Armazenar(id, _idCurso, _preco, _tipoDeCursoEmString, _dataDeAbertura, _dataDeFechamento, _dataDoCurso);
 
             _cursoAbertoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<CursoAberto>()), Times.Never);
         }
@@ -61,8 +63,8 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveSalvarCursoAbertoQuandoPrecoNulo()
         {
             const int id = 0;
-            var message = Assert.ThrowsException<ExcecaoDeDominio>(() => _armazenador.Armazenar(id, _idCurso, null,
-                    _dataDeAbertura, _dataDeFechamento, _dataDoCurso))
+            var message = Assert.ThrowsException<ExcecaoDeDominio>(() => 
+                _armazenador.Armazenar(id, _idCurso, null, _tipoDeCursoEmString, _dataDeAbertura, _dataDeFechamento, _dataDoCurso))
                 .Message;
 
             Assert.AreEqual("Preço inválido", message);
@@ -72,11 +74,22 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveSalvarCursoAbertoQuandoPrecoInvalido()
         {
             const int id = 0;
-            var message = Assert.ThrowsException<ExcecaoDeDominio>(() => _armazenador.Armazenar(id, _idCurso, "PREÇO INVÁLIDO",
-                    _dataDeAbertura, _dataDeFechamento, _dataDoCurso))
+            var message = Assert.ThrowsException<ExcecaoDeDominio>(() => 
+                _armazenador.Armazenar(id, _idCurso, "PREÇO INVÁLIDO", _tipoDeCursoEmString, _dataDeAbertura, _dataDeFechamento, _dataDoCurso))
                 .Message;
 
             Assert.AreEqual("Preço inválido", message);
+        }
+
+        [TestMethod]
+        public void NaoDeveSalvarCursoAbertoQuandoTipoInvalido()
+        {
+            const int id = 0;
+            var message = Assert.ThrowsException<ExcecaoDeDominio>(() =>
+                    _armazenador.Armazenar(id, _idCurso, _preco, "ENUM INVÁLIDO", _dataDeAbertura, _dataDeFechamento, _dataDoCurso))
+                .Message;
+
+            Assert.AreEqual("Tipo de curso inválido", message);
         }
     }
 }

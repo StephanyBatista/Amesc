@@ -36,7 +36,7 @@ namespace Amesc.DominioTestes.Matriculas
             _alunoRepositorio = new Mock<IAlunoRepositorio>();
             _alunoRepositorio.Setup(r => r.ObterPorId(_idAluno)).Returns(_aluno);
 
-            _criacaoDeMatricula =
+            _criacaoDeMatricula = 
                 new CriacaoDeMatricula(_matriculaRepositorio.Object, _cursoAbertoRepositorio.Object, _alunoRepositorio.Object);
         }
 
