@@ -3,10 +3,12 @@ using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Matriculas;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Amesc.Data.Identity;
 
 namespace Amesc.Data.Contexts
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -20,6 +22,8 @@ namespace Amesc.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Aluno>().ToTable("Aluno");
             modelBuilder.Entity<Contato>().ToTable("Contato");
             modelBuilder.Entity<Curso>().ToTable("Curso");

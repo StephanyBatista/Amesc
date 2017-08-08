@@ -5,13 +5,6 @@ C:\source\Amesc\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.Assem
 C:\source\Amesc\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.dll
 C:\source\Amesc\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.pdb
 C:\source\Amesc\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.csprojResolveAssemblyReference.cache
-C:\source\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.deps.json
-C:\source\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.dll
-C:\source\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.pdb
-C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.AssemblyInfo.cs
-C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.dll
-C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.pdb
-C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.csprojResolveAssemblyReference.cache
 C:\Users\steph\Desktop\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.deps.json
 C:\Users\steph\Desktop\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.dll
 C:\Users\steph\Desktop\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.pdb
@@ -19,3 +12,10 @@ C:\Users\steph\Desktop\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Domini
 C:\Users\steph\Desktop\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.AssemblyInfo.cs
 C:\Users\steph\Desktop\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.dll
 C:\Users\steph\Desktop\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.pdb
+C:\source\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.deps.json
+C:\source\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.dll
+C:\source\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.pdb
+C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.AssemblyInfo.cs
+C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.dll
+C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.pdb
+C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.csprojResolveAssemblyReference.cache

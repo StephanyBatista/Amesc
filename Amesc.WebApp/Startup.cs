@@ -1,4 +1,5 @@
 ﻿using Amesc.Data.Contexts;
+using Amesc.Data.Identity;
 using Amesc.Data.Repositorios;
 using Amesc.Dominio;
 using Amesc.Dominio.Alunos;
@@ -7,6 +8,7 @@ using Amesc.Dominio.Matriculas;
 using Amesc.WebApp.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +36,19 @@ namespace Amesc.WebApp
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(config => {
+
+                config.Password.RequireDigit = false;
+                config.Password.RequiredLength = 3;
+                config.Password.RequireLowercase = false;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireUppercase = false;
+                config.Cookies.ApplicationCookie.LoginPath = "/Autenticacao";
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
             services.AddScoped(typeof(IRepositorio<>), typeof(RepositorioBase<>));
             services.AddScoped(typeof(IRepositorio<Curso>), typeof(CursoRepositorio));
             services.AddScoped(typeof(IAlunoRepositorio), typeof(AlunoRepositorio));

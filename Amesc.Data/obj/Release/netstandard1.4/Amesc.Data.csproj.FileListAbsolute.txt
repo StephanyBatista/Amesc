@@ -7,3 +7,12 @@ C:\source\Amesc\Amesc.Repositorio\obj\Release\netstandard1.4\Amesc.Data.csprojRe
 C:\source\Amesc\Amesc.Repositorio\obj\Release\netstandard1.4\Amesc.Data.AssemblyInfo.cs
 C:\source\Amesc\Amesc.Repositorio\obj\Release\netstandard1.4\Amesc.Data.dll
 C:\source\Amesc\Amesc.Repositorio\obj\Release\netstandard1.4\Amesc.Data.pdb
+C:\source\Amesc\Amesc.Data\bin\Release\netstandard1.4\Amesc.Data.deps.json
+C:\source\Amesc\Amesc.Data\bin\Release\netstandard1.4\Amesc.Data.dll
+C:\source\Amesc\Amesc.Data\bin\Release\netstandard1.4\Amesc.Data.pdb
+C:\source\Amesc\Amesc.Data\bin\Release\netstandard1.4\Amesc.Dominio.dll
+C:\source\Amesc\Amesc.Data\bin\Release\netstandard1.4\Amesc.Dominio.pdb
+C:\source\Amesc\Amesc.Data\obj\Release\netstandard1.4\Amesc.Data.csprojResolveAssemblyReference.cache
+C:\source\Amesc\Amesc.Data\obj\Release\netstandard1.4\Amesc.Data.AssemblyInfo.cs
+C:\source\Amesc\Amesc.Data\obj\Release\netstandard1.4\Amesc.Data.dll
+C:\source\Amesc\Amesc.Data\obj\Release\netstandard1.4\Amesc.Data.pdb
