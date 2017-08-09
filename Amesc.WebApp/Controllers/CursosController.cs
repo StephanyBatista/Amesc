@@ -1,11 +1,14 @@
 using System.Linq;
 using Amesc.Dominio;
 using Amesc.Dominio.Cursos;
+using Amesc.WebApp.Util;
 using Microsoft.AspNetCore.Mvc;
 using Amesc.WebApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Amesc.WebApp.Controllers
 {
+    [Authorize]
     public class CursosController : Controller
     {
         private readonly ArmazenadorDeCurso _armazenadorDeCurso;
@@ -20,10 +23,9 @@ namespace Amesc.WebApp.Controllers
         public IActionResult Index()
         {
             var cursos = _cursoRepositorio.Consultar();
-            var cursosViewModel =
-                cursos.Select(c => new CursoParaListaViewModel {Id = c.Id, Nome = c.Nome, Descricao = c.Descricao}).ToList();
+            var models = cursos.Select(c => new CursoParaListaViewModel {Id = c.Id, Nome = c.Nome, Descricao = c.Descricao});
 
-            return View(cursosViewModel);
+            return View(PaginatedList<CursoParaListaViewModel>.Create(models, Request));
         }
 
         public IActionResult Novo()

@@ -3,6 +3,7 @@ using Amesc.Data.Identity;
 using Amesc.Data.Repositorios;
 using Amesc.Dominio;
 using Amesc.Dominio.Alunos;
+using Amesc.Dominio.Contas;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Matriculas;
 using Amesc.WebApp.Filters;
@@ -54,6 +55,7 @@ namespace Amesc.WebApp
             services.AddScoped(typeof(IAlunoRepositorio), typeof(AlunoRepositorio));
             services.AddScoped(typeof(ICursoAbertoRepositorio), typeof(CursoAbertoRepositorio));
             services.AddScoped(typeof(IMatriculaRepositorio), typeof(MatriculaRepositorio));
+            services.AddScoped(typeof(IAutenticacao), typeof(Autenticacao));
             services.AddScoped(typeof(ArmazenadorDeAluno));
             services.AddScoped(typeof(ArmazenadorDeCurso));
             services.AddScoped(typeof(ArmazenadorDeCursoAberto));
@@ -98,6 +100,8 @@ namespace Amesc.WebApp
             {
                 DefaultRequestCulture = new RequestCulture("pt-BR")
             });
+
+            app.UseIdentity();
 
             app.UseStaticFiles();
 

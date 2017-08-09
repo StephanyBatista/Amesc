@@ -1,106 +1,76 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
 <html>
-<head>
-    <title>AMESC @ViewData["Title"]</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- bootstrap -->
-    <link href="/css/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="/css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
-    <!-- libraries -->
-    <link href="/css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />
-    <link href="/css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
-    <!-- global styles -->
-    <link rel="stylesheet" type="text/css" href="/css/compiled/layout.css" />
-    <link rel="stylesheet" type="text/css" href="/css/compiled/elements.css" />
-    <link rel="stylesheet" type="text/css" href="/css/compiled/icons.css" />
-    <!-- this page specific styles -->
-    <link rel="stylesheet" href="/css/compiled/index.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <!-- open sans font -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
-    <!-- lato font -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AMESC</title>
+    <link rel="stylesheet" href="/css/site.min.css" />
 </head>
-<body>
-    <!-- navbar -->
-    <header class="navbar navbar-inverse" role="banner">
-        <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">
-                <img src="/images/logo.png" alt="logo" />
-            </a>
-        </div>
-        <ul class="nav navbar-nav pull-right hidden-xs">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                    Fulano
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Personal info</a></li>
-                    <li><a href="#">Conta</a></li>
-                    <li><a href="#">Sair</a></li>
-                </ul>
-            </li>
-        </ul>
-    </header>
-    <!-- end navbar -->
-    <!-- sidebar -->
-    <div id="sidebar-nav">
-        <ul id="dashboard-menu">
-            <li class="active">
-                <div class="pointer">
-                    <div class="arrow"></div>
-                    <div class="arrow_border"></div>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">AMESC</a>
                 </div>
-                <a href="/">
-                    <i class="icon-home"></i>
-                    <span>Home</span>
-                </a>                
-            </li>
-            <li>
-                <a href="/Cursos">
-                    <i class="icon-edit"></i>
-                    <span>Cursos</span>
-                </a>
-            </li>
-            <li>
-                <a href="/Alunos">
-                    <i class="icon-edit"></i>
-                    <span>Alunos</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- end sidebar -->
-    <!-- main container -->
-    <div class="content">
-        @RenderBody()
-    </div>
+                @if (@User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cadastro<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Cursos">Cursos</a></li>
+                                <li><a href="/Alunos">Alunos</a></li>
+                            </ul>
+                        </li>
+                        <li class="active"><a href="/Matriculas">Matriculas</a></li>
+                    </ul>
+                
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Olá @User.Identity.Name</a></li>
+                        <li><a href="/Autenticacao/Deslogar"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
+                    </ul>
+                }
+            </div>
+        </nav>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; 2017 - AMESC</p>
+            </footer>
+        </div>
 
-    <!-- scripts -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery-ui-1.10.2.custom.min.js"></script>
-    <!-- knob -->
-    <script src="/js/jquery.knob.js"></script>
-    <!-- flot charts -->
-    <script src="/js/jquery.flot.js"></script>
-    <script src="/js/jquery.flot.stack.js"></script>
-    <script src="/js/jquery.flot.resize.js"></script>
-    <script src="/js/theme.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    
+        <environment names="Development">
+            <script src="~/js/jquery.min.js"></script>
+            <script src="~/js/bootstrap.min.js"></script>
+            <script src="~/js/toastr.min.js"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+            </script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        </environment>
+        
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+
     @RenderSection("Scripts", required: false)
-</body>
+    </body>
 </html>

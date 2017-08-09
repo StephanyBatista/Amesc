@@ -1,10 +1,14 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Amesc.Dominio.Alunos;
+using Amesc.WebApp.Util;
 using Microsoft.AspNetCore.Mvc;
 using Amesc.WebApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Amesc.WebApp.Controllers
 {
+    [Authorize]
     public class AlunosController : Controller
     {
         private readonly ArmazenadorDeAluno _armazenadorDeAluno;
@@ -19,9 +23,8 @@ namespace Amesc.WebApp.Controllers
         public IActionResult Index()
         {
             var alunos = _alunoRepositorio.Consultar();
-            var alunosViewModel = alunos.Select(c => new AlunoParaListaViewModel(c)).ToList();
-
-            return View(alunosViewModel);
+            var alunosViewModel = alunos.Select(c => new AlunoParaListaViewModel(c));
+            return View(PaginatedList<AlunoParaListaViewModel>.Create(alunosViewModel, Request));
         }
 
         public IActionResult Novo()

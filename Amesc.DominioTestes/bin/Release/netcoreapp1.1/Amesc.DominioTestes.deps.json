@@ -488,7 +488,7 @@
     "newtonsoft.json/9.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw==",
+      "sha512": "sha512-JvEsHLfMZQ0Gpo9YVBrDF3EMNplmrYKYFZKk1YqsqKxh78jTcgzjXYxVgvAKuDnpjj9ukN7YSLl0VF14UKZnGQ==",
       "path": "newtonsoft.json/9.0.1",
       "hashPath": "newtonsoft.json.9.0.1.nupkg.sha512"
     },
@@ -502,14 +502,14 @@
     "system.collections.nongeneric/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-MqWSShyAqeaYX4PcqL0daPjaMCL3gnnCgr3gTQyT1wzT4K4s5Uo5SFYuy9WSSGIxNKvfttlPy36EJeT2cMijng==",
+      "sha512": "sha512-noXsvi9hT+wTLFsaQ+K+RLp98luYozS1+5BOFq+uLGZcm+MPiEBV/iXWHsrca8ph8pkwPjWSJY8yhs0eP/b3RA==",
       "path": "system.collections.nongeneric/4.3.0",
       "hashPath": "system.collections.nongeneric.4.3.0.nupkg.sha512"
     },
     "system.collections.specialized/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-JdaViR0vAGB2FbyrlwBCu9IXimYq1wVu+KrqHqHigx2ENwa1nzEFfJexEndMiQvLJ2musSazJnWfcikuKXv1sw==",
+      "sha512": "sha512-qaMNYvo7W39lp6UcdxnVguLmqNkSI7P5EcjlFLhv+57ke7QE3KFjN+QwYYKYXjTU2ngFN2yBk/sJuhZ5eXEikA==",
       "path": "system.collections.specialized/4.3.0",
       "hashPath": "system.collections.specialized.4.3.0.nupkg.sha512"
     },
@@ -523,14 +523,14 @@
     "system.componentmodel.primitives/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-gTeL2I+QMUPOAj2exb71DeOaE9tScsyWDJg2xT/bgHY1AuJ5dBCcwKxJ9iYvwo0/zGMtsxxjCaB5PE+o0Lu7Sw==",
+      "sha512": "sha512-uJ6zdQNCqAcLo1lnIiCddOzlbevQudoj5iHbdsESAlEGovc6lNXEWhzBpVxoeby+1JnvGF5WE5/QnT3EoCSE4Q==",
       "path": "system.componentmodel.primitives/4.3.0",
       "hashPath": "system.componentmodel.primitives.4.3.0.nupkg.sha512"
     },
     "system.componentmodel.typeconverter/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-swJbBbdVO0kE9XqA+LHyA5c8gHnv4ZcLn5PtPhCUzAFusR8Iim/P2mJMSkeUwFQ20gDfnKhBKV53aJH3Ew/QQg==",
+      "sha512": "sha512-43XYBoLxFwGNp8q86mvQRcEbGlcBRouO3HfD1YgRiaRfjpK/A7gNmov+cgaGJaB+EchHhFQVi1p4FTWklZShwA==",
       "path": "system.componentmodel.typeconverter/4.3.0",
       "hashPath": "system.componentmodel.typeconverter.4.3.0.nupkg.sha512"
     },
@@ -565,7 +565,7 @@
     "system.runtime.serialization.primitives/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4uAGin+fivlYmkRj8soLnRDAfi25QF1ZJ7uFxX2QFCTHeTJIQ48IXxacFWY8mZB6UsJP42OsWu1CYqOpdwrwRw==",
+      "sha512": "sha512-N39WQWpzN5jwa/XaxNi3DVXRc/bhvdfmi/90uPpBS7GQhU5RVoIPkZcnnHy7hRDsT6kxr3p7pseLdMDJZokrLA==",
       "path": "system.runtime.serialization.primitives/4.3.0",
       "hashPath": "system.runtime.serialization.primitives.4.3.0.nupkg.sha512"
     },

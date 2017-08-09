@@ -1,11 +1,14 @@
 using System.Linq;
 using Amesc.Dominio;
 using Amesc.Dominio.Cursos;
+using Amesc.WebApp.Util;
 using Amesc.WebApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Amesc.WebApp.Controllers
 {
+    [Authorize]
     public class AbrirCursoController : Controller
     {
         private readonly ArmazenadorDeCursoAberto _armazenadorDeCursoAberto;
@@ -27,9 +30,9 @@ namespace Amesc.WebApp.Controllers
         {
             BuscarCursoEDeclararNaViewBag(idCurso);
             var cursosAbertos = _cursoAbertoRepositorio.ListarPorCurso(idCurso);
-            var models = cursosAbertos.Select(m => new CursoAbertoParaListaViewModel(m)).ToList();
+            var models = cursosAbertos.Select(m => new CursoAbertoParaListaViewModel(m));
 
-            return View(models);
+            return View(PaginatedList<CursoAbertoParaListaViewModel>.Create(models, Request));
         }
 
         private void BuscarCursoEDeclararNaViewBag(int id)

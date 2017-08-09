@@ -2,11 +2,15 @@ using System.Linq;
 using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Matriculas;
+using Amesc.WebApp.Util;
 using Amesc.WebApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Amesc.WebApp.Controllers
 {
+    [Authorize]
     public class MatriculasController : Controller
     {
         private readonly CriacaoDeMatricula _criacaoDeMatricula;
@@ -31,9 +35,9 @@ namespace Amesc.WebApp.Controllers
         public IActionResult Index()
         {
             var matriculas = _matriculaRepositorio.Consultar();
-            var matriculasViewModel = matriculas.Select(m => new MatriculaParaListaViewModel(m)).ToList();
+            var models = matriculas.Select(m => new MatriculaParaListaViewModel(m));
 
-            return View(matriculasViewModel);
+            return View(PaginatedList<MatriculaParaListaViewModel>.Create(models, Request));
         }
 
         public IActionResult Novo()

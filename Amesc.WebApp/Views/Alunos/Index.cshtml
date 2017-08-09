@@ -1,4 +1,6 @@
-﻿@model List<Amesc.WebApp.ViewModels.AlunoParaListaViewModel>
+﻿@using Amesc.WebApp.Util
+@using Amesc.WebApp.ViewModels
+@model PaginatedList<AlunoParaListaViewModel>
 @{
     ViewData["Title"] = "Alunos";
 }
@@ -24,25 +26,42 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @item.Nome
-                            </td>
-                            <td>
-                                @item.Cpf
-                            </td>
-                            <td>
-                                @item.TipoDePublico
-                            </td>
-                            <td>
-                                <a href="/Alunos/Editar/@item.Id" class="btn">Editar</a>
-                            </td>
-                        </tr>   
-                    }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Nome
+                        </td>
+                        <td>
+                            @item.Cpf
+                        </td>
+                        <td>
+                            @item.TipoDePublico
+                        </td>
+                        <td>
+                            <a href="/Alunos/Editar/@item.Id" class="btn">Editar</a>
+                        </td>
+                    </tr>   
+                }
                 </tbody>
             </table>
+            
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageIndex - 1)"
+               class="btn btn-default @prevDisabled">
+                Anterior
+            </a>
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageIndex + 1)"
+               class="btn btn-default @nextDisabled">
+                Próximo
+            </a>
+
         </div>
     </div>
 </div>
