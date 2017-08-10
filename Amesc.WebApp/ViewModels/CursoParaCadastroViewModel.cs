@@ -2,13 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Amesc.Dominio.Cursos;
-using Microsoft.AspNetCore.Http.Features;
 
 namespace Amesc.WebApp.ViewModels
 {
     public class CursoParaCadastroViewModel
     {
         public int Id { get; set; }
+        public string Codigo { get; set; }
         [Required(ErrorMessage = "Nome é obrigatório")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Descricao é obrigatório")]
@@ -25,6 +25,7 @@ namespace Amesc.WebApp.ViewModels
         public CursoParaCadastroViewModel(Curso entidade)
         {
             Id = entidade.Id;
+            Codigo = entidade.Codigo;
             Nome = entidade.Nome;
             Descricao = entidade.Descricao;
             Requisitos = entidade.Requisitos;

@@ -12,23 +12,25 @@ namespace Amesc.Dominio.Cursos
         public string Descricao { get; private set; }
         public decimal PrecoSugerido { get; private set; }
         public List<PublicoAlvoParaCurso> PublicosAlvo { get; private set; }
+        public string Codigo { get; private set; }
 
         private Curso() { }
 
-        public Curso(string nome, string descricao, decimal precoSugerido, List<string> publicosAlvo, string requisitos, int? periodoValidoEmAno)
+        public Curso(string codigo, string nome, string descricao, decimal precoSugerido, List<string> publicosAlvo, string requisitos, int? periodoValidoEmAno)
         {
             Validar(nome, descricao, requisitos);
-            Atribuir(nome, descricao, precoSugerido, publicosAlvo, requisitos, periodoValidoEmAno);
+            Atribuir(codigo, nome, descricao, precoSugerido, publicosAlvo, requisitos, periodoValidoEmAno);
         }
 
-        public void Editar(string nome, string descricao, decimal precoSugerido, List<string> publicosAlvo, string requisitos, int? periodoValidoEmAno)
+        public void Editar(string codigo, string nome, string descricao, decimal precoSugerido, List<string> publicosAlvo, string requisitos, int? periodoValidoEmAno)
         {
             Validar(nome, descricao, requisitos);
-            Atribuir(nome, descricao, precoSugerido, publicosAlvo, requisitos, periodoValidoEmAno);
+            Atribuir(codigo, nome, descricao, precoSugerido, publicosAlvo, requisitos, periodoValidoEmAno);
         }
 
-        private void Atribuir(string nome, string descricao, decimal precoSugerido, List<string> publicosAlvo, string requisitos, int? periodoValidoEmAno)
+        private void Atribuir(string codigo, string nome, string descricao, decimal precoSugerido, List<string> publicosAlvo, string requisitos, int? periodoValidoEmAno)
         {
+            Codigo = codigo;
             Nome = nome;
             Descricao = descricao;
             PrecoSugerido = precoSugerido;

@@ -12,7 +12,7 @@ namespace Amesc.Dominio.Cursos
             _cursoRepositorio = cursoRepositorio;
         }
 
-        public void Armazenar(int id, string nome, string descricao, string precoSugeridoEmString, List<string> publicosAlvo, string requisitos, int? periodoValidoEmAno)
+        public void Armazenar(string codigo, int id, string nome, string descricao, string precoSugeridoEmString, List<string> publicosAlvo, string requisitos, int? periodoValidoEmAno)
         {
             ExcecaoDeDominio.Quando(!decimal.TryParse(precoSugeridoEmString, out decimal precoSugerido), "Preço sugerido é inválido");
 
@@ -20,11 +20,11 @@ namespace Amesc.Dominio.Cursos
 
             if (curso == null)
             {
-                curso = new Curso(nome, descricao, precoSugerido, publicosAlvo, requisitos, periodoValidoEmAno);
+                curso = new Curso(codigo, nome, descricao, precoSugerido, publicosAlvo, requisitos, periodoValidoEmAno);
                 _cursoRepositorio.Adicionar(curso);
             }
             else
-                curso.Editar(nome, descricao, precoSugerido, publicosAlvo, requisitos, periodoValidoEmAno);
+                curso.Editar(codigo, nome, descricao, precoSugerido, publicosAlvo, requisitos, periodoValidoEmAno);
         }
     }
 }

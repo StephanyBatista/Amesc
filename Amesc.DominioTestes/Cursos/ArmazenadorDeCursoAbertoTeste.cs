@@ -29,7 +29,7 @@ namespace Amesc.DominioTestes.Cursos
             _dataDeAbertura = DateTime.Now.AddDays(-10);
             _dataDeFechamento = DateTime.Now.AddDays(-1);
             _dataDoCurso = DateTime.Now;
-            _tipoDeCursoEmString = "Privado";
+            _tipoDeCursoEmString = "Fechado";
 
             _cursoRepositorio = new Mock<IRepositorio<Curso>>();
             _cursoRepositorio.Setup(repositorio => repositorio.ObterPorId(_idCurso))

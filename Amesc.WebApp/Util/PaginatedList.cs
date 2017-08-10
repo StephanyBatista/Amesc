@@ -10,7 +10,7 @@ namespace Amesc.WebApp.Util
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
 
-        public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
+        private PaginatedList(IEnumerable<T> items, int count, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
@@ -28,8 +28,9 @@ namespace Amesc.WebApp.Util
             int.TryParse(request.Query["page"], out int pageIndex);
             pageIndex = pageIndex > 0 ? pageIndex : 1;
 
-            var count = source.Count();
-            var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            var enumerable = source as IList<T> ?? source.ToList();
+            var count = enumerable.Count();
+            var items = enumerable.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
     }

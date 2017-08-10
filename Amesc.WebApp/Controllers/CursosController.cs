@@ -12,9 +12,9 @@ namespace Amesc.WebApp.Controllers
     public class CursosController : Controller
     {
         private readonly ArmazenadorDeCurso _armazenadorDeCurso;
-        private readonly IRepositorio<Curso> _cursoRepositorio;
+        private readonly ICursoRepositorio _cursoRepositorio;
 
-        public CursosController(ArmazenadorDeCurso armazenadorDeCurso, IRepositorio<Curso> cursoRepositorio)
+        public CursosController(ArmazenadorDeCurso armazenadorDeCurso, ICursoRepositorio cursoRepositorio)
         {
             _armazenadorDeCurso = armazenadorDeCurso;
             _cursoRepositorio = cursoRepositorio;
@@ -22,7 +22,9 @@ namespace Amesc.WebApp.Controllers
 
         public IActionResult Index()
         {
-            var cursos = _cursoRepositorio.Consultar();
+            var cursos = !string.IsNullOrEmpty(Request.Query["q"]) ?
+                _cursoRepositorio.ConsultarPorNome(Request.Query["q"]) :
+                _cursoRepositorio.Consultar();
             var models = cursos.Select(c => new CursoParaListaViewModel {Id = c.Id, Nome = c.Nome, Descricao = c.Descricao});
 
             return View(PaginatedList<CursoParaListaViewModel>.Create(models, Request));
@@ -47,7 +49,7 @@ namespace Amesc.WebApp.Controllers
         public IActionResult Salvar(CursoParaCadastroViewModel model)
         {
             _armazenadorDeCurso.Armazenar(
-                model.Id, model.Nome, model.Descricao, model.PrecoSugerido, model.PublicosAlvo, model.Requisitos, model.PeriodoValidoEmAno);
+                model.Codigo, model.Id, model.Nome, model.Descricao, model.PrecoSugerido, model.PublicosAlvo, model.Requisitos, model.PeriodoValidoEmAno);
 
             return RedirectToAction("Index");
         }

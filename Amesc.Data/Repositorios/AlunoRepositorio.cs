@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Amesc.Data.Contexts;
 using Amesc.Dominio.Alunos;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,12 @@ namespace Amesc.Data.Repositorios
         {
             var query = Context.Set<Aluno>().Include(p => p.Contato).Where(entidade => entidade.Id == id);
             return query.Any() ? query.First() : null;
+        }
+
+        public IEnumerable<Aluno> ConsultarPorNome(string nome)
+        {
+            var query = Context.Set<Aluno>().Include(p => p.Contato).Where(entidade => entidade.Nome.ToUpper().Contains(nome.ToUpper()));
+            return query.Any() ? query.ToList() : new List<Aluno>();
         }
     }
 }

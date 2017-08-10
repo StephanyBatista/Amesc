@@ -51,7 +51,7 @@ namespace Amesc.WebApp
             .AddDefaultTokenProviders();
 
             services.AddScoped(typeof(IRepositorio<>), typeof(RepositorioBase<>));
-            services.AddScoped(typeof(IRepositorio<Curso>), typeof(CursoRepositorio));
+            services.AddScoped(typeof(ICursoRepositorio), typeof(CursoRepositorio));
             services.AddScoped(typeof(IAlunoRepositorio), typeof(AlunoRepositorio));
             services.AddScoped(typeof(ICursoAbertoRepositorio), typeof(CursoAbertoRepositorio));
             services.AddScoped(typeof(IMatriculaRepositorio), typeof(MatriculaRepositorio));

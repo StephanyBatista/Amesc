@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Amesc.Dominio.Alunos;
@@ -22,7 +23,10 @@ namespace Amesc.WebApp.Controllers
 
         public IActionResult Index()
         {
-            var alunos = _alunoRepositorio.Consultar();
+            var alunos = !string.IsNullOrEmpty(Request.Query["q"]) ? 
+                _alunoRepositorio.ConsultarPorNome(Request.Query["q"]) : 
+                _alunoRepositorio.Consultar();
+
             var alunosViewModel = alunos.Select(c => new AlunoParaListaViewModel(c));
             return View(PaginatedList<AlunoParaListaViewModel>.Create(alunosViewModel, Request));
         }

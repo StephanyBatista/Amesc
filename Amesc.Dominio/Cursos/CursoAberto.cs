@@ -7,7 +7,7 @@ namespace Amesc.Dominio.Cursos
     {
         Nenhum,
         Publico,
-        Privado
+        Fechado
     }
 
     public class CursoAberto : Entidade

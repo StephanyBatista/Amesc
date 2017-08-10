@@ -19,10 +19,12 @@ namespace Amesc.DominioTestes.Cursos
         private List<string> _publicosSugeridos;
         private ArmazenadorDeCurso _armazenador;
         private Mock<IRepositorio<Curso>> _cursoRepositorio;
+        private string _codigo;
 
         [TestInitialize]
         public void Setup()
         {
+            _codigo = "ADF";
             _nome = "Curso A";
             _descricao = "Descricao A";
             _precoSugerido = "1000";
@@ -36,7 +38,7 @@ namespace Amesc.DominioTestes.Cursos
         [TestMethod]
         public void DeveCriarNovoCurso()
         {
-            _armazenador.Armazenar(0, _nome, _descricao, _precoSugerido, _publicosSugeridos, _requisitos, _periodoValidoEmAno);
+            _armazenador.Armazenar(_codigo, 0, _nome, _descricao, _precoSugerido, _publicosSugeridos, _requisitos, _periodoValidoEmAno);
 
             _cursoRepositorio.Verify(r => r.Adicionar(It.IsAny<Curso>()));
         }
@@ -48,7 +50,7 @@ namespace Amesc.DominioTestes.Cursos
             _cursoRepositorio.Setup(r => r.ObterPorId(idCurso)).Returns(
                 FluentBuilder<Curso>.New().Build());
 
-            _armazenador.Armazenar(idCurso, _nome, _descricao, _precoSugerido, _publicosSugeridos, _requisitos, _periodoValidoEmAno);
+            _armazenador.Armazenar(_codigo, idCurso, _nome, _descricao, _precoSugerido, _publicosSugeridos, _requisitos, _periodoValidoEmAno);
 
             _cursoRepositorio.Verify(r => r.Adicionar(It.IsAny<Curso>()), Times.Never);
         }
@@ -60,7 +62,7 @@ namespace Amesc.DominioTestes.Cursos
 
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
                 () => _armazenador.Armazenar(
-                    idCurso, _nome, _descricao, "PREÇO INVÁLIDO", _publicosSugeridos, _requisitos, _periodoValidoEmAno))
+                    _codigo, idCurso, _nome, _descricao, "PREÇO INVÁLIDO", _publicosSugeridos, _requisitos, _periodoValidoEmAno))
                 .Message;
 
             Assert.AreEqual("Preço sugerido é inválido", message);
