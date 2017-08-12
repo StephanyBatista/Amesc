@@ -65,6 +65,12 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group" id="empresaDiv">
+                    <label class="col-md-2 control-label">Empresa</label>
+                    <div class="col-md-2">
+                        <input class="form-control" asp-for="Empresa">
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
                         <button class="btn btn-success">Salvar</button>
@@ -103,11 +109,14 @@
                     $('#PeriodoInicialParaMatricula').val('');
                     $('#fimDasMatriculasDiv').css('display', 'none');
                     $('#PeriodoFinalParaMatricula').val('');
+                    $('#empresaDiv').css('display', '');
                 }
                 else {
 
                     $('#inicioDasMatriculasDiv').css('display', '');
                     $('#fimDasMatriculasDiv').css('display', '');
+                    $('#empresaDiv').css('display', 'none');
+                    $('#Empresa').val('');
                 }
             }
         });

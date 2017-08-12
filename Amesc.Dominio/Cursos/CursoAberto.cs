@@ -19,35 +19,39 @@ namespace Amesc.Dominio.Cursos
         public DateTime InicioDoCurso { get; private set; }
         public DateTime FimDoCurso { get; private set; }
         public TipoDeCursoAberto Tipo { get; private set; }
+        public string Empresa { get; private set; }
 
         public CursoAberto() { }
 
         public CursoAberto(Curso curso, 
             decimal preco, TipoDeCursoAberto tipoDeCursoAberto, 
+            string empresa,
             DateTime? periodoInicialParaMatricula, 
             DateTime? periodoFinalParaMatricula, 
             DateTime inicioDoCurso, 
             DateTime fimDoCurso)
         {
-            Validar(curso, preco, tipoDeCursoAberto, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
-            Atribuir(curso, preco, tipoDeCursoAberto, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
+            Validar(curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
+            Atribuir(curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
         }
 
         public void Editar(Curso curso, 
             decimal preco, 
             TipoDeCursoAberto tipoDeCursoAberto, 
+            string empresa,
             DateTime? periodoInicialParaMatricula, 
             DateTime? periodoFinalParaMatricula, 
             DateTime inicioDoCurso, 
             DateTime fimDoCurso)
         {
-            Validar(curso, preco, tipoDeCursoAberto, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
-            Atribuir(curso, preco, tipoDeCursoAberto, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
+            Validar(curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
+            Atribuir(curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
         }
 
         private static void Validar(Curso curso, 
             decimal preco, 
             TipoDeCursoAberto tipoDeCursoAberto, 
+            string empresa,
             DateTime? periodoInicialParaMatricula, 
             DateTime? periodoFinalParaMatricula, 
             DateTime inicioDoCurso, 
@@ -58,6 +62,7 @@ namespace Amesc.Dominio.Cursos
             ExcecaoDeDominio.Quando(tipoDeCursoAberto == TipoDeCursoAberto.Nenhum, "Tipo de curso aberto é obrigatório");
             ExcecaoDeDominio.Quando(tipoDeCursoAberto == TipoDeCursoAberto.Publico && !periodoInicialParaMatricula.HasValue, "Período inicial para matricula é obrigatório");
             ExcecaoDeDominio.Quando(tipoDeCursoAberto == TipoDeCursoAberto.Publico && !periodoFinalParaMatricula.HasValue, "Período final para matricula é obrigatório");
+            ExcecaoDeDominio.Quando(tipoDeCursoAberto == TipoDeCursoAberto.Fechado && string.IsNullOrEmpty(empresa), "Empresa é obrigatório quando tipo é fechado");
             ExcecaoDeDominio.Quando(periodoInicialParaMatricula > periodoFinalParaMatricula, "Período inicial é maior que período final para matricula");
             ExcecaoDeDominio.Quando(inicioDoCurso <= DateTime.MinValue, "Data de inicio do curso é obrigatório");
             ExcecaoDeDominio.Quando(inicioDoCurso < periodoFinalParaMatricula, "Data de inicio do curso menor que período final para matricula");
@@ -68,6 +73,7 @@ namespace Amesc.Dominio.Cursos
         private void Atribuir(Curso curso, 
             decimal preco, 
             TipoDeCursoAberto tipoDeCursoAberto, 
+            string empresa,
             DateTime? periodoInicialParaMatricula, 
             DateTime? periodoFinalParaMatricula, 
             DateTime inicioDoCurso, 
@@ -76,6 +82,7 @@ namespace Amesc.Dominio.Cursos
             Curso = curso;
             Preco = preco;
             Tipo = tipoDeCursoAberto;
+            Empresa = empresa;
             PeriodoInicialParaMatricula = periodoInicialParaMatricula;
             PeriodoFinalParaMatricula = periodoFinalParaMatricula;
             InicioDoCurso = inicioDoCurso;

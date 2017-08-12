@@ -11,6 +11,7 @@ namespace Amesc.DominioTestes.Cursos
     {
         private Curso _curso;
         private decimal _preco;
+        private string _empresa;
         private DateTime _periodoInicialParaMatricula;
         private DateTime _periodoFinalParaMatricula;
         private DateTime _dataDeInicioDoCurso;
@@ -21,9 +22,10 @@ namespace Amesc.DominioTestes.Cursos
         [TestInitialize]
         public void Setup()
         {
+            _preco = 1000m;
+            _empresa = "Empresa";
             _tipoDeCursoAberto = TipoDeCursoAberto.Publico;
             _curso = FluentBuilder<Curso>.New().Build();
-            _preco = 1000m;
             _periodoInicialParaMatricula = DateTime.Now.AddDays(-1);
             _periodoFinalParaMatricula = DateTime.Now;
             _dataDeInicioDoCurso = DateTime.Now.AddDays(+1);
@@ -34,7 +36,7 @@ namespace Amesc.DominioTestes.Cursos
         [TestMethod]
         public void DeveCriarCursoAberto()
         {
-            var cursoAberto = new CursoAberto(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso);
+            var cursoAberto = new CursoAberto(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso);
 
             Assert.AreEqual(_curso, cursoAberto.Curso);
             Assert.AreEqual(_preco, cursoAberto.Preco);
@@ -48,7 +50,7 @@ namespace Amesc.DominioTestes.Cursos
         [TestMethod]
         public void DeveEditarCursoAberto()
         {
-            _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso);
+            _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso);
 
             Assert.AreEqual(_curso, _cursoAberto.Curso);
             Assert.AreEqual(_preco, _cursoAberto.Preco);
@@ -62,7 +64,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveCriarCursoAbertoSemCurso()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => new CursoAberto(null, _preco, TipoDeCursoAberto.Publico, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                () => new CursoAberto(null, _preco, TipoDeCursoAberto.Publico, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Curso é obrigatório", message);
@@ -72,7 +74,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveEditarCursoAbertoSemCurso()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => _cursoAberto.Editar(null, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                () => _cursoAberto.Editar(null, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Curso é obrigatório", message);
@@ -82,7 +84,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveCriarCursoAbertoSemPreco()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => new CursoAberto(_curso, 0, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                () => new CursoAberto(_curso, 0, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Preço do curso inválido", message);
@@ -92,7 +94,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveEditarCursoAbertoSemPreco()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => _cursoAberto.Editar(_curso, 0, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                () => _cursoAberto.Editar(_curso, 0, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Preço do curso inválido", message);
@@ -102,7 +104,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveCriarCursoAbertoSemPeriodoInicialParaMatricula()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, null, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, null, null, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Período inicial para matricula é obrigatório", message);
@@ -112,7 +114,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveEditarCursoAbertoSemPeriodoInicialParaMatricula()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, null, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, null, null, _periodoFinalParaMatricula, _dataDeInicioDoCurso, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Período inicial para matricula é obrigatório", message);
@@ -122,7 +124,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveCriarCursoAbertoSemPeriodoFinalParaMatricula()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, null, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                    () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, null, _dataDeInicioDoCurso, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Período final para matricula é obrigatório", message);
@@ -132,7 +134,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveEditarCursoAbertoSemPeriodoFinalParaMatricula()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, null, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                    () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, null, _dataDeInicioDoCurso, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Período final para matricula é obrigatório", message);
@@ -142,7 +144,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveCriarCursoAbertoComPeriodoInicialMaiorQuePeriodoFinalParaMatricula()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, DateTime.Now.AddDays(+5), DateTime.Now, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, null, DateTime.Now.AddDays(+5), DateTime.Now, _dataDeInicioDoCurso, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Período inicial é maior que período final para matricula", message);
@@ -152,7 +154,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveEditarCursoAbertoComPeriodoInicialMaiorQuePeriodoFinalParaMatricula()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, DateTime.Now.AddDays(+5), DateTime.Now, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, null, DateTime.Now.AddDays(+5), DateTime.Now, _dataDeInicioDoCurso, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Período inicial é maior que período final para matricula", message);
@@ -162,7 +164,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveCriarCursoAbertoSemDataDeInicioDoCurso()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.MinValue, _dataDeFimDoCurso))
+                () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.MinValue, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Data de inicio do curso é obrigatório", message);
@@ -172,7 +174,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveEditarCursoAbertoSemDataDeInicioDoCurso()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.MinValue, _dataDeFimDoCurso))
+                () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.MinValue, _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Data de inicio do curso é obrigatório", message);
@@ -182,7 +184,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveCriarCursoAbertoSemDataDeFimDoCurso()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, DateTime.MinValue))
+                    () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, DateTime.MinValue))
                 .Message;
 
             Assert.AreEqual("Data de fim do curso é obrigatório", message);
@@ -192,7 +194,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveEditarCursoAbertoSemDataDeFimDoCurso()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, DateTime.MinValue))
+                    () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, _dataDeInicioDoCurso, DateTime.MinValue))
                 .Message;
 
             Assert.AreEqual("Data de fim do curso é obrigatório", message);
@@ -202,7 +204,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveCriarCursoAbertoComDataDeInicioDoCursoMenorQuePeriodoFinalParaMatricula()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.Now.AddDays(-3), _dataDeFimDoCurso))
+                () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.Now.AddDays(-3), _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Data de inicio do curso menor que período final para matricula", message);
@@ -212,7 +214,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveEditarCursoAbertoComDataDeInicioDoCursoMenorQuePeriodoFinalParaMatricula()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.Now.AddDays(-3), _dataDeFimDoCurso))
+                () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.Now.AddDays(-3), _dataDeFimDoCurso))
                 .Message;
 
             Assert.AreEqual("Data de inicio do curso menor que período final para matricula", message);
@@ -222,7 +224,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveCriarCursoAbertoComDataDeInicioDoCursoMaiorQueDataDeFimDoCurso()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.Now.AddDays(+5), DateTime.Now))
+                    () => new CursoAberto(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.Now.AddDays(+5), DateTime.Now))
                 .Message;
 
             Assert.AreEqual("Data de inicio do curso maior que data de fim do curso", message);
@@ -232,7 +234,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDeveEditarCursoAbertoComDataDeInicioDoCursoMaiorQueDataDeFimDoCurso()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.Now.AddDays(+5), DateTime.Now))
+                    () => _cursoAberto.Editar(_curso, _preco, _tipoDeCursoAberto, null, _periodoInicialParaMatricula, _periodoFinalParaMatricula, DateTime.Now.AddDays(+5), DateTime.Now))
                 .Message;
 
             Assert.AreEqual("Data de inicio do curso maior que data de fim do curso", message);
@@ -241,7 +243,7 @@ namespace Amesc.DominioTestes.Cursos
         [TestMethod]
         public void NaoDeveObrigarNaCriacaoPeriodoInicialEFinalParaMatriculaQuandoTipoDeCursoEhFechado()
         {
-            var cursoAberto = new CursoAberto(_curso, _preco, TipoDeCursoAberto.Fechado, null, null, _dataDeInicioDoCurso, _dataDeFimDoCurso);
+            var cursoAberto = new CursoAberto(_curso, _preco, TipoDeCursoAberto.Fechado, _empresa, null, null, _dataDeInicioDoCurso, _dataDeFimDoCurso);
 
             Assert.IsNull(cursoAberto.PeriodoInicialParaMatricula);
             Assert.IsNull(cursoAberto.PeriodoFinalParaMatricula);
@@ -250,10 +252,30 @@ namespace Amesc.DominioTestes.Cursos
         [TestMethod]
         public void NaoDeveObrigarNaEdicaoPeriodoInicialEFinalParaMatriculaQuandoTipoDeCursoEhFechado()
         {
-            _cursoAberto.Editar(_curso, _preco, TipoDeCursoAberto.Fechado, null, null, _dataDeInicioDoCurso, _dataDeFimDoCurso);
+            _cursoAberto.Editar(_curso, _preco, TipoDeCursoAberto.Fechado, _empresa, null, null, _dataDeInicioDoCurso, _dataDeFimDoCurso);
 
             Assert.IsNull(_cursoAberto.PeriodoInicialParaMatricula);
             Assert.IsNull(_cursoAberto.PeriodoFinalParaMatricula);
+        }
+
+        [TestMethod]
+        public void DeveObrigarNaCriacaoInformarONomeDaEmpresaQuandoTipoDeCursoEhFechad()
+        {
+            var message = Assert.ThrowsException<ExcecaoDeDominio>(
+                    () => new CursoAberto(_curso, _preco, TipoDeCursoAberto.Fechado, null, null, null, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                .Message;
+            
+            Assert.AreEqual("Empresa é obrigatório quando tipo é fechado", message);
+        }
+
+        [TestMethod]
+        public void DeveObrigarNaEdicaoInformarONomeDaEmpresaQuandoTipoDeCursoEhFechad()
+        {
+            var message = Assert.ThrowsException<ExcecaoDeDominio>(
+                    () => _cursoAberto.Editar(_curso, _preco, TipoDeCursoAberto.Fechado, null, null, null, _dataDeInicioDoCurso, _dataDeFimDoCurso))
+                .Message;
+
+            Assert.AreEqual("Empresa é obrigatório quando tipo é fechado", message);
         }
     }
 }
