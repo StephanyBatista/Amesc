@@ -24,8 +24,10 @@ namespace Amesc.DominioTestes.Matriculas
         [TestInitialize]
         public void Setup()
         {
-            _cursoAberto = FluentBuilder<CursoAberto>.New().Build();
-            _aluno = FluentBuilder<Aluno>.New().Build();
+            _aluno = FluentBuilder<Aluno>.New().With(a => a.TipoDePublico, "Medico(a)").Build();
+            var cursoAbertoMock = new Mock<CursoAberto>();
+            cursoAbertoMock.Setup(c => c.ContemPublicoAlvo(_aluno.TipoDePublico)).Returns(true);
+            _cursoAberto = cursoAbertoMock.Object;
             _estaPago = true;
             _idCursoAberto = 100;
             _idAluno = 600;

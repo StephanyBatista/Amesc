@@ -27,21 +27,12 @@ namespace Amesc.DominioTestes.Alunos
         }
 
         [TestMethod]
-        public void NaoDeveCriarSemTelefone()
+        public void NaoDeveCriarContatoSemTelefone()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(() => new Contato(null, _endereco))
                 .Message;
 
             Assert.AreEqual("Telefone é obrigatório", message);
-        }
-
-        [TestMethod]
-        public void NaoDeveCriarSemEndereco()
-        {
-            var message = Assert.ThrowsException<ExcecaoDeDominio>(() => new Contato(_telefone, null))
-                .Message;
-
-            Assert.AreEqual("Endereço é obrigatório", message);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Amesc.WebApp.ViewModels
             Id = entidade.Id;
             Aluno = entidade.Aluno.Nome;
             Curso = entidade.CursoAberto.Curso.Nome;
-            DataDoCurso = entidade.CursoAberto.DataDoCurso.ToString("dd/MM/yyyy");
+            DataDoCurso = entidade.CursoAberto.InicioDoCurso.ToString("dd/MM/yyyy");
             EstaPago = entidade.EstaPago;
             NotaDoAlunoNoCurso = entidade.NotaDoAlunoNoCurso;
             Observacao = entidade.Observacao;

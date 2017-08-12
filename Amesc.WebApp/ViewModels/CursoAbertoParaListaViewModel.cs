@@ -5,18 +5,20 @@ namespace Amesc.WebApp.ViewModels
     public class CursoAbertoParaListaViewModel
     {
         public int Id { get; set; }
-        public string DataDeAbertura { get; set; }
-        public string DataDeFechamento { get; set; }
-        public string DataDoCurso { get; set; }
+        public string PeriodoInicialParaMatricula { get; set; }
+        public string PeriodoFinalParaMatricula { get; set; }
+        public string InicioDoCurso { get; set; }
+        public string FimDoCurso { get; set; }
 
         public CursoAbertoParaListaViewModel() { }
 
         public CursoAbertoParaListaViewModel(CursoAberto entidade)
         {
             Id = entidade.Id;
-            DataDeAbertura = entidade.DataDeAbertura.ToString("dd/MM/yyyy");
-            DataDeFechamento = entidade.DataDeFechamento.ToString("dd/MM/yyyy");
-            DataDoCurso = entidade.DataDoCurso.ToString("dd/MM/yyyy");
+            PeriodoInicialParaMatricula = entidade.PeriodoInicialParaMatricula.HasValue ? entidade.PeriodoInicialParaMatricula.Value.ToString("dd/MM/yyyy"): string.Empty;
+            PeriodoFinalParaMatricula = entidade.PeriodoFinalParaMatricula.HasValue ? entidade.PeriodoFinalParaMatricula.Value.ToString("dd/MM/yyyy"): string.Empty;
+            InicioDoCurso = entidade.InicioDoCurso.ToString("dd/MM/yyyy");
+            FimDoCurso = entidade.FimDoCurso.ToString("dd/MM/yyyy");
         }
     }
 }

@@ -19,9 +19,10 @@ namespace Amesc.Dominio.Cursos
             int idCurso, 
             string precoEmString, 
             string tipoDeCursoAbertoEmString, 
-            DateTime dataDeAbertura, 
-            DateTime dataDeFechamento, 
-            DateTime dataDoCurso)
+            DateTime? periodoInicialParaMatricula, 
+            DateTime? periodoFinalParaMatricula, 
+            DateTime dataDeInicioDoCurso,
+            DateTime dataDeFimDoCurso)
         {
             var curso = _cursoRepositorio.ObterPorId(idCurso);
             ExcecaoDeDominio.Quando(!decimal.TryParse(precoEmString, out decimal preco), "Preço inválido");
@@ -35,9 +36,10 @@ namespace Amesc.Dominio.Cursos
                     curso, 
                     preco,
                     tipo, 
-                    dataDeAbertura, 
-                    dataDeFechamento, 
-                    dataDoCurso);
+                    periodoInicialParaMatricula, 
+                    periodoFinalParaMatricula, 
+                    dataDeInicioDoCurso,
+                    dataDeFimDoCurso);
             }
             else
             {
@@ -45,9 +47,10 @@ namespace Amesc.Dominio.Cursos
                     curso, 
                     preco,
                     tipo, 
-                    dataDeAbertura, 
-                    dataDeFechamento, 
-                    dataDoCurso);
+                    periodoInicialParaMatricula, 
+                    periodoFinalParaMatricula, 
+                    dataDeInicioDoCurso,
+                    dataDeFimDoCurso);
 
                 _cursoAbertoRepositorio.Adicionar(cursoAberto);
             }

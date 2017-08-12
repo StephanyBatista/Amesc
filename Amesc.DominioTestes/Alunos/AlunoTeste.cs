@@ -57,27 +57,7 @@ namespace Amesc.DominioTestes.Alunos
                 () => _aluno.Editar(_nome, null, _telefone, _endereco, _tipoDePublico))
                 .Message;
 
-            Assert.AreEqual("Cpf é obrigatório", message);
-        }
-
-        [TestMethod]
-        public void NaoDeveEditarAlunoSemTelefone()
-        {
-            var message  = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => _aluno.Editar(_nome, _cpf, null, _endereco, _tipoDePublico))
-                .Message;
-
-            Assert.AreEqual("Telefone é obrigatório", message);
-        }
-
-        [TestMethod]
-        public void NaoDeveEditarAlunoSemEndereco()
-        {
-            var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => _aluno.Editar(_nome, _cpf, _telefone, null, _tipoDePublico))
-                .Message;
-
-            Assert.AreEqual("Endereço é obrigatório", message);
+            Assert.AreEqual("CPF é obrigatório", message);
         }
 
         [TestMethod]
@@ -128,10 +108,10 @@ namespace Amesc.DominioTestes.Alunos
         public void NaoDeveCriarAlunoSemTelefone()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => new Aluno(_nome, _cpf, _telefone, null, _tipoDePublico))
+                () => new Aluno(_nome, _cpf, null, _endereco, _tipoDePublico))
                 .Message;
 
-            Assert.AreEqual("Endereço é obrigatório", message);
+            Assert.AreEqual("Telefone é obrigatório", message);
         }
 
         [TestMethod]
