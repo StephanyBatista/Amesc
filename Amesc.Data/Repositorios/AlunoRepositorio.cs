@@ -14,13 +14,13 @@ namespace Amesc.Data.Repositorios
 
         public override Aluno ObterPorId(int id)
         {
-            var query = Context.Set<Aluno>().Include(p => p.Contato).Where(entidade => entidade.Id == id);
+            var query = Context.Set<Aluno>().Include(p => p.Endereco).Where(entidade => entidade.Id == id);
             return query.Any() ? query.First() : null;
         }
 
         public IEnumerable<Aluno> ConsultarPorNome(string nome)
         {
-            var query = Context.Set<Aluno>().Include(p => p.Contato).Where(entidade => entidade.Nome.ToUpper().Contains(nome.ToUpper()));
+            var query = Context.Set<Aluno>().Include(p => p.Endereco).Where(entidade => entidade.Nome.ToUpper().Contains(nome.ToUpper()));
             return query.Any() ? query.ToList() : new List<Aluno>();
         }
     }

@@ -50,7 +50,17 @@ namespace Amesc.WebApp.Controllers
         public IActionResult Salvar(AlunoParaCadastroViewModel model)
         {
             _armazenadorDeAluno.Armazenar(
-                model.Id, model.Nome, model.Cpf, model.Telefone, model.Endereco, model.TipoDePublico);
+                model.Id, 
+                model.Nome, 
+                model.Cpf, 
+                model.Telefone, 
+                model.Numero, 
+                model.Logradouro, 
+                model.Bairro, 
+                model.Complemento, 
+                model.Cidade, 
+                model.Estado, 
+                model.TipoDePublico);
 
             return Ok();
         }

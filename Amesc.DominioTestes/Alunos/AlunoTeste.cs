@@ -15,7 +15,7 @@ namespace Amesc.DominioTestes.Alunos
         private string _tipoDePublico;
         private Aluno _aluno;
         private string _telefone;
-        private string _endereco;
+        private Endereco _endereco;
 
         [TestInitialize]
         public void Setup()
@@ -23,8 +23,8 @@ namespace Amesc.DominioTestes.Alunos
             _nome = "Aluno";
             _cpf = "001";
             _telefone = "01";
-            _endereco = "01";
             _tipoDePublico = "Médico(a)";
+            _endereco = FluentBuilder<Endereco>.New().Build();
             _aluno = FluentBuilder<Aluno>.New().Build();
         }
 
@@ -35,8 +35,8 @@ namespace Amesc.DominioTestes.Alunos
 
             Assert.AreEqual(_nome, aluno.Nome);
             Assert.AreEqual(_cpf, aluno.Cpf);
-            Assert.AreEqual(_telefone, aluno.Contato.Telefone);
-            Assert.AreEqual(_endereco, aluno.Contato.Endereco);
+            Assert.AreEqual(_telefone, aluno.Telefone);
+            Assert.AreEqual(_endereco, aluno.Endereco);
             Assert.AreEqual(_tipoDePublico, aluno.TipoDePublico);
         }
 
@@ -61,6 +61,26 @@ namespace Amesc.DominioTestes.Alunos
         }
 
         [TestMethod]
+        public void NaoDeveEditarAlunoSemTelefone()
+        {
+            var message = Assert.ThrowsException<ExcecaoDeDominio>(
+                () => _aluno.Editar(_nome, _cpf, null, _endereco, _tipoDePublico))
+                .Message;
+
+            Assert.AreEqual("Telefone é obrigatório", message);
+        }
+
+        [TestMethod]
+        public void NaoDeveEditarAlunoSemEndereco()
+        {
+            var message = Assert.ThrowsException<ExcecaoDeDominio>(
+                () => _aluno.Editar(_nome, _cpf, _telefone, null, _tipoDePublico))
+                .Message;
+
+            Assert.AreEqual("Endereço é obrigatório", message);
+        }
+
+        [TestMethod]
         public void NaoDeveEditarAlunoSemTipoDePublico()
         {
             var message  = Assert.ThrowsException<ExcecaoDeDominio>(
@@ -79,8 +99,8 @@ namespace Amesc.DominioTestes.Alunos
 
             Assert.AreEqual(_nome, aluno.Nome);
             Assert.AreEqual(_cpf, aluno.Cpf);
-            Assert.AreEqual(_telefone, aluno.Contato.Telefone);
-            Assert.AreEqual(_endereco, aluno.Contato.Endereco);
+            Assert.AreEqual(_telefone, aluno.Telefone);
+            Assert.AreEqual(_endereco, aluno.Endereco);
             Assert.AreEqual(_tipoDePublico, aluno.TipoDePublico);
         }
 
@@ -118,10 +138,10 @@ namespace Amesc.DominioTestes.Alunos
         public void NaoDeveCriarAlunoSemEndereco()
         {
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                () => new Aluno(_nome, _cpf, null, _endereco, _tipoDePublico))
+                () => new Aluno(_nome, _cpf, _telefone, null, _tipoDePublico))
                 .Message;
 
-            Assert.AreEqual("Telefone é obrigatório", message);
+            Assert.AreEqual("Endereço é obrigatório", message);
         }
 
         [TestMethod]
