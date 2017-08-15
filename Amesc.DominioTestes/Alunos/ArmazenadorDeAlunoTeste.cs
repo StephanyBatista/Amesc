@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Amesc.Dominio;
 using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
@@ -23,6 +24,11 @@ namespace Amesc.DominioTestes.Alunos
         private string _complemento;
         private string _cidade;
         private string _estado;
+        private string _orgaoEmissorDoRg;
+        private string _rg;
+        private string _registroProfissional;
+        private string _dataDeNascimento;
+        private string _midiaSocial;
 
         [TestInitialize]
         public void Setup()
@@ -37,6 +43,11 @@ namespace Amesc.DominioTestes.Alunos
             _cidade = "Campo Grande";
             _estado = "MS";
             _publicoAlvo = "Medico(a)";
+            _orgaoEmissorDoRg = "MS";
+            _rg = "001336781";
+            _registroProfissional = "aaxx";
+            _dataDeNascimento = "25/11/1985";
+            _midiaSocial = "facebook";
 
             _alunoRepositorio = new Mock<IRepositorio<Aluno>>();
             _armazenador = new ArmazenadorDeAluno(_alunoRepositorio.Object);
@@ -47,7 +58,7 @@ namespace Amesc.DominioTestes.Alunos
         {
             const int id = 0;
 
-            _armazenador.Armazenar(id, _nome, _cpf, _telefone, _numero, _logradouro, _bairro, _complemento, _cidade, _estado, _publicoAlvo);
+            _armazenador.Armazenar(id, _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _numero, _logradouro, _bairro, _complemento, _cidade, _estado, _publicoAlvo, _midiaSocial);
 
             _alunoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<Aluno>()));
         }
@@ -59,7 +70,7 @@ namespace Amesc.DominioTestes.Alunos
             _alunoRepositorio.Setup(repositorio => repositorio.ObterPorId(id))
                 .Returns(FluentBuilder<Aluno>.New().Build());
 
-            _armazenador.Armazenar(id, _nome, _cpf, _telefone, _numero, _logradouro, _bairro, _complemento, _cidade, _estado, _publicoAlvo);
+            _armazenador.Armazenar(id, _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _numero, _logradouro, _bairro, _complemento, _cidade, _estado, _publicoAlvo, _midiaSocial);
 
             _alunoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<Aluno>()), Times.Never);
         }

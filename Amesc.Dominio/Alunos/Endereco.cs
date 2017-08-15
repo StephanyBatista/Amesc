@@ -7,13 +7,13 @@ namespace Amesc.Dominio.Alunos
         public string Numero { get; private set; }
         public string Logradouro { get; private set; }
         public string Bairro { get; private set; }
-        public object Complemento { get; private set; }
+        public string Complemento { get; private set; }
         public string Cidade { get; private set; }
         public string Estado { get; private set; }
 
         public Endereco() { }
 
-        public Endereco(string numero, string logradouro, string bairro, object complemento, string cidade, string estado)
+        public Endereco(string numero, string logradouro, string bairro, string complemento, string cidade, string estado)
         {
             ExcecaoDeDominio.Quando(string.IsNullOrEmpty(numero), "Número do endereço é obrigatório");
             ExcecaoDeDominio.Quando(string.IsNullOrEmpty(logradouro), "Logradouro do endereço é obrigatório");

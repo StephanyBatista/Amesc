@@ -53,6 +53,10 @@ namespace Amesc.WebApp.Controllers
                 model.Id, 
                 model.Nome, 
                 model.Cpf, 
+                model.OrgaoEmissorDoRg,
+                model.Rg,
+                model.DataDeNascimento,
+                model.RegistroProfissional,
                 model.Telefone, 
                 model.Numero, 
                 model.Logradouro, 
@@ -60,7 +64,8 @@ namespace Amesc.WebApp.Controllers
                 model.Complemento, 
                 model.Cidade, 
                 model.Estado, 
-                model.TipoDePublico);
+                model.TipoDePublico,
+                model.MidiaSocial);
 
             return Ok();
         }

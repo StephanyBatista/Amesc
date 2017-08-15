@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using Amesc.Dominio.Alunos;
 
@@ -15,17 +16,24 @@ namespace Amesc.WebApp.ViewModels
         [Required(ErrorMessage = "Número é obrigatório")]
         public string Numero { get; set; }
         [Required(ErrorMessage = "Logradouro é obrigatório")]
-        public string Logradouro { get; private set; }
+        public string Logradouro { get; set; }
         [Required(ErrorMessage = "Bairro é obrigatório")]
-        public string Bairro { get; private set; }
-        [Required(ErrorMessage = "Complemento é obrigatório")]
-        public object Complemento { get; private set; }
+        public string Bairro { get; set; }
+        public string Complemento { get; set; }
         [Required(ErrorMessage = "Cidade é obrigatório")]
-        public string Cidade { get; private set; }
+        public string Cidade { get; set; }
         [Required(ErrorMessage = "Estado é obrigatório")]
-        public string Estado { get; private set; }
+        public string Estado { get; set; }
         [Required(ErrorMessage = "Tipo de publico é obrigatório")]
         public string TipoDePublico { get; set; }
+        [Required(ErrorMessage = "Orgão emissor do RG é obrigatório")]
+        public string OrgaoEmissorDoRg { get; set; }
+        [Required(ErrorMessage = "RG é obrigatório")]
+        public string Rg { get; set; }
+        [Required(ErrorMessage = "Data de nascimento é obrigatório")]
+        public string DataDeNascimento { get; set; }
+        public string RegistroProfissional { get; set; }
+        public string MidiaSocial { get; set; }
 
         public AlunoParaCadastroViewModel() { }
 
@@ -34,6 +42,10 @@ namespace Amesc.WebApp.ViewModels
             Id = entidade.Id;
             Nome = entidade.Nome;
             Cpf = entidade.Cpf;
+            OrgaoEmissorDoRg = entidade.OrgaoEmissorDoRg;
+            Rg = entidade.Rg;
+            DataDeNascimento = entidade.DataDeNascimento.ToString("dd/MM/yyyy");
+            RegistroProfissional = entidade.RegistroProfissional;
             TipoDePublico = entidade.TipoDePublico;
             Telefone = entidade.Telefone;
             Numero = entidade.Endereco.Numero;
@@ -42,6 +54,7 @@ namespace Amesc.WebApp.ViewModels
             Complemento = entidade.Endereco.Complemento;
             Cidade = entidade.Endereco.Cidade;
             Estado = entidade.Endereco.Estado;
+            MidiaSocial = entidade.MidiaSocial;
         }
     }
 }

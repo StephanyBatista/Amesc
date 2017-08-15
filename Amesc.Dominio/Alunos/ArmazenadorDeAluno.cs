@@ -1,4 +1,5 @@
-﻿using Amesc.Dominio.Cursos;
+﻿using System;
+using Amesc.Dominio.Cursos;
 
 namespace Amesc.Dominio.Alunos
 {
@@ -11,19 +12,37 @@ namespace Amesc.Dominio.Alunos
             _alunoRepositorio = alunoRepositorio;
         }
 
-        public void Armazenar(int id, string nome, string cpf, string telefone, string numero, string logradouro, string bairro, object complemento, string cidade, string estado, string publicoAlvo)
+        public void Armazenar(
+            int id, 
+            string nome, 
+            string cpf, 
+            string orgaoEmissorDoRg,
+            string rg,
+            string dataDeNascimentoEmString,
+            string registroProfissional,
+            string telefone, 
+            string numero, 
+            string logradouro, 
+            string bairro, 
+            string complemento, 
+            string cidade, 
+            string estado, 
+            string publicoAlvo,
+            string midiaSocial)
         {
+            DateTime.TryParse(dataDeNascimentoEmString, out DateTime dataDeNascimento);
+
             if (id == 0)
             {
                 var endereço = new Endereco(numero, logradouro, bairro, complemento, cidade, estado);
-                var aluno = new Aluno(nome, cpf, telefone, endereço, publicoAlvo);
+                var aluno = new Aluno(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereço, publicoAlvo, midiaSocial);
                 _alunoRepositorio.Adicionar(aluno);
             }
             else
             {
                 var endereço = new Endereco(numero, logradouro, bairro, complemento, cidade, estado);
                 var aluno = _alunoRepositorio.ObterPorId(id);
-                aluno.Editar(nome, cpf, telefone, endereço, publicoAlvo);
+                aluno.Editar(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereço, publicoAlvo, midiaSocial);
             }
         }
     }

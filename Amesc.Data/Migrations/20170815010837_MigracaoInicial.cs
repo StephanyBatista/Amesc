@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Amesc.Data.Migrations
 {
-    public partial class AddIdentity : Migration
+    public partial class MigracaoInicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,6 +32,42 @@ namespace Amesc.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Endereco",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Bairro = table.Column<string>(nullable: true),
+                    Cidade = table.Column<string>(nullable: true),
+                    Complemento = table.Column<string>(nullable: true),
+                    Estado = table.Column<string>(nullable: true),
+                    Logradouro = table.Column<string>(nullable: true),
+                    Numero = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Endereco", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Curso",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Codigo = table.Column<string>(nullable: true),
+                    Descricao = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(nullable: true),
+                    PeriodoValidoEmAno = table.Column<int>(nullable: true),
+                    PrecoSugerido = table.Column<decimal>(nullable: false),
+                    Requisitos = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Curso", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,6 +140,80 @@ namespace Amesc.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Aluno",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Cpf = table.Column<string>(nullable: true),
+                    DataDeNascimento = table.Column<DateTime>(nullable: false),
+                    EnderecoId = table.Column<int>(nullable: true),
+                    MidiaSocial = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(nullable: true),
+                    OrgaoEmissorDoRg = table.Column<string>(nullable: true),
+                    RegistroProfissional = table.Column<string>(nullable: true),
+                    Rg = table.Column<string>(nullable: true),
+                    Telefone = table.Column<string>(nullable: true),
+                    TipoDePublico = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Aluno", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Aluno_Endereco_EnderecoId",
+                        column: x => x.EnderecoId,
+                        principalTable: "Endereco",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CursoAberto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CursoId = table.Column<int>(nullable: true),
+                    Empresa = table.Column<string>(nullable: true),
+                    FimDoCurso = table.Column<DateTime>(nullable: false),
+                    InicioDoCurso = table.Column<DateTime>(nullable: false),
+                    PeriodoFinalParaMatricula = table.Column<DateTime>(nullable: true),
+                    PeriodoInicialParaMatricula = table.Column<DateTime>(nullable: true),
+                    Preco = table.Column<decimal>(nullable: false),
+                    Tipo = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CursoAberto", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CursoAberto_Curso_CursoId",
+                        column: x => x.CursoId,
+                        principalTable: "Curso",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PublicoAlvoParaCurso",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CursoId = table.Column<int>(nullable: true),
+                    Nome = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PublicoAlvoParaCurso", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PublicoAlvoParaCurso_Curso_CursoId",
+                        column: x => x.CursoId,
+                        principalTable: "Curso",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -148,6 +258,36 @@ namespace Amesc.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Matricula",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AlunoId = table.Column<int>(nullable: true),
+                    CursoAbertoId = table.Column<int>(nullable: true),
+                    DataDeCriacao = table.Column<DateTime>(nullable: false),
+                    EstaPago = table.Column<bool>(nullable: false),
+                    NotaDoAlunoNoCurso = table.Column<float>(nullable: true),
+                    Observacao = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Matricula", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Matricula_Aluno_AlunoId",
+                        column: x => x.AlunoId,
+                        principalTable: "Aluno",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Matricula_CursoAberto_CursoAbertoId",
+                        column: x => x.CursoAbertoId,
+                        principalTable: "CursoAberto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
@@ -158,6 +298,31 @@ namespace Amesc.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Aluno_EnderecoId",
+                table: "Aluno",
+                column: "EnderecoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CursoAberto_CursoId",
+                table: "CursoAberto",
+                column: "CursoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PublicoAlvoParaCurso_CursoId",
+                table: "PublicoAlvoParaCurso",
+                column: "CursoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Matricula_AlunoId",
+                table: "Matricula",
+                column: "AlunoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Matricula_CursoAbertoId",
+                table: "Matricula",
+                column: "CursoAbertoId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -189,6 +354,12 @@ namespace Amesc.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "PublicoAlvoParaCurso");
+
+            migrationBuilder.DropTable(
+                name: "Matricula");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -204,10 +375,22 @@ namespace Amesc.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Aluno");
+
+            migrationBuilder.DropTable(
+                name: "CursoAberto");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Endereco");
+
+            migrationBuilder.DropTable(
+                name: "Curso");
         }
     }
 }

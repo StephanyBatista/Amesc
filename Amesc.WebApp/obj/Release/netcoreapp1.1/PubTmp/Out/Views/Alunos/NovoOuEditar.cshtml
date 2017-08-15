@@ -30,8 +30,35 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">CPF</label>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" asp-for="Cpf" id="cpf">
+                        <input type="text" class="form-control" asp-for="Cpf">
                         <span asp-validation-for="Cpf" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Orgão emissor</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="OrgaoEmissorDoRg">
+                        <span asp-validation-for="OrgaoEmissorDoRg" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">RG</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="Rg">
+                        <span asp-validation-for="Rg" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Data de nascimento</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="DataDeNascimento" placeholder="DD/MM/YYYY">
+                        <span asp-validation-for="DataDeNascimento" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Registro profissional</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="RegistroProfissional">
                     </div>
                 </div>
                 <div class="form-group">
@@ -42,10 +69,47 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Endereço</label>
+                    <label class="col-md-2 control-label">Numero</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" asp-for="Numero">
+                        <span asp-validation-for="Numero" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Logradouro</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" asp-for="Endereco">
-                        <span asp-validation-for="Endereco" class="text-danger"></span>
+                        <input type="text" class="form-control" asp-for="Logradouro">
+                        <span asp-validation-for="Logradouro" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Bairro</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" asp-for="Bairro">
+                        <span asp-validation-for="Bairro" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Complemento</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" asp-for="Complemento">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Cidade</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" asp-for="Cidade">
+                        <span asp-validation-for="Cidade" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Estado</label>
+                    <div class="col-md-2">
+                        <select class="form-control" asp-for="Estado">
+                            <option value="MS">MS</option>
+                            <option value="SP">SP</option>
+                        </select>
+                        <span asp-validation-for="Estado" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -58,6 +122,12 @@
                             <option value="Enfermeiro(a)">Enfermeiro(a)</option>
                             <option value="Bombeiro(a)">Bombeiro(a)</option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Midia social</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="MidiaSocial">
                     </div>
                 </div>
                 <div class="form-group">
@@ -79,7 +149,8 @@
     <script src="/js/excecaoDeDominio.js"></script>
     <script>
         $(function() {
-            $("#cpf").mask("999.999.999-99");
+            $("#Cpf").mask("999.999.999-99");
+            $("#Rg").mask("999999999");
             $("#telefone").mask("(99) 99999999?9");
         });
     </script>

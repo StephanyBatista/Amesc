@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Amesc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170808172442_CriarUsuarioAdmin")]
-    public partial class CriarUsuarioAdmin : Migration
+    [Migration("20170815010838_CriarUsuarioAdmin")]
+    public class CriarUsuarioAdmin : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

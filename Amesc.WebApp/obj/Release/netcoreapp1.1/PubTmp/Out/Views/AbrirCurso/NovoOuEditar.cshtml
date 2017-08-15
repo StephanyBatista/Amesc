@@ -21,25 +21,32 @@
                   data-ajax="true" data-ajax-method="POST" data-ajax-failure="formQuandoFalha" data-ajax-success="window.location = '/AbrirCurso/@ViewBag.Curso.Id'">
                 <input type="hidden" class="form-control" asp-for="Id">
                 <input type="hidden" class="form-control" asp-for="IdCurso" value="@ViewBag.Curso.Id">
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Data de abertura</label>
+                <div class="form-group" id="inicioDasMatriculasDiv">
+                    <label class="col-md-2 control-label">Inicio das matriculas</label>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" asp-for="DataDeAbertura" asp-format="{0:dd/MM/yyyy}" maxlength="10" placeholder="dd/mm/yyyy" />
-                        <span asp-validation-for="DataDeAbertura" class="text-danger"></span>
+                        <input type="text" class="form-control" asp-for="PeriodoInicialParaMatricula" asp-format="{0:dd/MM/yyyy}" maxlength="10" placeholder="DD/MM/YYYY" />
+                        <span asp-validation-for="PeriodoInicialParaMatricula" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group" id="fimDasMatriculasDiv">
+                    <label class="col-md-2 control-label">Fim das matriculas</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" asp-for="PeriodoFinalParaMatricula" asp-format="{0:dd/MM/yyyy}" maxlength="10" placeholder="DD/MM/YYYY" />
+                        <span asp-validation-for="PeriodoFinalParaMatricula" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Data de fechamento</label>
+                    <label class="col-md-2 control-label">Inicio do curso</label>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" asp-for="DataDeFechamento" asp-format="{0:dd/MM/yyyy}" maxlength="10" placeholder="dd/mm/yyyy" />
-                        <span asp-validation-for="DataDeFechamento" class="text-danger"></span>
+                        <input type="text" class="form-control" asp-for="InicioDoCurso" asp-format="{0:dd/MM/yyyy}" maxlength="10" placeholder="DD/MM/YYYY" />
+                        <span asp-validation-for="InicioDoCurso" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Data do curso</label>
+                    <label class="col-md-2 control-label">Fim do curso</label>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" asp-for="DataDoCurso" asp-format="{0:dd/MM/yyyy}" maxlength="10" placeholder="dd/mm/yyyy" />
-                        <span asp-validation-for="DataDoCurso" class="text-danger"></span>
+                        <input type="text" class="form-control" asp-for="FimDoCurso" asp-format="{0:dd/MM/yyyy}" maxlength="10" placeholder="DD/MM/YYYY" />
+                        <span asp-validation-for="FimDoCurso" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -52,10 +59,16 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Tipo</label>
                     <div class="col-md-2">
-                        <select class="form-control" asp-for="TipoDeCursoAberto">
+                        <select class="form-control" asp-for="TipoDeCursoAberto" id="tipoDeCursoAberto">
                             <option value="Publico">Publico</option>
                             <option value="Fechado">Fechado</option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group" id="empresaDiv">
+                    <label class="col-md-2 control-label">Empresa</label>
+                    <div class="col-md-2">
+                        <input class="form-control" asp-for="Empresa">
                     </div>
                 </div>
                 <div class="form-group">
@@ -81,6 +94,31 @@
                 centsSeparator: ',',
                 thousandsSeparator: '.'
             });
+
+            prepararCamposDePeriodoDaMatriculaPeloTipoDeCursio($("#tipoDeCursoAberto option:selected").val());
+            $('#tipoDeCursoAberto').change(function() {
+
+                prepararCamposDePeriodoDaMatriculaPeloTipoDeCursio($("#tipoDeCursoAberto option:selected").val());
+            });
+
+            function prepararCamposDePeriodoDaMatriculaPeloTipoDeCursio(tipo)
+            {
+                if ($("#tipoDeCursoAberto option:selected").val() == "Fechado") {
+
+                    $('#inicioDasMatriculasDiv').css('display', 'none');
+                    $('#PeriodoInicialParaMatricula').val('');
+                    $('#fimDasMatriculasDiv').css('display', 'none');
+                    $('#PeriodoFinalParaMatricula').val('');
+                    $('#empresaDiv').css('display', '');
+                }
+                else {
+
+                    $('#inicioDasMatriculasDiv').css('display', '');
+                    $('#fimDasMatriculasDiv').css('display', '');
+                    $('#empresaDiv').css('display', 'none');
+                    $('#Empresa').val('');
+                }
+            }
         });
     </script>
 }

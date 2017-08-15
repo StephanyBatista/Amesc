@@ -1,0 +1,5 @@
+C:\source\Amesc\Amesc.WebApp\bin\Debug\netcoreapp2.0\Amesc.WebApp.deps.json
+C:\source\Amesc\Amesc.WebApp\bin\Debug\netcoreapp2.0\Amesc.WebApp.runtimeconfig.json
+C:\source\Amesc\Amesc.WebApp\bin\Debug\netcoreapp2.0\Amesc.WebApp.runtimeconfig.dev.json
+C:\source\Amesc\Amesc.WebApp\obj\Debug\netcoreapp2.0\Amesc.WebApp.csprojResolveAssemblyReference.cache
+C:\source\Amesc\Amesc.WebApp\obj\Debug\netcoreapp2.0\Amesc.WebApp.AssemblyInfo.cs

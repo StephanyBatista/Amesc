@@ -9,8 +9,8 @@ using Amesc.Dominio.Cursos;
 namespace Amesc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170810020925_AddCodigoEmCurso")]
-    partial class AddCodigoEmCurso
+    [Migration("20170815010837_MigracaoInicial")]
+    partial class MigracaoInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,33 +73,53 @@ namespace Amesc.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ContatoId");
-
                     b.Property<string>("Cpf");
 
+                    b.Property<DateTime>("DataDeNascimento");
+
+                    b.Property<int?>("EnderecoId");
+
+                    b.Property<string>("MidiaSocial");
+
                     b.Property<string>("Nome");
+
+                    b.Property<string>("OrgaoEmissorDoRg");
+
+                    b.Property<string>("RegistroProfissional");
+
+                    b.Property<string>("Rg");
+
+                    b.Property<string>("Telefone");
 
                     b.Property<string>("TipoDePublico");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContatoId");
+                    b.HasIndex("EnderecoId");
 
                     b.ToTable("Aluno");
                 });
 
-            modelBuilder.Entity("Amesc.Dominio.Alunos.Contato", b =>
+            modelBuilder.Entity("Amesc.Dominio.Alunos.Endereco", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Endereco");
+                    b.Property<string>("Bairro");
 
-                    b.Property<string>("Telefone");
+                    b.Property<string>("Cidade");
+
+                    b.Property<string>("Complemento");
+
+                    b.Property<string>("Estado");
+
+                    b.Property<string>("Logradouro");
+
+                    b.Property<string>("Numero");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contato");
+                    b.ToTable("Endereco");
                 });
 
             modelBuilder.Entity("Amesc.Dominio.Cursos.Curso", b =>
@@ -131,11 +151,15 @@ namespace Amesc.Data.Migrations
 
                     b.Property<int?>("CursoId");
 
-                    b.Property<DateTime>("DataDeAbertura");
+                    b.Property<string>("Empresa");
 
-                    b.Property<DateTime>("DataDeFechamento");
+                    b.Property<DateTime>("FimDoCurso");
 
-                    b.Property<DateTime>("DataDoCurso");
+                    b.Property<DateTime>("InicioDoCurso");
+
+                    b.Property<DateTime?>("PeriodoFinalParaMatricula");
+
+                    b.Property<DateTime?>("PeriodoInicialParaMatricula");
 
                     b.Property<decimal>("Preco");
 
@@ -299,9 +323,9 @@ namespace Amesc.Data.Migrations
 
             modelBuilder.Entity("Amesc.Dominio.Alunos.Aluno", b =>
                 {
-                    b.HasOne("Amesc.Dominio.Alunos.Contato", "Contato")
+                    b.HasOne("Amesc.Dominio.Alunos.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("ContatoId");
+                        .HasForeignKey("EnderecoId");
                 });
 
             modelBuilder.Entity("Amesc.Dominio.Cursos.CursoAberto", b =>

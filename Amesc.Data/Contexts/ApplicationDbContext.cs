@@ -25,7 +25,7 @@ namespace Amesc.Data.Contexts
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Aluno>().ToTable("Aluno");
-            modelBuilder.Entity<Endereco>().ToTable("Contato");
+            modelBuilder.Entity<Endereco>().ToTable("Endereco");
             modelBuilder.Entity<Curso>().ToTable("Curso");
             modelBuilder.Entity<CursoAberto>().ToTable("CursoAberto");
             modelBuilder.Entity<PublicoAlvoParaCurso>().ToTable("PublicoAlvoParaCurso");

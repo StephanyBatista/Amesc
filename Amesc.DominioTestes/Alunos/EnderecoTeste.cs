@@ -11,7 +11,7 @@ namespace Amesc.DominioTestes.Alunos
         private string _logradouro;
         private string _numero;
         private string _bairro;
-        private object _complemento;
+        private string _complemento;
         private string _cidade;
         private string _estado;
 
