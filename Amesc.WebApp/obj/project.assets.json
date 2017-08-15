@@ -13162,9 +13162,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\source\\Amesc\\Amesc.WebApp\\Amesc.WebApp.csproj",
       "projectName": "Amesc.WebApp",
@@ -13190,11 +13187,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\source\\Amesc\\Amesc.Dominio\\Amesc.Dominio.csproj": {
-              "projectPath": "C:\\source\\Amesc\\Amesc.Dominio\\Amesc.Dominio.csproj"
-            },
             "C:\\source\\Amesc\\Amesc.Data\\Amesc.Data.csproj": {
               "projectPath": "C:\\source\\Amesc\\Amesc.Data\\Amesc.Data.csproj"
+            },
+            "C:\\source\\Amesc\\Amesc.Dominio\\Amesc.Dominio.csproj": {
+              "projectPath": "C:\\source\\Amesc\\Amesc.Dominio\\Amesc.Dominio.csproj"
             }
           }
         }
@@ -13208,10 +13205,6 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Tools": {
-            "target": "Package",
-            "version": "2.0.0"
-          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
@@ -13219,6 +13212,10 @@
             "autoReferenced": true
           },
           "Microsoft.AspNetCore.All": {
+            "target": "Package",
+            "version": "2.0.0"
+          },
+          "Microsoft.EntityFrameworkCore.Tools": {
             "target": "Package",
             "version": "2.0.0"
           }

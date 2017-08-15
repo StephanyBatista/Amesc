@@ -8649,9 +8649,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\source\\Amesc\\Amesc.DominioTestes\\Amesc.DominioTestes.csproj",
       "projectName": "Amesc.DominioTestes",
@@ -8690,22 +8687,6 @@
     "frameworks": {
       "netcoreapp1.1": {
         "dependencies": {
-          "MSTest.TestFramework": {
-            "target": "Package",
-            "version": "1.1.18"
-          },
-          "Nosbor.FluentBuilder": {
-            "target": "Package",
-            "version": "1.1.0"
-          },
-          "MSTest.TestAdapter": {
-            "target": "Package",
-            "version": "1.1.18"
-          },
-          "Moq": {
-            "target": "Package",
-            "version": "4.7.99"
-          },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "1.1.2",
@@ -8714,6 +8695,22 @@
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "15.3.0"
+          },
+          "Moq": {
+            "target": "Package",
+            "version": "4.7.99"
+          },
+          "MSTest.TestAdapter": {
+            "target": "Package",
+            "version": "1.1.18"
+          },
+          "MSTest.TestFramework": {
+            "target": "Package",
+            "version": "1.1.18"
+          },
+          "Nosbor.FluentBuilder": {
+            "target": "Package",
+            "version": "1.1.0"
           }
         }
       }
