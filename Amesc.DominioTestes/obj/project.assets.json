@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
       "Castle.Core/4.1.1": {
@@ -2918,6 +2918,12 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "bin/placeholder/Amesc.Dominio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Amesc.Dominio.dll": {}
         }
       }
     }
@@ -8643,15 +8649,29 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "C:\\source\\Amesc\\Amesc.DominioTestes\\Amesc.DominioTestes.csproj",
       "projectName": "Amesc.DominioTestes",
       "projectPath": "C:\\source\\Amesc\\Amesc.DominioTestes\\Amesc.DominioTestes.csproj",
+      "packagesPath": "C:\\Users\\steph\\.nuget\\packages\\",
       "outputPath": "C:\\source\\Amesc\\Amesc.DominioTestes\\obj\\",
       "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\steph\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {},
+        "C:\\Users\\steph\\.dotnet\\NuGetFallbackFolder": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
@@ -8660,6 +8680,11 @@
             }
           }
         }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
       }
     },
     "frameworks": {

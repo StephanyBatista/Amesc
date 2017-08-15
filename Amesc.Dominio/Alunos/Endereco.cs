@@ -2,7 +2,7 @@
 
 namespace Amesc.Dominio.Alunos
 {
-    public class Endereco : Entidade
+    public class Endereco
     {
         public string Numero { get; private set; }
         public string Logradouro { get; private set; }

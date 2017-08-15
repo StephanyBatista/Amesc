@@ -1,5 +1,5 @@
 ﻿using Amesc.Dominio.Contas;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Amesc.Data.Identity
 {

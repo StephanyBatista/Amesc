@@ -2,9 +2,9 @@
 using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Matriculas;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Amesc.Data.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Amesc.Data.Contexts
 {
@@ -24,12 +24,7 @@ namespace Amesc.Data.Contexts
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Aluno>().ToTable("Aluno");
-            modelBuilder.Entity<Endereco>().ToTable("Endereco");
-            modelBuilder.Entity<Curso>().ToTable("Curso");
-            modelBuilder.Entity<CursoAberto>().ToTable("CursoAberto");
-            modelBuilder.Entity<PublicoAlvoParaCurso>().ToTable("PublicoAlvoParaCurso");
-            modelBuilder.Entity<Matricula>().ToTable("Matricula");
+            modelBuilder.Entity<Aluno>().OwnsOne(p => p.Endereco);
         }
 
         public async Task Commit()

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Amesc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170815010838_CriarUsuarioAdmin")]
+    [Migration("20170815024850_CriarUsuarioAdmin")]
     public class CriarUsuarioAdmin : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

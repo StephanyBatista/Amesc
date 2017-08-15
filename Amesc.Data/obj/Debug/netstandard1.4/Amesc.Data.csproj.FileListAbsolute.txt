@@ -31,6 +31,8 @@ C:\source\Amesc\Amesc.Data\bin\Debug\netstandard1.4\Amesc.Data.pdb
 C:\source\Amesc\Amesc.Data\bin\Debug\netstandard1.4\Amesc.Dominio.dll
 C:\source\Amesc\Amesc.Data\bin\Debug\netstandard1.4\Amesc.Dominio.pdb
 C:\source\Amesc\Amesc.Data\obj\Debug\netstandard1.4\Amesc.Data.csprojResolveAssemblyReference.cache
+C:\source\Amesc\Amesc.Data\obj\Debug\netstandard1.4\Amesc.Data.csproj.CoreCompileInputs.cache
+C:\source\Amesc\Amesc.Data\obj\Debug\netstandard1.4\Amesc.Data.AssemblyInfoInputs.cache
 C:\source\Amesc\Amesc.Data\obj\Debug\netstandard1.4\Amesc.Data.AssemblyInfo.cs
 C:\source\Amesc\Amesc.Data\obj\Debug\netstandard1.4\Amesc.Data.dll
 C:\source\Amesc\Amesc.Data\obj\Debug\netstandard1.4\Amesc.Data.pdb

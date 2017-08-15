@@ -9,6 +9,7 @@ using Amesc.Dominio.Matriculas;
 using Amesc.WebApp.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -45,10 +46,10 @@ namespace Amesc.WebApp
                 config.Password.RequireLowercase = false;
                 config.Password.RequireNonAlphanumeric = false;
                 config.Password.RequireUppercase = false;
-                config.Cookies.ApplicationCookie.LoginPath = "/Autenticacao";
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Autenticacao");
 
             services.AddScoped(typeof(IRepositorio<>), typeof(RepositorioBase<>));
             services.AddScoped(typeof(ICursoRepositorio), typeof(CursoRepositorio));
@@ -101,7 +102,7 @@ namespace Amesc.WebApp
                 DefaultRequestCulture = new RequestCulture("pt-BR")
             });
 
-            app.UseIdentity();
+            app.UseAuthentication();
 
             app.UseStaticFiles();
 

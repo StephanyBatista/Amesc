@@ -40,3 +40,5 @@ C:\source\Amesc\Amesc.DominioTestes\bin\Debug\netcoreapp1.1\Amesc.Dominio.dll
 C:\source\Amesc\Amesc.DominioTestes\bin\Debug\netcoreapp1.1\Amesc.Dominio.pdb
 C:\source\Amesc\Amesc.DominioTestes\obj\Debug\netcoreapp1.1\Amesc.DominioTestes.dll
 C:\source\Amesc\Amesc.DominioTestes\obj\Debug\netcoreapp1.1\Amesc.DominioTestes.pdb
+C:\source\Amesc\Amesc.DominioTestes\obj\Debug\netcoreapp1.1\Amesc.DominioTestes.csproj.CoreCompileInputs.cache
+C:\source\Amesc\Amesc.DominioTestes\obj\Debug\netcoreapp1.1\Amesc.DominioTestes.AssemblyInfoInputs.cache
