@@ -1,4 +1,5 @@
-﻿using Amesc.Dominio._Base;
+﻿using System;
+using Amesc.Dominio._Base;
 
 namespace Amesc.Dominio.Matriculas
 {
@@ -11,15 +12,21 @@ namespace Amesc.Dominio.Matriculas
             _matriculaRepositorio = matriculaRepositorio;
         }
 
-        public void Alterar(int idMatricula, string observacao, float? notaDoAlunoNoCurso)
+        public void Alterar(int idMatricula, string observacao, float? notaDoAlunoNoCurso, string statusDaAprovacaoEmString, string ip)
         {
             var matricula = _matriculaRepositorio.ObterPorId(idMatricula);
             ExcecaoDeDominio.Quando(matricula == null, "Matricula não encontrada");
 
             if(!string.IsNullOrEmpty(observacao))
                 matricula.AdicionarObservacao(observacao);
+            
+            
             if(notaDoAlunoNoCurso.HasValue)
-                matricula.AdicionarNotaDoAlunoNoCurso(notaDoAlunoNoCurso.Value);
+            {
+                ExcecaoDeDominio.Quando(!Enum.TryParse(statusDaAprovacaoEmString, out StatusDaAprovacaoDaMatricula status), "Status da aprovação é inválido");
+                matricula.AdicionarNotaDoAlunoNoCurso(notaDoAlunoNoCurso.Value, status);
+            }
+                
         }
     }
 }

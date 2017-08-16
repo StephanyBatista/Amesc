@@ -35,17 +35,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Orgão emissor</label>
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" asp-for="OrgaoEmissorDoRg">
-                        <span asp-validation-for="OrgaoEmissorDoRg" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-md-2 control-label">RG</label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" asp-for="Rg">
                         <span asp-validation-for="Rg" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Orgão emissor</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="OrgaoEmissorDoRg">
+                        <span asp-validation-for="OrgaoEmissorDoRg" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -152,6 +152,7 @@
             $("#Cpf").mask("999.999.999-99");
             $("#Rg").mask("999999999");
             $("#telefone").mask("(99) 99999999?9");
+            $('#DataDeNascimento').mask("99/99/9999");
         });
     </script>
 }

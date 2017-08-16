@@ -91,14 +91,15 @@ namespace Amesc.DominioTestes.Matriculas
         }
 
         [TestMethod]
-        public void DevePoderAdicionarNotaDoAlunoNoCurso()
+        public void DevePoderAdicionarNotaDoAlunoNoCursoESeAprovado()
         {
             const float notaDoAlunoNoCurso = 7.5f;
             var matricula = FluentBuilder<Matricula>.New().Build();
 
-            matricula.AdicionarNotaDoAlunoNoCurso(notaDoAlunoNoCurso);
+            matricula.AdicionarNotaDoAlunoNoCurso(notaDoAlunoNoCurso, StatusDaAprovacaoDaMatricula.Aprovado);
 
             Assert.AreEqual(notaDoAlunoNoCurso, matricula.NotaDoAlunoNoCurso);
+            Assert.AreEqual(StatusDaAprovacaoDaMatricula.Aprovado, matricula.StatusDaAprovacao);
         }
 
         [TestMethod]
@@ -106,11 +107,31 @@ namespace Amesc.DominioTestes.Matriculas
         {
             var matricula = FluentBuilder<Matricula>.New().Build();
 
-            var message0 = Assert.ThrowsException<ExcecaoDeDominio>(() => matricula.AdicionarNotaDoAlunoNoCurso(0)).Message;
+            var message0 = Assert.ThrowsException<ExcecaoDeDominio>(() => matricula.AdicionarNotaDoAlunoNoCurso(0, StatusDaAprovacaoDaMatricula.Aprovado)).Message;
             Assert.AreEqual("Nota do aluno no curso é inválido", message0);
 
-            var message11 = Assert.ThrowsException<ExcecaoDeDominio>(() => matricula.AdicionarNotaDoAlunoNoCurso(11)).Message;
+            var message11 = Assert.ThrowsException<ExcecaoDeDominio>(() => matricula.AdicionarNotaDoAlunoNoCurso(11, StatusDaAprovacaoDaMatricula.Aprovado)).Message;
             Assert.AreEqual("Nota do aluno no curso é inválido", message11);
+        }
+
+        [TestMethod]
+        public void NaoDeveAdicionarStatusDeAprovacaoDaMatriculaInvalida()
+        {
+            var matricula = FluentBuilder<Matricula>.New().Build();
+
+            Assert.ThrowsException<ExcecaoDeDominio>(() => matricula.AdicionarNotaDoAlunoNoCurso(1, StatusDaAprovacaoDaMatricula.Nenhum))
+                .Message.StartsWith("Status de aprovação é inválido");
+        }
+
+        [TestMethod]
+        public void DevePoderAdicionarInstructorPotentialDaMatricula()
+        {
+            var matricula = FluentBuilder<Matricula>.New().Build();
+            var ipEsperado = "ip";
+
+            matricula.AdicionarIP(ipEsperado);
+
+            Assert.AreEqual(ipEsperado, matricula.Ip);
         }
     }
 }

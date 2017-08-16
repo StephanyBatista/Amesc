@@ -1,0 +1,25 @@
+{
+  "name": "amesc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "dotnet run -p .\\Amesc.WebApp\\Amesc.WebApp.csproj",
+    "test": "cd .\\Amesc.DominioTestes && dotnet test",
+    "migration": "cd .\\Amesc.Data\\ && dotnet ef --startup-project ..\\Amesc.WebApp\\Amesc.WebApp.csproj migrations add",
+    "remove-migration": "cd .\\Amesc.Data\\ && dotnet ef --startup-project ..\\Amesc.WebApp\\Amesc.WebApp.csproj migrations remove",
+    "database-update": "cd .\\Amesc.Data\\ && dotnet ef --startup-project ..\\Amesc.WebApp\\Amesc.WebApp.csproj database update"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StephanyBatista/Amesc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StephanyBatista/Amesc/issues"
+  },
+  "homepage": "https://github.com/StephanyBatista/Amesc#readme"
+}

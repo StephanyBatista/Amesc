@@ -5,6 +5,13 @@ using Amesc.Dominio._Base;
 
 namespace Amesc.Dominio.Matriculas
 {
+    public enum StatusDaAprovacaoDaMatricula{
+
+        Nenhum,
+        Aprovado,
+        Reprovado
+    }
+    
     public class Matricula : Entidade
     {
         public CursoAberto CursoAberto { get; private set; }
@@ -13,6 +20,8 @@ namespace Amesc.Dominio.Matriculas
         public bool EstaPago { get; private set; }
         public string Observacao { get; private set; }
         public float? NotaDoAlunoNoCurso { get; private set; }
+        public StatusDaAprovacaoDaMatricula StatusDaAprovacao { get; private set; }
+        public string Ip { get; private set; }
 
         public Matricula() { }
 
@@ -34,10 +43,17 @@ namespace Amesc.Dominio.Matriculas
             Observacao = observacao;
         }
 
-        public void AdicionarNotaDoAlunoNoCurso(float notaDoAlunoNoCurso)
+        public void AdicionarNotaDoAlunoNoCurso(float notaDoAlunoNoCurso, StatusDaAprovacaoDaMatricula status)
         {
             ExcecaoDeDominio.Quando(notaDoAlunoNoCurso < 1 || notaDoAlunoNoCurso > 10, "Nota do aluno no curso é inválido");
+            ExcecaoDeDominio.Quando(status == StatusDaAprovacaoDaMatricula.Nenhum, "Status da aprovação é inválido");
             NotaDoAlunoNoCurso = notaDoAlunoNoCurso;
+            StatusDaAprovacao = status;
+        }
+
+        public void AdicionarIP(string ip)
+        {
+            Ip = ip;
         }
     }
 }

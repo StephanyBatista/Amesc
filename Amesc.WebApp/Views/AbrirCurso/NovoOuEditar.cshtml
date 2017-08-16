@@ -86,9 +86,16 @@
     <script src="/js/jquery.validate.unobtrusive.js"></script>
     <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
     <script src="/js/jquery.priceformat.min.js"></script>
+    <script src="/js/jquery.maskedinput.min.js"></script>
     <script src="/js/excecaoDeDominio.js"></script>
     <script>
         $(function() {
+            
+            $('#PeriodoInicialParaMatricula').mask('99/99/9999');
+            $('#PeriodoFinalParaMatricula').mask('99/99/9999');
+            $('#InicioDoCurso').mask('99/99/9999');
+            $('#FimDoCurso').mask('99/99/9999');
+            
             $('#preco').priceFormat({
                 prefix: '',
                 centsSeparator: ',',

@@ -76,7 +76,7 @@ namespace Amesc.WebApp.Controllers
         [HttpPost]
         public IActionResult Gerenciar(GerenciarMatriculaViewModel model)
         {
-            _alteracaoDeDadosDaMatricula.Alterar(model.Id, model.Observacao, model.NotaDoAlunoNoCurso);
+            _alteracaoDeDadosDaMatricula.Alterar(model.Id, model.Observacao, model.NotaDoAlunoNoCurso, model.StatusDaAprovacao, model.Ip);
             return Ok();
         }
     }

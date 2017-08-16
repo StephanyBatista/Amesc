@@ -8650,11 +8650,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\source\\Amesc\\Amesc.DominioTestes\\Amesc.DominioTestes.csproj",
+      "projectUniqueName": "c:\\source\\Amesc\\Amesc.DominioTestes\\Amesc.DominioTestes.csproj",
       "projectName": "Amesc.DominioTestes",
-      "projectPath": "C:\\source\\Amesc\\Amesc.DominioTestes\\Amesc.DominioTestes.csproj",
+      "projectPath": "c:\\source\\Amesc\\Amesc.DominioTestes\\Amesc.DominioTestes.csproj",
       "packagesPath": "C:\\Users\\steph\\.nuget\\packages\\",
-      "outputPath": "C:\\source\\Amesc\\Amesc.DominioTestes\\obj\\",
+      "outputPath": "c:\\source\\Amesc\\Amesc.DominioTestes\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\steph\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8672,8 +8672,8 @@
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "C:\\source\\Amesc\\Amesc.Dominio\\Amesc.Dominio.csproj": {
-              "projectPath": "C:\\source\\Amesc\\Amesc.Dominio\\Amesc.Dominio.csproj"
+            "c:\\source\\Amesc\\Amesc.Dominio\\Amesc.Dominio.csproj": {
+              "projectPath": "c:\\source\\Amesc\\Amesc.Dominio\\Amesc.Dominio.csproj"
             }
           }
         }
