@@ -6,9 +6,6 @@
     "tasks": [
         {
             "taskName": "build",
-            "args": [
-                "${workspaceRoot}/Amesc.DominioTestes/Amesc.DominioTestes.csproj"
-            ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
         }

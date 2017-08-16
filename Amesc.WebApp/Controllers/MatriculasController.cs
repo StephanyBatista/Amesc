@@ -34,7 +34,16 @@ namespace Amesc.WebApp.Controllers
 
         public IActionResult Index()
         {
-            var matriculas = _matriculaRepositorio.Consultar();
+            var somenteMatriculasPagas = string.IsNullOrEmpty(Request.Query["naopago"]);
+            var validadeDoCursoExpirada = !string.IsNullOrEmpty(Request.Query["expirado"]);
+            
+            var matriculas = _matriculaRepositorio
+                .ConsultarPor(
+                    Request.Query["aluno"], 
+                    Request.Query["curso"], 
+                    somenteMatriculasPagas, 
+                    validadeDoCursoExpirada);
+
             var models = matriculas.Select(m => new MatriculaParaListaViewModel(m));
 
             return View(PaginatedList<MatriculaParaListaViewModel>.Create(models, Request));

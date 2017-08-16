@@ -22,10 +22,10 @@
             <form asp-action="Index" method="get">
                 <div class="form-actions no-color">
                     <p>
-                        <input type="text" name="q" placeholder="Aluno" />
-                        <input type="text" name="q" placeholder="Curso" />
-                        Pago? <input type="checkbox" name="q" placeholder="Curso" />
-                        Validade expirada? <input type="checkbox" name="q" placeholder="Curso" />
+                        <input type="text" name="aluno" placeholder="Aluno" class="form-control col-xs-12" />
+                        <input type="text" name="curso" placeholder="Curso" class="form-control col-xs-12"/>
+                        Não Pago? <input type="checkbox" name="naopago" value="sim"  />
+                        Validade expirada? <input type="checkbox" name="expirado" value="sim" />
                         <input type="submit" value="Buscar" class="btn btn-default" /> |
                         <a asp-action="Index">Remover filtro</a>
                     </p>
@@ -85,7 +85,7 @@
             <a asp-action="Index"
                asp-route-page="@(Model.PageIndex + 1)"
                class="btn btn-default @nextDisabled">
-                Pr�ximo
+                Próximo
             </a>
         </div>
     </div>

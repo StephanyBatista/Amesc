@@ -6,7 +6,7 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "start": "dotnet run -p .\\Amesc.WebApp\\Amesc.WebApp.csproj",
+    "start": "cd .\\Amesc.WebApp\\ && dotnet run",
     "test": "cd .\\Amesc.DominioTestes && dotnet test",
     "migration": "cd .\\Amesc.Data\\ && dotnet ef --startup-project ..\\Amesc.WebApp\\Amesc.WebApp.csproj migrations add",
     "remove-migration": "cd .\\Amesc.Data\\ && dotnet ef --startup-project ..\\Amesc.WebApp\\Amesc.WebApp.csproj migrations remove",

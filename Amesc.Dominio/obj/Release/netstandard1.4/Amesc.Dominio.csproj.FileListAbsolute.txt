@@ -1,7 +1,0 @@
-C:\source\Amesc\Amesc.Dominio\bin\Release\netstandard1.4\Amesc.Dominio.deps.json
-C:\source\Amesc\Amesc.Dominio\bin\Release\netstandard1.4\Amesc.Dominio.dll
-C:\source\Amesc\Amesc.Dominio\bin\Release\netstandard1.4\Amesc.Dominio.pdb
-C:\source\Amesc\Amesc.Dominio\obj\Release\netstandard1.4\Amesc.Dominio.AssemblyInfo.cs
-C:\source\Amesc\Amesc.Dominio\obj\Release\netstandard1.4\Amesc.Dominio.dll
-C:\source\Amesc\Amesc.Dominio\obj\Release\netstandard1.4\Amesc.Dominio.pdb
-C:\source\Amesc\Amesc.Dominio\obj\Release\netstandard1.4\Amesc.Dominio.csprojResolveAssemblyReference.cache

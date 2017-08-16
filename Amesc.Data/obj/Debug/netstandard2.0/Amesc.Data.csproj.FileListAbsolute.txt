@@ -1,4 +1,0 @@
-C:\source\Amesc\Amesc.Data\obj\Debug\netstandard2.0\Amesc.Data.csprojResolveAssemblyReference.cache
-C:\source\Amesc\Amesc.Data\obj\Debug\netstandard2.0\Amesc.Data.csproj.CoreCompileInputs.cache
-C:\source\Amesc\Amesc.Data\obj\Debug\netstandard2.0\Amesc.Data.AssemblyInfoInputs.cache
-C:\source\Amesc\Amesc.Data\obj\Debug\netstandard2.0\Amesc.Data.AssemblyInfo.cs
