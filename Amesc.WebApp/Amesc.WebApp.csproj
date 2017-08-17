@@ -4,69 +4,24 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <AssetTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
-    <ApplicationIcon />
-    <OutputType>WinExe</OutputType>
-    <StartupObject />
-    <EnableDefaultContentItems>false</EnableDefaultContentItems>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\NewFolder\**" />
-    <Compile Remove="Css\**" />
-    <Content Remove="Controllers\NewFolder\**" />
-    <Content Remove="Css\**" />
-    <EmbeddedResource Remove="Controllers\NewFolder\**" />
-    <EmbeddedResource Remove="Css\**" />
-    <None Remove="Controllers\NewFolder\**" />
-    <None Remove="Css\**" />
+    <None Remove="Properties\PublishProfiles\amesc - Web Deploy.pubxml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Js\excecaoDeDominio.js" />
-    <Content Include="Js\jquery.maskedinput.min.js" />
-    <Content Include="Js\jquery.priceformat.min.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Js\site.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Js\site.min.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\font\fontawesome-webfont.eot" />
-    <Content Include="wwwroot\font\fontawesome-webfont.svg" />
-    <Content Include="wwwroot\font\fontawesome-webfont.ttf" />
-    <Content Include="wwwroot\font\fontawesome-webfont.woff" />
-    <Content Include="wwwroot\font\FontAwesome.otf" />
-    <Content Include="wwwroot\font\glyphicons-halflings-regular.eot" />
-    <Content Include="wwwroot\font\glyphicons-halflings-regular.svg" />
-    <Content Include="wwwroot\font\glyphicons-halflings-regular.ttf" />
-    <Content Include="wwwroot\font\glyphicons-halflings-regular.woff" />
-    <Content Include="wwwroot\js\bootstrap.min.js" />
-    <Content Include="wwwroot\js\excecaoDeDominio.js" />
-    <Content Include="wwwroot\js\jquery.maskedinput.min.js" />
-    <Content Include="wwwroot\js\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="wwwroot\js\jquery.validate.min.js" />
-    <Content Include="wwwroot\js\jquery.validate.unobtrusive.js" />
-  </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Amesc.Data\Amesc.Data.csproj" />
     <ProjectReference Include="..\Amesc.Dominio\Amesc.Dominio.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
 </Project>

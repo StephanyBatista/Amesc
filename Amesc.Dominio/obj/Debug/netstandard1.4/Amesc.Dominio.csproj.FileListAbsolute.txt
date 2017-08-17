@@ -1,0 +1,9 @@
+C:\source\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.deps.json
+C:\source\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.dll
+C:\source\Amesc\Amesc.Dominio\bin\Debug\netstandard1.4\Amesc.Dominio.pdb
+C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.csproj.CoreCompileInputs.cache
+C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.AssemblyInfoInputs.cache
+C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.AssemblyInfo.cs
+C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.dll
+C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.pdb
+C:\source\Amesc\Amesc.Dominio\obj\Debug\netstandard1.4\Amesc.Dominio.csprojResolveAssemblyReference.cache

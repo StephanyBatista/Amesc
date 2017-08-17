@@ -1,0 +1,11 @@
+C:\source\Amesc\Amesc.Data\bin\Debug\netcoreapp2.0\Amesc.Data.deps.json
+C:\source\Amesc\Amesc.Data\bin\Debug\netcoreapp2.0\Amesc.Data.dll
+C:\source\Amesc\Amesc.Data\bin\Debug\netcoreapp2.0\Amesc.Data.pdb
+C:\source\Amesc\Amesc.Data\bin\Debug\netcoreapp2.0\Amesc.Dominio.dll
+C:\source\Amesc\Amesc.Data\bin\Debug\netcoreapp2.0\Amesc.Dominio.pdb
+C:\source\Amesc\Amesc.Data\obj\Debug\netcoreapp2.0\Amesc.Data.csproj.CoreCompileInputs.cache
+C:\source\Amesc\Amesc.Data\obj\Debug\netcoreapp2.0\Amesc.Data.AssemblyInfoInputs.cache
+C:\source\Amesc\Amesc.Data\obj\Debug\netcoreapp2.0\Amesc.Data.AssemblyInfo.cs
+C:\source\Amesc\Amesc.Data\obj\Debug\netcoreapp2.0\Amesc.Data.dll
+C:\source\Amesc\Amesc.Data\obj\Debug\netcoreapp2.0\Amesc.Data.pdb
+C:\source\Amesc\Amesc.Data\obj\Debug\netcoreapp2.0\Amesc.Data.csprojResolveAssemblyReference.cache
