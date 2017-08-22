@@ -1,4 +1,5 @@
-﻿using Amesc.Data.Contexts;
+﻿using System.Globalization;
+using Amesc.Data.Contexts;
 using Amesc.Data.Identity;
 using Amesc.Data.Repositorios;
 using Amesc.Dominio;
@@ -97,9 +98,15 @@ namespace Amesc.WebApp
             //    app.UseExceptionHandler("/Home/Error");
             //}
 
+            var supportedCultures = new[] { new CultureInfo("pt-BR") };
+
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture("pt-BR")
+                DefaultRequestCulture = new RequestCulture("pt-BR"),
+                // Formatting numbers, dates, etc.
+                SupportedCultures = supportedCultures,
+                // UI strings that we have localized.
+                SupportedUICultures = supportedCultures
             });
 
             app.UseAuthentication();
