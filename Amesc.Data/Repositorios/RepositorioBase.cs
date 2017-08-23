@@ -2,6 +2,7 @@
 using System.Linq;
 using Amesc.Data.Contexts;
 using Amesc.Dominio;
+using Microsoft.EntityFrameworkCore;
 
 namespace Amesc.Data.Repositorios
 {

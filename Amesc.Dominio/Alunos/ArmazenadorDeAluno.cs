@@ -22,7 +22,8 @@ namespace Amesc.Dominio.Alunos
             string registroProfissional,
             string telefone, 
             string numero, 
-            string logradouro, 
+            string logradouro,
+            string cep,
             string bairro, 
             string complemento, 
             string cidade, 
@@ -34,15 +35,15 @@ namespace Amesc.Dominio.Alunos
 
             if (id == 0)
             {
-                var endereço = new Endereco(numero, logradouro, bairro, complemento, cidade, estado);
+                var endereço = new Endereco(numero, logradouro, cep, bairro, complemento, cidade, estado);
                 var aluno = new Aluno(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereço, publicoAlvo, midiaSocial);
                 _alunoRepositorio.Adicionar(aluno);
             }
             else
             {
-                var endereço = new Endereco(numero, logradouro, bairro, complemento, cidade, estado);
+                var endereco = new Endereco(numero, logradouro, cep, bairro, complemento, cidade, estado);
                 var aluno = _alunoRepositorio.ObterPorId(id);
-                aluno.Editar(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereço, publicoAlvo, midiaSocial);
+                aluno.Editar(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereco, publicoAlvo, midiaSocial);
             }
         }
     }

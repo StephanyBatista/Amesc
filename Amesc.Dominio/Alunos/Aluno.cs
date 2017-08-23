@@ -47,13 +47,29 @@ namespace Amesc.Dominio.Alunos
             Nome = nome;
             Cpf = cpf;
             Telefone = telefone;
-            Endereco = endereco;
             TipoDePublico = tipoDePublico;
             OrgaoEmissorDoRg = orgaoEmissorDoRg;
             Rg = rg;
             DataDeNascimento = dataDeNascimento;
             RegistroProfissional = registroProfissional;
             MidiaSocial = midiaSocial;
+            AtribuirEndereco(endereco);
+        }
+
+        private void AtribuirEndereco(Endereco endereco)
+        {
+            if (Endereco == null)
+                Endereco = endereco;
+            else
+            {
+                Endereco.AlterarNumero(endereco.Numero);
+                Endereco.AlterarLogradouro(endereco.Logradouro);
+                Endereco.AlterarBairro(endereco.Bairro);
+                Endereco.AlterarComplemento(endereco.Complemento);
+                Endereco.AlterarCidade(endereco.Cidade);
+                Endereco.AlterarEstado(endereco.Estado);
+                Endereco.AlterarCep(endereco.Cep);
+            }
         }
     }
 }

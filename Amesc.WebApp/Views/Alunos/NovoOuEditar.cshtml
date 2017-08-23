@@ -69,17 +69,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Numero</label>
-                    <div class="col-md-2">
-                        <input type="text" class="form-control" asp-for="Numero">
-                        <span asp-validation-for="Numero" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-md-2 control-label">Logradouro</label>
                     <div class="col-md-8">
                         <input type="text" class="form-control" asp-for="Logradouro">
                         <span asp-validation-for="Logradouro" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Numero</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" asp-for="Numero">
+                        <span asp-validation-for="Numero" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -110,6 +110,13 @@
                             <option value="SP">SP</option>
                         </select>
                         <span asp-validation-for="Estado" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">CEP</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="Cep">
+                        <span asp-validation-for="Cep" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -149,6 +156,7 @@
     <script src="/js/excecaoDeDominio.js"></script>
     <script>
         $(function() {
+            $("#Cep").mask("99999-999");
             $("#Cpf").mask("999.999.999-99");
             $("#Rg").mask("999999999");
             $("#telefone").mask("(99) 99999999?9");

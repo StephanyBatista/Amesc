@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace Amesc.WebApp
 {
@@ -37,7 +38,7 @@ namespace Amesc.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<ApplicationDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(config => {
@@ -78,11 +79,19 @@ namespace Amesc.WebApp
             app.Use(async (context, next) =>
             {
                 //Request
-                await next.Invoke();
+                try
+                {
+                    await next.Invoke();
 
-                var applicationDbContext = (ApplicationDbContext)context.RequestServices.GetService(typeof(ApplicationDbContext));
-                //Response
-                await applicationDbContext.Commit();
+                    var applicationDbContext = (ApplicationDbContext)context.RequestServices.GetService(typeof(ApplicationDbContext));
+                    //Response
+                    await applicationDbContext.Commit();
+                }
+                catch(Exception ex)
+                {
+
+                }
+                
             });
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));

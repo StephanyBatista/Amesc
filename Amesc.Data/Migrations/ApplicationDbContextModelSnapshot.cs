@@ -313,6 +313,8 @@ namespace Amesc.Data.Migrations
 
                             b1.Property<string>("Bairro");
 
+                            b1.Property<string>("Cep");
+
                             b1.Property<string>("Cidade");
 
                             b1.Property<string>("Complemento");

@@ -17,6 +17,8 @@ namespace Amesc.WebApp.ViewModels
         public string Numero { get; set; }
         [Required(ErrorMessage = "Logradouro é obrigatório")]
         public string Logradouro { get; set; }
+        [Required(ErrorMessage = "CEP é obrigatório")]
+        public string Cep { get; set; }
         [Required(ErrorMessage = "Bairro é obrigatório")]
         public string Bairro { get; set; }
         public string Complemento { get; set; }
@@ -34,6 +36,7 @@ namespace Amesc.WebApp.ViewModels
         public string DataDeNascimento { get; set; }
         public string RegistroProfissional { get; set; }
         public string MidiaSocial { get; set; }
+        
 
         public AlunoParaCadastroViewModel() { }
 
@@ -54,6 +57,7 @@ namespace Amesc.WebApp.ViewModels
             Complemento = entidade.Endereco.Complemento;
             Cidade = entidade.Endereco.Cidade;
             Estado = entidade.Endereco.Estado;
+            Cep = entidade.Endereco.Cep;
             MidiaSocial = entidade.MidiaSocial;
         }
     }
