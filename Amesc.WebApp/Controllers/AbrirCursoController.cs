@@ -71,7 +71,7 @@ namespace Amesc.WebApp.Controllers
         [HttpPost]
         public IActionResult Salvar(CursoAbertoParaCadastroViewModel model)
         {
-            _armazenadorDeCursoAberto.Armazenar(model.Id, model.IdCurso, model.Preco, model.TipoDeCursoAberto, model.Empresa, model.PeriodoInicialParaMatricula, model.PeriodoFinalParaMatricula, model.InicioDoCurso, model.FimDoCurso);
+            _armazenadorDeCursoAberto.Armazenar(model.Id, model.Codigo, model.IdCurso, model.Preco, model.TipoDeCursoAberto, model.Empresa, model.PeriodoInicialParaMatricula, model.PeriodoFinalParaMatricula, model.InicioDoCurso, model.FimDoCurso);
 
             return RedirectToAction("Index", new {idCurso = model.IdCurso});
         }

@@ -15,7 +15,8 @@ namespace Amesc.Dominio.Cursos
         }
 
         public void Armazenar(
-            int id, 
+            int id,
+            string codigo,
             int idCurso, 
             string precoEmString, 
             string tipoDeCursoAbertoEmString,
@@ -34,6 +35,7 @@ namespace Amesc.Dominio.Cursos
             {
                 cursoAberto = _cursoAbertoRepositorio.ObterPorId(id);
                 cursoAberto.Editar(
+                    codigo,
                     curso, 
                     preco,
                     tipo, 
@@ -46,6 +48,7 @@ namespace Amesc.Dominio.Cursos
             else
             {
                 cursoAberto = new CursoAberto(
+                    codigo,
                     curso, 
                     preco,
                     tipo,

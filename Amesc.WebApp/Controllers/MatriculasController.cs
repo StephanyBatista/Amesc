@@ -69,7 +69,7 @@ namespace Amesc.WebApp.Controllers
         [HttpPost]
         public IActionResult Novo(MatriculaParaCadastroViewModel model)
         {
-            _criacaoDeMatricula.Criar(model.IdCursoAberto, model.IdAluno, model.EstaPago);
+            _criacaoDeMatricula.Criar(model.IdCursoAberto, model.IdAluno, model.EstaPago, model.ValorPago);
 
             return Ok();
         }

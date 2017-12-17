@@ -7,6 +7,7 @@ namespace Amesc.WebApp.ViewModels
     public class CursoAbertoParaCadastroViewModel
     {
         public int Id { get; set; }
+        public string Codigo { get; set; }
         public int IdCurso { get; set; }
         public string NomeCurso { get; set; }
         public string NomeCursoEDataDoCurso => $"{NomeCurso} - {InicioDoCurso:dd/MM/yyyy}";
@@ -32,6 +33,7 @@ namespace Amesc.WebApp.ViewModels
         public CursoAbertoParaCadastroViewModel(CursoAberto entidade)
         {
             Id = entidade.Id;
+            Codigo = entidade.Codigo;
             IdCurso = entidade.Curso.Id;
             NomeCurso = entidade.Curso.Nome;
             Preco = entidade.Preco.ToString();

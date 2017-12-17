@@ -1,5 +1,4 @@
-﻿using Amesc.Dominio;
-using Amesc.Dominio.Alunos;
+﻿using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Matriculas;
 using Moq;
@@ -20,6 +19,7 @@ namespace Amesc.DominioTestes.Matriculas
         private Mock<IAlunoRepositorio> _alunoRepositorio;
         private Mock<IMatriculaRepositorio> _matriculaRepositorio;
         private Mock<ICursoAbertoRepositorio> _cursoAbertoRepositorio;
+        private decimal _valorPago;
 
         [TestInitialize]
         public void Setup()
@@ -29,6 +29,7 @@ namespace Amesc.DominioTestes.Matriculas
             cursoAbertoMock.Setup(c => c.ContemPublicoAlvo(_aluno.TipoDePublico)).Returns(true);
             _cursoAberto = cursoAbertoMock.Object;
             _estaPago = true;
+            _valorPago = 100m;
             _idCursoAberto = 100;
             _idAluno = 600;
 
@@ -45,7 +46,7 @@ namespace Amesc.DominioTestes.Matriculas
         [TestMethod]
         public void DeveSalvarMatricula()
         {
-            _criacaoDeMatricula.Criar(_idCursoAberto, _idAluno, _estaPago);
+            _criacaoDeMatricula.Criar(_idCursoAberto, _idAluno, _estaPago, _valorPago.ToString());
 
             _matriculaRepositorio.Verify(
                 r => r.Adicionar(

@@ -128,6 +128,8 @@ namespace Amesc.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Codigo");
+
                     b.Property<int?>("CursoId");
 
                     b.Property<string>("Empresa");
@@ -187,6 +189,8 @@ namespace Amesc.Data.Migrations
                     b.Property<string>("Observacao");
 
                     b.Property<int>("StatusDaAprovacao");
+
+                    b.Property<decimal?>("ValorPago");
 
                     b.HasKey("Id");
 
