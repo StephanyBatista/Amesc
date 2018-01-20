@@ -32,6 +32,7 @@
                     <div class="col-md-3">
                         <input type="text" class="form-control" asp-for="Cpf">
                         <span asp-validation-for="Cpf" class="text-danger"></span>
+                        <h3 id="cpfJaCadastrado" class="hidden"><span class="label label-warning">CPF Já Cadastrado</span></h3>
                     </div>
                 </div>
                 <div class="form-group">
@@ -149,13 +150,19 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Tipo de publico</label>
                     <div class="col-md-2">
-                        
+
                         <select class="form-control" asp-for="TipoDePublico">
                             <option value="Médico(a)">Médico(a)</option>
                             <option value="Aluno 6° ano de medicina">Aluno 6° ano de medicina</option>
                             <option value="Enfermeiro(a)">Enfermeiro(a)</option>
                             <option value="Bombeiro(a)">Bombeiro(a)</option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Especialidade</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="Especialidade">
                     </div>
                 </div>
                 <div class="form-group">
@@ -183,11 +190,29 @@
     <script src="/js/excecaoDeDominio.js"></script>
     <script>
         $(function() {
+            adicionarMascaras();
+            validarSeCpfJaCadastrado();
+        });
+
+        function adicionarMascaras() {
             $("#Cep").mask("99999-999");
-            $("#Cpf").mask("999.999.999-99");            
+            $("#Cpf").mask("999.999.999-99");
             $("#telefone").mask("(99) 99999999?9");
             $('#DataDeNascimento').mask("99/99/9999");
-        });
+        }
+
+        function validarSeCpfJaCadastrado() {
+            $("#Cpf").change(function () {
+                $.getJSON("/alunos/cpfJaCadastrado?cpf=" + $("#Cpf").val(),
+                    function (result) {
+                        if (result) {
+                            $("#cpfJaCadastrado").removeClass("hidden");
+                        } else {
+                            $("#cpfJaCadastrado").addClass("hidden");
+                        }
+                    });
+            });
+        }
     </script>
 }
 

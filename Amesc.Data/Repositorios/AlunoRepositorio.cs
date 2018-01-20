@@ -23,5 +23,11 @@ namespace Amesc.Data.Repositorios
             var query = Context.Set<Aluno>().Include(p => p.Endereco).Where(entidade => entidade.Nome.ToUpper().Contains(nome.ToUpper()));
             return query.Any() ? query.ToList() : new List<Aluno>();
         }
+
+        public IEnumerable<Aluno> ConsultarPorCpf(string cpf)
+        {
+            var query = Context.Set<Aluno>().Include(p => p.Endereco).Where(entidade => entidade.Cpf == cpf);
+            return query.Any() ? query.ToList() : new List<Aluno>();
+        }
     }
 }

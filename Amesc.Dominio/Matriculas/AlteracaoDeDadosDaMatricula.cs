@@ -20,13 +20,11 @@ namespace Amesc.Dominio.Matriculas
             if(!string.IsNullOrEmpty(observacao))
                 matricula.AdicionarObservacao(observacao);
             
-            
             if(notaDoAlunoNoCurso.HasValue)
             {
                 ExcecaoDeDominio.Quando(!Enum.TryParse(statusDaAprovacaoEmString, out StatusDaAprovacaoDaMatricula status), "Status da aprovação é inválido");
                 matricula.AdicionarNotaDoAlunoNoCurso(notaDoAlunoNoCurso.Value, status);
             }
-                
         }
     }
 }

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Amesc.Dominio.Alunos;
 using Amesc.WebApp.Util;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +27,15 @@ namespace Amesc.WebApp.Controllers
 
             var alunosViewModel = alunos.Select(c => new AlunoParaListaViewModel(c));
             return View(PaginatedList<AlunoParaListaViewModel>.Create(alunosViewModel, Request));
+        }
+
+        public bool CpfJaCadastrado(string cpf)
+        {
+            var alunos = _alunoRepositorio.ConsultarPorCpf(cpf);
+
+            if (alunos != null && alunos.Any())
+                return true;
+            return false;
         }
 
         public IActionResult Novo()
@@ -66,6 +73,7 @@ namespace Amesc.WebApp.Controllers
                 model.Cidade, 
                 model.Estado, 
                 model.TipoDePublico,
+                model.Especialidade,
                 model.MidiaSocial);
 
             return Ok();

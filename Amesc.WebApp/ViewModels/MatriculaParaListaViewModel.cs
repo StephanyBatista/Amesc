@@ -11,6 +11,7 @@ namespace Amesc.WebApp.ViewModels
         public string Curso { get; set; }
         public DateTime DataDoCurso { get; set; }
         public string EstaPago { get; set; }
+        public string Cancelada { get; set; }
 
         public MatriculaParaListaViewModel() { }
 
@@ -22,6 +23,7 @@ namespace Amesc.WebApp.ViewModels
             Aluno = entidade.Aluno.Nome;
             Cpf = entidade.Aluno.Cpf;
             EstaPago = entidade.EstaPago ? "Sim" : "Não";
+            Cancelada = entidade.Cancelada ? "Sim": "Não";
         }
     }
 }

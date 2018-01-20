@@ -36,7 +36,7 @@ namespace Amesc.WebApp.ViewModels
         public string DataDeNascimento { get; set; }
         public string RegistroProfissional { get; set; }
         public string MidiaSocial { get; set; }
-        
+        public string Especialidade { get; set; }
 
         public AlunoParaCadastroViewModel() { }
 
@@ -50,6 +50,7 @@ namespace Amesc.WebApp.ViewModels
             DataDeNascimento = entidade.DataDeNascimento.ToString("dd/MM/yyyy");
             RegistroProfissional = entidade.RegistroProfissional;
             TipoDePublico = entidade.TipoDePublico;
+            Especialidade = entidade.Especialidade;
             Telefone = entidade.Telefone;
             Numero = entidade.Endereco.Numero;
             Logradouro = entidade.Endereco.Logradouro;

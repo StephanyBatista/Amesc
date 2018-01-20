@@ -8,6 +8,14 @@
     <div class="row">
         <div class="col-md-12">
             <a href="/Matriculas" class="btn">Voltar</a>
+            @if (!@Model.Cancelada)
+            {
+                <a href="/Matriculas/CancelarMatricula/@Model.Id" class="btn btn-danger">Cancelar Matricula</a>
+            }
+            else
+            {
+                <h1><span class="label label-warning">Matricula Cancelada</span></h1>
+            }
         </div>
     </div>
     <div class="row header">
@@ -79,7 +87,10 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
-                        <button class="btn btn-success">Salvar</button>
+                        @if (!@Model.Cancelada)
+                        {
+                            <button class="btn btn-success">Salvar</button>
+                        }
                     </div>
                 </div>
             </form>

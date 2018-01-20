@@ -13,9 +13,10 @@ using System;
 namespace Amesc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180120135813_AddColunaCanceladaNaMatricula")]
+    partial class AddColunaCanceladaNaMatricula
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,8 +82,6 @@ namespace Amesc.Data.Migrations
                     b.Property<string>("Cpf");
 
                     b.Property<DateTime>("DataDeNascimento");
-
-                    b.Property<string>("Especialidade");
 
                     b.Property<string>("MidiaSocial");
 

@@ -29,6 +29,7 @@ namespace Amesc.Dominio.Alunos
             string cidade, 
             string estado, 
             string publicoAlvo,
+            string especialidade,
             string midiaSocial)
         {
             DateTime.TryParse(dataDeNascimentoEmString, out DateTime dataDeNascimento);
@@ -36,14 +37,18 @@ namespace Amesc.Dominio.Alunos
             if (id == 0)
             {
                 var endereço = new Endereco(numero, logradouro, cep, bairro, complemento, cidade, estado);
-                var aluno = new Aluno(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereço, publicoAlvo, midiaSocial);
+                var aluno = new Aluno(
+                    nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereço, 
+                    publicoAlvo, especialidade, midiaSocial);
                 _alunoRepositorio.Adicionar(aluno);
             }
             else
             {
                 var endereco = new Endereco(numero, logradouro, cep, bairro, complemento, cidade, estado);
                 var aluno = _alunoRepositorio.ObterPorId(id);
-                aluno.Editar(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereco, publicoAlvo, midiaSocial);
+                aluno.Editar(
+                    nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereco, 
+                    publicoAlvo, especialidade, midiaSocial);
             }
         }
     }

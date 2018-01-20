@@ -15,6 +15,7 @@ namespace Amesc.WebApp.Controllers
     {
         private readonly CriacaoDeMatricula _criacaoDeMatricula;
         private readonly AlteracaoDeDadosDaMatricula _alteracaoDeDadosDaMatricula;
+        private readonly CanceladorDeMatricula _canceladorDeMatricula;
         private readonly ICursoAbertoRepositorio _cursoAbertoRepositorio;
         private readonly IAlunoRepositorio _alunoRepositorio;
         private readonly IMatriculaRepositorio _matriculaRepositorio;
@@ -22,11 +23,13 @@ namespace Amesc.WebApp.Controllers
         public MatriculasController(
             CriacaoDeMatricula criacaoDeMatricula, 
             AlteracaoDeDadosDaMatricula alteracaoDeDadosDaMatricula,
+            CanceladorDeMatricula canceladorDeMatricula,
             ICursoAbertoRepositorio cursoAbertoRepositorio, 
             IAlunoRepositorio alunoRepositorio, IMatriculaRepositorio matriculaRepositorio)
         {
             _criacaoDeMatricula = criacaoDeMatricula;
             _alteracaoDeDadosDaMatricula = alteracaoDeDadosDaMatricula;
+            _canceladorDeMatricula = canceladorDeMatricula;
             _cursoAbertoRepositorio = cursoAbertoRepositorio;
             _alunoRepositorio = alunoRepositorio;
             _matriculaRepositorio = matriculaRepositorio;
@@ -87,6 +90,21 @@ namespace Amesc.WebApp.Controllers
         {
             _alteracaoDeDadosDaMatricula.Alterar(model.Id, model.Observacao, model.NotaDoAlunoNoCurso, model.StatusDaAprovacao, model.Ip);
             return Ok();
+        }
+
+        public IActionResult CancelarMatricula(int id)
+        {
+            var matricula = _matriculaRepositorio.ObterPorId(id);
+            var viewModel = new GerenciarMatriculaViewModel(matricula);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Cancelar(int id)
+        {
+            _canceladorDeMatricula.Cancelar(id);
+            return RedirectToAction("Gerenciar", new { id });
         }
     }
 }

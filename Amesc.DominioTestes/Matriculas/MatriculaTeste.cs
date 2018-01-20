@@ -135,5 +135,15 @@ namespace Amesc.DominioTestes.Matriculas
 
             Assert.AreEqual(ipEsperado, matricula.Ip);
         }
+
+        [TestMethod]
+        public void DeveSerPossivelCancelarMatricula()
+        {
+            var matricula = FluentBuilder<Matricula>.New().Build();
+
+            matricula.CancelarMatricula();
+
+            Assert.IsTrue(matricula.Cancelada);
+        }
     }
 }

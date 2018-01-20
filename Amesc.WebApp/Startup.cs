@@ -60,6 +60,7 @@ namespace Amesc.WebApp
             services.AddScoped(typeof(IMatriculaRepositorio), typeof(MatriculaRepositorio));
             services.AddScoped(typeof(IAutenticacao), typeof(Autenticacao));
             services.AddScoped(typeof(ArmazenadorDeAluno));
+            services.AddScoped(typeof(CanceladorDeMatricula));
             services.AddScoped(typeof(ArmazenadorDeCurso));
             services.AddScoped(typeof(ArmazenadorDeCursoAberto));
             services.AddScoped(typeof(CriacaoDeMatricula));

@@ -30,6 +30,7 @@ namespace Amesc.DominioTestes.Alunos
         private string _registroProfissional;
         private string _dataDeNascimento;
         private string _midiaSocial;
+        private string _especialidade;
 
         [TestInitialize]
         public void Setup()
@@ -60,7 +61,9 @@ namespace Amesc.DominioTestes.Alunos
         {
             const int id = 0;
 
-            _armazenador.Armazenar(id, _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _numero, _logradouro, _cep, _bairro, _complemento, _cidade, _estado, _publicoAlvo, _midiaSocial);
+            _armazenador.Armazenar(
+                id, _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _numero, _logradouro, _cep, _bairro, _complemento, _cidade, _estado, 
+                _publicoAlvo, _especialidade, _midiaSocial);
 
             _alunoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<Aluno>()));
         }
@@ -72,7 +75,8 @@ namespace Amesc.DominioTestes.Alunos
             _alunoRepositorio.Setup(repositorio => repositorio.ObterPorId(id))
                 .Returns(FluentBuilder<Aluno>.New().Build());
 
-            _armazenador.Armazenar(id, _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _numero, _logradouro, _cep, _bairro, _complemento, _cidade, _estado, _publicoAlvo, _midiaSocial);
+            _armazenador.Armazenar(id, _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _numero, _logradouro, _cep, _bairro, _complemento, _cidade, _estado,
+                _publicoAlvo, _especialidade, _midiaSocial);
 
             _alunoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<Aluno>()), Times.Never);
         }

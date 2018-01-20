@@ -1,0 +1,62 @@
+﻿@model Amesc.WebApp.ViewModels.GerenciarMatriculaViewModel
+@{
+    ViewData["Title"] = "Matriculas";
+}
+
+<div id="pad-wrapper">
+
+    <div class="row">
+        <div class="col-md-12">
+            <a href="/Matriculas/Gerenciar/@Model.Id" class="btn">Voltar</a>
+        </div>
+    </div>
+    <div class="row header">
+        <div class="col-md-8">
+            <h3>Cancelamento de matricula</h3>
+        </div>
+    </div>
+    <div class="row form-wrapper">
+        <div class="col-md-12">
+            <form iid="form" class="form-horizontal" asp-action="Cancelar" asp-controller="Matriculas" asp-anti-forgery>
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Aluno</label>
+                    <div class="col-md-10">
+                        <label class="col-md-10">@Model.Aluno</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Curso</label>
+                    <div class="col-md-10">
+                        <label class="col-md-10">@Model.Curso</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Data do curso</label>
+                    <div class="col-md-10">
+                        <label class="col-md-2">@Model.DataDoCurso</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <button class="btn btn-danger">Sim! Quero Cancelar Matricula</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.validate.unobtrusive.js"></script>
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="/js/excecaoDeDominio.js"></script>
+}
+
+    
+
+
+
+

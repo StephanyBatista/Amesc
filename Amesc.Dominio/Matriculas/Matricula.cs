@@ -5,7 +5,7 @@ using Amesc.Dominio._Base;
 
 namespace Amesc.Dominio.Matriculas
 {
-    public enum StatusDaAprovacaoDaMatricula{
+    public enum StatusDaAprovacaoDaMatricula {
 
         Nenhum,
         Aprovado,
@@ -23,6 +23,7 @@ namespace Amesc.Dominio.Matriculas
         public StatusDaAprovacaoDaMatricula StatusDaAprovacao { get; private set; }
         public string Ip { get; private set; }
         public decimal? ValorPago { get; private set; }
+        public bool Cancelada { get; private set; }
 
         public Matricula() { }
 
@@ -57,6 +58,11 @@ namespace Amesc.Dominio.Matriculas
         public void AdicionarIP(string ip)
         {
             Ip = ip;
+        }
+
+        public void CancelarMatricula()
+        {
+            Cancelada = true;
         }
     }
 }
