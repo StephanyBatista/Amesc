@@ -22,10 +22,11 @@ namespace Amesc.Dominio.Matriculas
         public float? NotaDoAlunoNoCurso { get; private set; }
         public StatusDaAprovacaoDaMatricula StatusDaAprovacao { get; private set; }
         public string Ip { get; private set; }
+        public decimal? ValorPago { get; private set; }
 
         public Matricula() { }
 
-        public Matricula(CursoAberto cursoAberto, Aluno aluno, bool estaPago)
+        public Matricula(CursoAberto cursoAberto, Aluno aluno, bool estaPago, decimal valorPago)
         {
             ExcecaoDeDominio.Quando(cursoAberto == null, "Curso é obrigatório");
             ExcecaoDeDominio.Quando(aluno == null, "Aluno é obrigatório");
@@ -35,6 +36,8 @@ namespace Amesc.Dominio.Matriculas
             Aluno = aluno;
             EstaPago = estaPago;
             DataDeCriacao = DateTime.Now;
+            if(valorPago > 0)
+                ValorPago = valorPago;
         }
 
         public void AdicionarObservacao(string observacao)

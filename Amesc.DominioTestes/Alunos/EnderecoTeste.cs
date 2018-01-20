@@ -7,7 +7,6 @@ namespace Amesc.DominioTestes.Alunos
     [TestClass]
     public class EnderecoTeste
     {
-        private string _telefone;
         private string _logradouro;
         private string _cep;
         private string _numero;
@@ -19,7 +18,6 @@ namespace Amesc.DominioTestes.Alunos
         [TestInitialize]
         public void Setup()
         {
-            _telefone = "99";
             _numero = "29";
             _logradouro = "Doutor";
             _cep = "79033-231";

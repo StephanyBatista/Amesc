@@ -20,22 +20,19 @@ namespace Amesc.Dominio.Cursos
         public DateTime FimDoCurso { get; private set; }
         public TipoDeCursoAberto Tipo { get; private set; }
         public string Empresa { get; private set; }
+        public string Codigo { get; private set; }
 
         public CursoAberto() { }
 
-        public CursoAberto(Curso curso, 
-            decimal preco, TipoDeCursoAberto tipoDeCursoAberto, 
-            string empresa,
-            DateTime? periodoInicialParaMatricula, 
-            DateTime? periodoFinalParaMatricula, 
-            DateTime inicioDoCurso, 
-            DateTime fimDoCurso)
+        public CursoAberto(string codigo, Curso curso, decimal preco, TipoDeCursoAberto tipoDeCursoAberto, string empresa, DateTime? periodoInicialParaMatricula, DateTime? periodoFinalParaMatricula, DateTime inicioDoCurso, DateTime fimDoCurso)
         {
             Validar(curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
-            Atribuir(curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
+            Atribuir(codigo, curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
         }
 
-        public void Editar(Curso curso, 
+        public void Editar(
+            string codigo,
+            Curso curso, 
             decimal preco, 
             TipoDeCursoAberto tipoDeCursoAberto, 
             string empresa,
@@ -45,7 +42,7 @@ namespace Amesc.Dominio.Cursos
             DateTime fimDoCurso)
         {
             Validar(curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
-            Atribuir(curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
+            Atribuir(codigo, curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
         }
 
         private static void Validar(Curso curso, 
@@ -70,7 +67,9 @@ namespace Amesc.Dominio.Cursos
             ExcecaoDeDominio.Quando(inicioDoCurso > fimDoCurso, "Data de inicio do curso maior que data de fim do curso");
         }
 
-        private void Atribuir(Curso curso, 
+        private void Atribuir(
+            string codigo,
+            Curso curso, 
             decimal preco, 
             TipoDeCursoAberto tipoDeCursoAberto, 
             string empresa,
@@ -79,6 +78,7 @@ namespace Amesc.Dominio.Cursos
             DateTime inicioDoCurso, 
             DateTime fimDoCurso)
         {
+            Codigo = codigo;
             Curso = curso;
             Preco = preco;
             Tipo = tipoDeCursoAberto;
