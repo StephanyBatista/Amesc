@@ -5,6 +5,16 @@
    "version": "0.2.0",
    "configurations": [
         {
+            "name": "e2e",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/Amesc.WebApp/node_modules/protractor/bin/protractor",
+            "protocol": "inspector",
+            "args": [
+            "${workspaceRoot}/Amesc.WebApp/conf.js"
+            ]
+        },
+        {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
