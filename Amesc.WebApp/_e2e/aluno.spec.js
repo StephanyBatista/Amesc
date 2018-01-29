@@ -28,16 +28,12 @@
         element(by.css('[name="Cep"]')).click('');
         element(by.css('[name="Cep"]')).sendKeys('79033333');
 
-        browser.sleep(10000);
-
         element(by.css('.btn-success')).click();
 
-        var colunas = element.all(by.tagName('td')).last();
+        const alunoCadastrado = element(by.cssContainingText('td', nomeDoAluno));
 
-        var nomes = colunas.map(function(coluna){
-            return coluna.getText();
-        });
+        expect(alunoCadastrado.isDisplayed()).toBeTruthy();
 
-        expect(nomes).toContain(nomeDoAluno);
+        browser.sleep(10000);
     });
 });
