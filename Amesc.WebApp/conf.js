@@ -1,4 +1,6 @@
-﻿exports.config = {
+﻿'use strict';
+
+module.exports.config = {
     ignoreSynchronization: true,
     framework: 'jasmine',
     seleniumAddress: 'http://localhost:4444/wd/hub',
