@@ -32,8 +32,10 @@
 
         const alunoCadastrado = element(by.cssContainingText('td', nomeDoAluno));
 
+        browser.sleep(3000);
+
         expect(alunoCadastrado.isDisplayed()).toBeTruthy();
 
-        browser.sleep(10000);
+        
     });
 });
