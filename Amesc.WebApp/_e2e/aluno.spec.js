@@ -34,8 +34,10 @@ describe('aluno', function () {
         alunoPage.sendKeys("Cep", '79033333');
         alunoPage.submit();
 
-        const alunoCadastrado = element(by.cssContainingText('td', nomeDoAluno));
+        browser.sleep(3000);
 
+        const alunoCadastrado = element(by.cssContainingText('td', nomeDoAluno));
+        
         expect(alunoCadastrado.isDisplayed()).toBeTruthy();
     });
 });
