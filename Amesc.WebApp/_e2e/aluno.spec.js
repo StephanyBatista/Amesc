@@ -40,4 +40,26 @@ describe('aluno', function () {
         
         expect(alunoCadastrado.isDisplayed()).toBeTruthy();
     });
+
+    fit('deve avisar cpf já cadastrado', function() {
+        const alunoPage = new AlunoPo();
+
+        alunoPage.navigateTo('Alunos/Novo');
+
+        alunoPage.focus("Cpf");
+
+        alunoPage.sendKeys("Cpf", '00000000001');
+
+        alunoPage.focus("DataDeNascimento");
+
+        browser.sleep(3000);
+
+        browser.wait(function() {
+
+        });
+
+        const cpfCadastrado = element(by.cssContainingText('span', 'CPF Já Cadastrado'));
+
+        expect(cpfCadastrado.isDisplayed()).toBeTruthy();
+    });
 });

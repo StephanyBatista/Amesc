@@ -1,0 +1,84 @@
+﻿@using Amesc.WebApp.Util
+@using Amesc.WebApp.ViewModels
+@model PaginatedList<InstrutorParaListaViewModel>
+@{
+    ViewData["Title"] = "Cursos";
+}
+
+<div id="pad-wrapper">
+
+    <div class="row header">
+        <div class="col-md-1">
+            <h3>Instrutores</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <a href="/Instrutores/Novo" class="btn btn-primary">Novo</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Index" method="get">
+                <div class="form-actions no-color">
+                    <p>
+                        <input type="text" name="q" placeholder="Nome" class="form-control col-xs-12" />
+                        <input type="submit" value="Buscar" class="btn btn-default" /> |
+                        <a asp-action="Index">Remover filtro</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Codigo
+                        </td>
+                        <td>
+                            @item.Nome
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            <a href="/Instrutores/Editar/@item.Id" class="btn">Editar</a>
+                        </td>
+                    </tr>   
+                }
+                </tbody>
+            </table>
+            
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageIndex - 1)"
+               class="btn btn-default @prevDisabled">
+                Anterior
+            </a>
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageIndex + 1)"
+               class="btn btn-default @nextDisabled">
+                Próximo
+            </a>
+        </div>
+    </div>
+</div>
+
+
+

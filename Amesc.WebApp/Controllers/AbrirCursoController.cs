@@ -1,6 +1,7 @@
 using System.Linq;
 using Amesc.Dominio;
 using Amesc.Dominio.Cursos;
+using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.WebApp.Util;
 using Amesc.WebApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -14,15 +15,18 @@ namespace Amesc.WebApp.Controllers
         private readonly ArmazenadorDeCursoAberto _armazenadorDeCursoAberto;
         private readonly IRepositorio<Curso> _cursoRepositorio;
         private readonly ICursoAbertoRepositorio _cursoAbertoRepositorio;
+        private readonly IInstrutorRepositorio _instrutorRepositorio;
 
         public AbrirCursoController(
             ArmazenadorDeCursoAberto armazenadorDeCursoAberto,
             ICursoAbertoRepositorio cursoAbertoRepositorio,
-            IRepositorio<Curso> cursoRepositorio)
+            IRepositorio<Curso> cursoRepositorio, 
+            IInstrutorRepositorio instrutorRepositorio)
         {
             _armazenadorDeCursoAberto = armazenadorDeCursoAberto;
             _cursoAbertoRepositorio = cursoAbertoRepositorio;
             _cursoRepositorio = cursoRepositorio;
+            _instrutorRepositorio = instrutorRepositorio;
         }
 
         [Route("AbrirCurso/{idCurso}")]
@@ -38,20 +42,17 @@ namespace Amesc.WebApp.Controllers
         private void BuscarCursoEDeclararNaViewBag(int id)
         {
             var curso = _cursoRepositorio.ObterPorId(id);
-            DeclararCursoNaViewBag(curso);
-        }
-
-        private void DeclararCursoNaViewBag(Curso curso)
-        {
-            if(curso != null)
-                ViewBag.Curso = new CursoViewModel(curso);
+            ViewBag.Curso = new CursoViewModel(curso);
+            var instrutores = _instrutorRepositorio.Consultar();
+            var instrutoresParaLista = instrutores.Select(i => new InstrutorParaListaViewModel { Id = i.Id, Nome = i.Nome}).ToList();
+            ViewBag.Instrutores = instrutoresParaLista;
         }
 
         [Route("AbrirCurso/Novo/{idCurso}")]
         public IActionResult Novo(int idCurso)
         {
             BuscarCursoEDeclararNaViewBag(idCurso);
-            return View("NovoOuEditar");
+            return View("NovoOuEditar", new CursoAbertoParaCadastroViewModel());
         }
 
         [Route("AbrirCurso/Editar/{id}")]
@@ -61,8 +62,7 @@ namespace Amesc.WebApp.Controllers
 
             if (cursoAberto == null)
                 return RedirectToAction("Index");
-
-            DeclararCursoNaViewBag(cursoAberto.Curso);
+            ViewBag.Curso = new CursoViewModel(cursoAberto.Curso);
 
             return View("NovoOuEditar", new CursoAbertoParaCadastroViewModel(cursoAberto));
         }
@@ -71,7 +71,9 @@ namespace Amesc.WebApp.Controllers
         [HttpPost]
         public IActionResult Salvar(CursoAbertoParaCadastroViewModel model)
         {
-            _armazenadorDeCursoAberto.Armazenar(model.Id, model.Codigo, model.IdCurso, model.Preco, model.TipoDeCursoAberto, model.Empresa, model.PeriodoInicialParaMatricula, model.PeriodoFinalParaMatricula, model.InicioDoCurso, model.FimDoCurso);
+            model.RemoverInstrutoresEmBranco();
+
+            _armazenadorDeCursoAberto.Armazenar(model);
 
             return RedirectToAction("Index", new {idCurso = model.IdCurso});
         }

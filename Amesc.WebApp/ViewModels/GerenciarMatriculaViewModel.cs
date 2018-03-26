@@ -13,7 +13,7 @@ namespace Amesc.WebApp.ViewModels
         public string Observacao { get; set; }
         public float? NotaDoAlunoNoCurso { get; set; }
         public string StatusDaAprovacao { get; set; }
-        public string Ip { get; set; }
+        public bool Ip { get; set; }
         public bool Cancelada { get; set; }
 
         public GerenciarMatriculaViewModel() { }

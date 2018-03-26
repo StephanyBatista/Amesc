@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using Amesc.Dominio.Cursos.Instrutores;
+using Amesc.Dominio.Cursos.Turma;
 using Amesc.Dominio._Base;
 
 namespace Amesc.Dominio.Cursos
@@ -21,10 +24,14 @@ namespace Amesc.Dominio.Cursos
         public TipoDeCursoAberto Tipo { get; private set; }
         public string Empresa { get; private set; }
         public string Codigo { get; private set; }
+        public List<InstrutorDaTurma> Instrutores { get; private set; }
 
         public CursoAberto() { }
 
-        public CursoAberto(string codigo, Curso curso, decimal preco, TipoDeCursoAberto tipoDeCursoAberto, string empresa, DateTime? periodoInicialParaMatricula, DateTime? periodoFinalParaMatricula, DateTime inicioDoCurso, DateTime fimDoCurso)
+        public CursoAberto(
+            string codigo, Curso curso, decimal preco, TipoDeCursoAberto tipoDeCursoAberto, 
+            string empresa, DateTime? periodoInicialParaMatricula, DateTime? periodoFinalParaMatricula, 
+            DateTime inicioDoCurso, DateTime fimDoCurso)
         {
             Validar(curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);
             Atribuir(codigo, curso, preco, tipoDeCursoAberto, empresa, periodoInicialParaMatricula, periodoFinalParaMatricula, inicioDoCurso, fimDoCurso);

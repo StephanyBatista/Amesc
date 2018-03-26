@@ -1,4 +1,6 @@
-﻿@model Amesc.WebApp.ViewModels.CursoAbertoParaCadastroViewModel
+﻿@using Amesc.Dominio.Cursos.Instrutores
+@using Amesc.WebApp.ViewModels
+@model Amesc.Dominio.Cursos.Instrutores.CursoAbertoParaCadastroViewModel
 @{
     ViewData["Title"] = "Cursos";
 }
@@ -77,6 +79,31 @@
                         <input class="form-control" asp-for="Empresa">
                     </div>
                 </div>
+                <div id="instrutores">
+                    @for (var index = 0; index < Model.Instrutores.Count; index++)
+                    {
+                        <div class="form-group hidden">
+                            <label class="col-md-2 control-label">Instrutor e cargo</label>
+                            <div class="col-md-2">
+                                <select class="form-control" name="Instrutores[@index].Id">
+                                    <option value="-1"></option>
+                                    @foreach (InstrutorParaListaViewModel instrutor in ViewBag.Instrutores)
+                                    {   
+                                        <option value="@instrutor.Id">@instrutor.Nome</option>
+                                    }
+                                </select>
+                                <select class="form-control" name="Instrutores[@index].Tipo">
+                                    <option value="-1"></option>
+                                    <option value="Diretor">Diretor</option>
+                                    <option value="Coordenador">Coordenador</option>
+                                    <option value="Instrutor">Instrutor</option>
+                                    <option value="Enfermagem">Enfermagem</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <a id="inserirInstrutor">Inserir instrutor</a>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
                         <button class="btn btn-success">Salvar</button>
@@ -132,6 +159,11 @@
                     $('#Empresa').val('');
                 }
             }
+        });
+
+        $('#inserirInstrutor').click(function () {
+            console.log('foi');
+            $('.form-group.hidden').first().removeClass('hidden');
         });
     </script>
 }

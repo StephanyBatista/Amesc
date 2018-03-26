@@ -1,4 +1,5 @@
 ﻿using System;
+using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio._Base;
 
 namespace Amesc.Dominio.Cursos
@@ -14,49 +15,39 @@ namespace Amesc.Dominio.Cursos
             _cursoAbertoRepositorio = cursoAbertoRepositorio;
         }
 
-        public void Armazenar(
-            int id,
-            string codigo,
-            int idCurso, 
-            string precoEmString, 
-            string tipoDeCursoAbertoEmString,
-            string empresa,
-            DateTime? periodoInicialParaMatricula, 
-            DateTime? periodoFinalParaMatricula, 
-            DateTime dataDeInicioDoCurso,
-            DateTime dataDeFimDoCurso)
+        public void Armazenar(CursoAbertoParaCadastroViewModel model)
         {
-            var curso = _cursoRepositorio.ObterPorId(idCurso);
-            ExcecaoDeDominio.Quando(!decimal.TryParse(precoEmString, out decimal preco), "Preço inválido");
-            ExcecaoDeDominio.Quando(!Enum.TryParse(tipoDeCursoAbertoEmString, out TipoDeCursoAberto tipo), "Tipo de curso inválido");
+            var curso = _cursoRepositorio.ObterPorId(model.IdCurso);
+            ExcecaoDeDominio.Quando(!decimal.TryParse(model.Preco, out decimal preco), "Preço inválido");
+            ExcecaoDeDominio.Quando(!Enum.TryParse(model.TipoDeCursoAberto, out TipoDeCursoAberto tipo), "Tipo de curso inválido");
 
             CursoAberto cursoAberto = null;
-            if (id > 0)
+            if (model.Id > 0)
             {
-                cursoAberto = _cursoAbertoRepositorio.ObterPorId(id);
+                cursoAberto = _cursoAbertoRepositorio.ObterPorId(model.Id);
                 cursoAberto.Editar(
-                    codigo,
+                    model.Codigo,
                     curso, 
                     preco,
-                    tipo, 
-                    empresa,
-                    periodoInicialParaMatricula, 
-                    periodoFinalParaMatricula, 
-                    dataDeInicioDoCurso,
-                    dataDeFimDoCurso);
+                    tipo,
+                    model.Empresa,
+                    model.PeriodoInicialParaMatricula,
+                    model.PeriodoFinalParaMatricula,
+                    model.InicioDoCurso,
+                    model.FimDoCurso);
             }
             else
             {
                 cursoAberto = new CursoAberto(
-                    codigo,
+                    model.Codigo,
                     curso, 
                     preco,
                     tipo,
-                    empresa,
-                    periodoInicialParaMatricula, 
-                    periodoFinalParaMatricula, 
-                    dataDeInicioDoCurso,
-                    dataDeFimDoCurso);
+                    model.Empresa,
+                    model.PeriodoInicialParaMatricula,
+                    model.PeriodoFinalParaMatricula,
+                    model.InicioDoCurso,
+                    model.FimDoCurso);
 
                 _cursoAbertoRepositorio.Adicionar(cursoAberto);
             }

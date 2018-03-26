@@ -126,14 +126,14 @@ namespace Amesc.DominioTestes.Matriculas
         }
 
         [TestMethod]
-        public void DevePoderAdicionarInstructorPotentialDaMatricula()
+        public void DevePoderInformarSeAlunoEhUmInstrutorEmPotencial()
         {
+            const bool ip = true;
             var matricula = FluentBuilder<Matricula>.New().Build();
-            var ipEsperado = "ip";
 
-            matricula.AdicionarIP(ipEsperado);
+            matricula.EhInstrutorEmPotencial(ip);
 
-            Assert.AreEqual(ipEsperado, matricula.Ip);
+            Assert.AreEqual(ip, matricula.Ip);
         }
 
         [TestMethod]
