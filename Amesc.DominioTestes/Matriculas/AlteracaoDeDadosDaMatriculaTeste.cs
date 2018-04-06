@@ -10,7 +10,7 @@ namespace Amesc.DominioTestes.Matriculas
     [TestClass]
     public class AlteracaoDeDadosDaMatriculaTeste
     {
-        private string _ip;
+        private bool _ip;
         private int _idMatricula;
         private string _observacao;
         private float? _notaDoAlunoNoCurso;
@@ -24,7 +24,7 @@ namespace Amesc.DominioTestes.Matriculas
         {
             _idMatricula = 100;
             _statusDaAprovacao = null;
-            _ip = "ip";
+            _ip = true;
             _matricula = FluentBuilder<Matricula>.New().Build();
             _matriculaRepositorio = new Mock<IRepositorio<Matricula>>();
             _matriculaRepositorio.Setup(r => r.ObterPorId(_idMatricula)).Returns(_matricula);
@@ -49,6 +49,14 @@ namespace Amesc.DominioTestes.Matriculas
             _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, _observacao, _notaDoAlunoNoCurso, _statusDaAprovacao, _ip);
 
             Assert.AreEqual(_observacao, _matricula.Observacao);
+        }
+
+        [TestMethod]
+        public void DeveInformarQueAlunoTemPotencialParaSerInstrutor()
+        {
+            _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, _observacao, _notaDoAlunoNoCurso, _statusDaAprovacao, _ip);
+
+            Assert.AreEqual(_ip, _matricula.Ip);
         }
 
         [TestMethod]

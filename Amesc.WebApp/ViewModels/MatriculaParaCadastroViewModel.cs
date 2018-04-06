@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Amesc.Dominio.Cursos.Instrutores;
 
 namespace Amesc.WebApp.ViewModels
 {

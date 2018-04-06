@@ -21,7 +21,7 @@ namespace Amesc.Dominio.Matriculas
         public string Observacao { get; private set; }
         public float? NotaDoAlunoNoCurso { get; private set; }
         public StatusDaAprovacaoDaMatricula StatusDaAprovacao { get; private set; }
-        public string Ip { get; private set; }
+        public bool Ip { get; private set; }
         public decimal? ValorPago { get; private set; }
         public bool Cancelada { get; private set; }
 
@@ -55,7 +55,7 @@ namespace Amesc.Dominio.Matriculas
             StatusDaAprovacao = status;
         }
 
-        public void AdicionarIP(string ip)
+        public void EhInstrutorEmPotencial(bool ip)
         {
             Ip = ip;
         }

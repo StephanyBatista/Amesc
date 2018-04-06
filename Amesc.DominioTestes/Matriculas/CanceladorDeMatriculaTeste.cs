@@ -13,6 +13,7 @@ namespace Amesc.DominioTestes.Matriculas
         private Mock<IMatriculaRepositorio> _matriculaRepositorio;
         private CanceladorDeMatricula _canceladorDeMatricula;
 
+        [TestInitialize]
         public void SetUp()
         {
             _matriculaId = 342;

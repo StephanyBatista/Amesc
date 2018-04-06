@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using Amesc.Dominio.Cursos.Instrutores;
 
 namespace Amesc.WebApp
 {
@@ -55,6 +56,7 @@ namespace Amesc.WebApp
 
             services.AddScoped(typeof(IRepositorio<>), typeof(RepositorioBase<>));
             services.AddScoped(typeof(ICursoRepositorio), typeof(CursoRepositorio));
+            services.AddScoped(typeof(IInstrutorRepositorio), typeof(InstrutorRepositorio));
             services.AddScoped(typeof(IAlunoRepositorio), typeof(AlunoRepositorio));
             services.AddScoped(typeof(ICursoAbertoRepositorio), typeof(CursoAbertoRepositorio));
             services.AddScoped(typeof(IMatriculaRepositorio), typeof(MatriculaRepositorio));
@@ -62,6 +64,7 @@ namespace Amesc.WebApp
             services.AddScoped(typeof(ArmazenadorDeAluno));
             services.AddScoped(typeof(CanceladorDeMatricula));
             services.AddScoped(typeof(ArmazenadorDeCurso));
+            services.AddScoped(typeof(ArmazenadorDeInstrutor));
             services.AddScoped(typeof(ArmazenadorDeCursoAberto));
             services.AddScoped(typeof(CriacaoDeMatricula));
             services.AddScoped(typeof(AlteracaoDeDadosDaMatricula));

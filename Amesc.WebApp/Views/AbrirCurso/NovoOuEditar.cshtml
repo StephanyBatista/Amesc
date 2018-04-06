@@ -1,4 +1,6 @@
-﻿@model Amesc.WebApp.ViewModels.CursoAbertoParaCadastroViewModel
+﻿@using Amesc.Dominio.Cursos.Instrutores
+@using Amesc.WebApp.ViewModels
+@model Amesc.Dominio.Cursos.Instrutores.CursoAbertoParaCadastroViewModel
 @{
     ViewData["Title"] = "Cursos";
 }
@@ -77,6 +79,71 @@
                         <input class="form-control" asp-for="Empresa">
                     </div>
                 </div>
+                <div id="instrutores">
+                    @for (var index = 0; index < Model.Instrutores.Count; index++)
+                    {
+                        var formStyle = Model.Instrutores[index].Id > 0 ? "form-group" : "form-group hidden";
+                        var formId = index.ToString() + "formInstrutor";
+                        <div id="@formId" class="@formStyle">
+                            <label class="col-md-2 control-label">Instrutor e cargo</label>
+                            <div class="col-md-2">
+                                <select id="@(formId + "selectInstrutor")" class="form-control" name="Instrutores[@index].Id">
+                                    <option value="-1"></option>
+                                    @foreach (InstrutorParaListaViewModel instrutor in ViewBag.Instrutores)
+                                    {
+                                        var selected = Model.Instrutores[index].Id == instrutor.Id;
+                                        if (selected)
+                                        {
+                                            <option value="@instrutor.Id" selected="selected">@instrutor.Nome</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@instrutor.Id" >@instrutor.Nome</option>
+                                        }
+
+                                    }
+                                </select>
+                                <select id="@(formId + "selectCargo")" class="form-control" name="Instrutores[@index].Cargo">
+                                    <option value="-1"></option>
+                                    @if (Model.Instrutores[index].Cargo == "Diretor")
+                                    {
+                                        <option value="Diretor" selected="selected">Diretor</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Diretor">Diretor</option>
+                                    }
+                                    @if (Model.Instrutores[index].Cargo == "Coordenador")
+                                    {
+                                        <option value="Coordenador" selected="selected">Coordenador</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Coordenador">Coordenador</option>
+                                    }
+                                    @if (Model.Instrutores[index].Cargo == "Instrutor")
+                                    {
+                                        <option value="Instrutor" selected="selected">Instrutor</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Instrutor">Instrutor</option>
+                                    }
+                                    @if (Model.Instrutores[index].Cargo == "Enfermagem")
+                                    {
+                                        <option value="Enfermagem" selected="selected">Enfermagem</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Enfermagem">Enfermagem</option>
+                                    }
+                                </select>
+                            </div>
+                            <a onclick="removerInstrutor('@formId', '@(formId + "selectInstrutor")', '@(formId + "selectCargo")');">Remover instrutor</a>
+                        </div>
+                    }
+                </div>
+                <a id="inserirInstrutor">Inserir instrutor</a>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
                         <button class="btn btn-success">Salvar</button>
@@ -133,6 +200,16 @@
                 }
             }
         });
+
+        $('#inserirInstrutor').click(function () {
+            $('.form-group.hidden').first().removeClass('hidden');
+        });
+
+        function removerInstrutor(form, selectInstrutor, selectCargo) {
+            $('#' + form).addClass('hidden');
+            $('#' + selectInstrutor).val('-1');
+            $('#' + selectCargo).val('-1');
+        }
     </script>
 }
 

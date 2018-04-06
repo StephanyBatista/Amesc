@@ -1,5 +1,7 @@
 ﻿using System;
 using Amesc.Dominio.Cursos;
+using Amesc.Dominio.Cursos.Instrutores;
+using Amesc.Dominio.Cursos.Turma;
 using Amesc.Dominio._Base;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nosbor.FluentBuilder.Lib;
@@ -61,6 +63,19 @@ namespace Amesc.DominioTestes.Cursos
             Assert.AreEqual(_periodoFinalParaMatricula, _cursoAberto.PeriodoFinalParaMatricula);
             Assert.AreEqual(_dataDeInicioDoCurso, _cursoAberto.InicioDoCurso);
             Assert.AreEqual(_dataDeFimDoCurso, _cursoAberto.FimDoCurso);
+        }
+
+        [TestMethod]
+        public void NaoDevePermitirInserirOMesmoInstrutorComMesmoCargo()
+        {
+            const int quantidadeEsperada = 1;
+            var instrutor = FluentBuilder<Instrutor>.New().With(i => i.Id, 5).Build();
+            var cargo = CargoNaTurma.Coordenador;
+
+            _cursoAberto.AdicionarInstrutor(instrutor, cargo);
+            _cursoAberto.AdicionarInstrutor(instrutor, cargo);
+
+            Assert.AreEqual(quantidadeEsperada, _cursoAberto.Instrutores.Count);
         }
 
         [TestMethod]

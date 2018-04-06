@@ -15,6 +15,8 @@ namespace Amesc.Data.Repositorios
         public override CursoAberto ObterPorId(int id)
         {
             var query = Context.Set<CursoAberto>()
+                .Include(p => p.Instrutores)
+                .ThenInclude(i => i.Instrutor)
                 .Include(p => p.Curso)
                 .Include(p => p.Curso.PublicosAlvo)
                 .Where(entidade => entidade.Id == id);

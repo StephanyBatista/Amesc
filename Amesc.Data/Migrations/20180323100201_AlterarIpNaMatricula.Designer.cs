@@ -13,8 +13,8 @@ using System;
 namespace Amesc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180120164249_AddColunaEspecialidadeNoAluno")]
-    partial class AddColunaEspecialidadeNoAluno
+    [Migration("20180323100201_AlterarIpNaMatricula")]
+    partial class AlterarIpNaMatricula
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -187,7 +187,7 @@ namespace Amesc.Data.Migrations
 
                     b.Property<bool>("EstaPago");
 
-                    b.Property<string>("Ip");
+                    b.Property<bool>("Ip");
 
                     b.Property<float?>("NotaDoAlunoNoCurso");
 

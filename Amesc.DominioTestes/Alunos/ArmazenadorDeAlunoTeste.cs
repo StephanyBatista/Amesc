@@ -51,6 +51,7 @@ namespace Amesc.DominioTestes.Alunos
             _registroProfissional = "aaxx";
             _dataDeNascimento = "25/11/1985";
             _midiaSocial = "facebook";
+            _especialidade = "medico";
 
             _alunoRepositorio = new Mock<IRepositorio<Aluno>>();
             _armazenador = new ArmazenadorDeAluno(_alunoRepositorio.Object);
