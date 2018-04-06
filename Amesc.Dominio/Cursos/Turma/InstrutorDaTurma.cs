@@ -4,6 +4,8 @@ namespace Amesc.Dominio.Cursos.Turma
 {
     public class InstrutorDaTurma : Entidade
     {
+        public InstrutorDaTurma() { }
+
         public InstrutorDaTurma(Instrutor instrutor, CargoNaTurma cargo)
         {
             Instrutor = instrutor;

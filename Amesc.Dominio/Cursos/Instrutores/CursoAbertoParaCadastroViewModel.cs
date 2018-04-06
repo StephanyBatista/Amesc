@@ -56,6 +56,31 @@ namespace Amesc.Dominio.Cursos.Instrutores
             FimDoCurso = entidade.FimDoCurso.Date;
             TipoDeCursoAberto = entidade.Tipo.ToString();
             Empresa = entidade.Empresa;
+
+            if(entidade.Instrutores == null)
+                Instrutores = new List<InstrutorDaTurmaViewModel>
+                {
+                    new InstrutorDaTurmaViewModel(),
+                    new InstrutorDaTurmaViewModel(),
+                    new InstrutorDaTurmaViewModel(),
+                    new InstrutorDaTurmaViewModel(),
+                    new InstrutorDaTurmaViewModel(),
+                    new InstrutorDaTurmaViewModel(),
+                };
+            else
+            {
+                Instrutores = new List<InstrutorDaTurmaViewModel>();
+                foreach (var instrutorDaTurma in entidade.Instrutores)
+                {
+                    Instrutores.Add(new InstrutorDaTurmaViewModel{ Id = instrutorDaTurma.Instrutor.Id, Cargo = instrutorDaTurma.Cargo.ToString() });
+                }
+
+                Instrutores.Add(new InstrutorDaTurmaViewModel());
+                Instrutores.Add(new InstrutorDaTurmaViewModel());
+                Instrutores.Add(new InstrutorDaTurmaViewModel());
+                Instrutores.Add(new InstrutorDaTurmaViewModel());
+                Instrutores.Add(new InstrutorDaTurmaViewModel());
+            }
         }
 
         public void RemoverInstrutoresEmBranco()

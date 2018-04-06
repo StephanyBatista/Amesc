@@ -3,7 +3,9 @@ using Amesc.Dominio.Cursos;
 using Amesc.Dominio._Base;
 using Moq;
 using System;
+using System.Collections.Generic;
 using Amesc.Dominio.Cursos.Instrutores;
+using Amesc.Dominio.Cursos.Turma;
 using Nosbor.FluentBuilder.Lib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,10 +14,13 @@ namespace Amesc.DominioTestes.Cursos
     [TestClass]
     public class ArmazenadorDeCursoAbertoTeste
     {
+        const int InstrutorId = 5;
         private Mock<IRepositorio<Curso>> _cursoRepositorio;
-        private Mock<IRepositorio<CursoAberto>> _cursoAbertoRepositorio;
+        private Mock<ICursoAbertoRepositorio> _cursoAbertoRepositorio;
         private ArmazenadorDeCursoAberto _armazenador;
         private CursoAbertoParaCadastroViewModel _dto;
+        private Mock<IInstrutorRepositorio> _instrutorRepositorio;
+        private Instrutor _instrutor;
 
         [TestInitialize]
         public void Setup()
@@ -35,8 +40,13 @@ namespace Amesc.DominioTestes.Cursos
             _cursoRepositorio = new Mock<IRepositorio<Curso>>();
             _cursoRepositorio.Setup(repositorio => repositorio.ObterPorId(_dto.IdCurso))
                 .Returns(FluentBuilder<Curso>.New().Build);
-            _cursoAbertoRepositorio = new Mock<IRepositorio<CursoAberto>>();
-            _armazenador = new ArmazenadorDeCursoAberto(_cursoRepositorio.Object, _cursoAbertoRepositorio.Object);
+            _cursoAbertoRepositorio = new Mock<ICursoAbertoRepositorio>();
+
+            _instrutorRepositorio = new Mock<IInstrutorRepositorio>();
+            _instrutor = FluentBuilder<Instrutor>.New().With(i => i.Id, InstrutorId).Build();
+            _instrutorRepositorio.Setup(r => r.ObterPorId(InstrutorId)).Returns(_instrutor);
+
+            _armazenador = new ArmazenadorDeCursoAberto(_cursoRepositorio.Object, _cursoAbertoRepositorio.Object, _instrutorRepositorio.Object);
         }
 
         [TestMethod]
@@ -46,6 +56,21 @@ namespace Amesc.DominioTestes.Cursos
             _armazenador.Armazenar(_dto);
 
             _cursoAbertoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<CursoAberto>()));
+        }
+
+        [TestMethod]
+        public void DeveSalvarCursoAbertoComInstrutores()
+        {
+            _dto.Id = 0;
+            _dto.Instrutores = new List<InstrutorDaTurmaViewModel>
+            {
+                new InstrutorDaTurmaViewModel{ Cargo = "Diretor", Id = InstrutorId}
+            };
+            _armazenador.Armazenar(_dto);
+
+            _cursoAbertoRepositorio.Verify(repositorio => 
+                repositorio.Adicionar(It.Is<CursoAberto>(c => 
+                    c.Instrutores.Exists(i => i.Instrutor == _instrutor && i.Cargo == CargoNaTurma.Diretor))));
         }
 
         [TestMethod]
@@ -59,6 +84,44 @@ namespace Amesc.DominioTestes.Cursos
 
             _cursoAbertoRepositorio.Verify(repositorio => 
                 repositorio.Adicionar(It.IsAny<CursoAberto>()), Times.Never);
+        }
+
+        [TestMethod]
+        public void DeveEditarCursoAbertoComInstrutores()
+        {
+            _dto.Id = 7;
+            _dto.Instrutores = new List<InstrutorDaTurmaViewModel>
+            {
+                new InstrutorDaTurmaViewModel{ Cargo = "Diretor", Id = InstrutorId}
+            };
+            var cursoAberto = FluentBuilder<CursoAberto>.New().Build();
+            _cursoAbertoRepositorio.Setup(repositorio => repositorio.ObterPorId(_dto.Id))
+                .Returns(cursoAberto);
+
+            _armazenador.Armazenar(_dto);
+
+            Assert.IsTrue(cursoAberto.Instrutores.Exists(i => i.Instrutor == _instrutor && i.Cargo == CargoNaTurma.Diretor));
+        }
+
+        [TestMethod]
+        public void DeveRemoverInstrutoresQueNaoEstiverContidoNoModeloDoCliente()
+        {
+            _dto.Id = 7;
+            
+            _dto.Instrutores = new List<InstrutorDaTurmaViewModel>
+            {
+                new InstrutorDaTurmaViewModel{ Cargo = "Diretor", Id = InstrutorId}
+            };
+            var instrutorParaRemocao = FluentBuilder<Instrutor>.New().With(i => i.Id, 56).Build();
+            var cursoAberto = FluentBuilder<CursoAberto>.New().Build();
+            cursoAberto.AdicionarInstrutor(instrutorParaRemocao, CargoNaTurma.Coordenador);
+
+            _cursoAbertoRepositorio.Setup(repositorio => repositorio.ObterPorId(_dto.Id))
+                .Returns(cursoAberto);
+
+            _armazenador.Armazenar(_dto);
+
+            Assert.IsFalse(cursoAberto.Instrutores.Exists(i => i.Instrutor == instrutorParaRemocao && i.Cargo == CargoNaTurma.Coordenador));
         }
 
         [TestMethod]

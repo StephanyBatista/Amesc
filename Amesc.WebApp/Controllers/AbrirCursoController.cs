@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Amesc.Dominio;
 using Amesc.Dominio.Cursos;
@@ -43,8 +44,21 @@ namespace Amesc.WebApp.Controllers
         {
             var curso = _cursoRepositorio.ObterPorId(id);
             ViewBag.Curso = new CursoViewModel(curso);
+            BuscarInstrutoresEDeclararNaViewBag();
+        }
+
+        private void BuscarInstrutoresEDeclararNaViewBag()
+        {
             var instrutores = _instrutorRepositorio.Consultar();
-            var instrutoresParaLista = instrutores.Select(i => new InstrutorParaListaViewModel { Id = i.Id, Nome = i.Nome}).ToList();
+
+            if (!instrutores.Any())
+            {
+                ViewBag.Instrutores = new List<InstrutorParaListaViewModel>();
+                return;
+            }
+
+            var instrutoresParaLista =
+                instrutores.Select(i => new InstrutorParaListaViewModel {Id = i.Id, Nome = i.Nome}).ToList();
             ViewBag.Instrutores = instrutoresParaLista;
         }
 
@@ -63,6 +77,7 @@ namespace Amesc.WebApp.Controllers
             if (cursoAberto == null)
                 return RedirectToAction("Index");
             ViewBag.Curso = new CursoViewModel(cursoAberto.Curso);
+            BuscarInstrutoresEDeclararNaViewBag();
 
             return View("NovoOuEditar", new CursoAbertoParaCadastroViewModel(cursoAberto));
         }

@@ -8,7 +8,7 @@ namespace Amesc.Data.Contexts
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = Amesc; Trusted_Connection = True; MultipleActiveResultSets = true");
+            optionsBuilder.UseSqlServer("Server=tcp:lackr48t1l.database.windows.net,1433;Initial Catalog=amesc-staging;Persist Security Info=False;User ID=user_flashcard;Password=@#tTbanco_;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }

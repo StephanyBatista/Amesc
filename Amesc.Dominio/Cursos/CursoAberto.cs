@@ -100,6 +100,21 @@ namespace Amesc.Dominio.Cursos
         {
             return Curso.ContemPublicoAlvo(publicoAlvo);
         }
+
+        public void AdicionarInstrutor(Instrutor instrutor, CargoNaTurma cargo)
+        {
+            if(Instrutores == null)
+                Instrutores = new List<InstrutorDaTurma>();
+
+            if (instrutor == null || Instrutores.Exists(i => i.Instrutor.Id == instrutor.Id && i.Cargo == cargo)) return;
+
+            Instrutores.Add(new InstrutorDaTurma(instrutor, cargo));
+        }
+
+        public void RemoverInstrutor(Instrutor instrutor, CargoNaTurma cargo)
+        {
+            Instrutores.RemoveAll(i => i.Instrutor.Id == instrutor.Id && i.Cargo == cargo);
+        }
     }
 }
 
