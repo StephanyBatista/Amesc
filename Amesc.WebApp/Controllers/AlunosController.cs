@@ -1,5 +1,5 @@
 using System.Linq;
-using Amesc.Dominio.Alunos;
+using Amesc.Dominio.Pessoas;
 using Amesc.WebApp.Util;
 using Microsoft.AspNetCore.Mvc;
 using Amesc.WebApp.ViewModels;
@@ -10,28 +10,28 @@ namespace Amesc.WebApp.Controllers
     [Authorize]
     public class AlunosController : Controller
     {
-        private readonly ArmazenadorDeAluno _armazenadorDeAluno;
-        private readonly IAlunoRepositorio _alunoRepositorio;
+        private readonly ArmazenadorDePessoa _armazenadorDePessoa;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
 
-        public AlunosController(ArmazenadorDeAluno armazenadorDeAluno, IAlunoRepositorio alunoRepositorio)
+        public AlunosController(ArmazenadorDePessoa armazenadorDePessoa, IPessoaRepositorio pessoaRepositorio)
         {
-            _armazenadorDeAluno = armazenadorDeAluno;
-            _alunoRepositorio = alunoRepositorio;
+            _armazenadorDePessoa = armazenadorDePessoa;
+            _pessoaRepositorio = pessoaRepositorio;
         }
 
         public IActionResult Index()
         {
-            var alunos = !string.IsNullOrEmpty(Request.Query["q"]) ? 
-                _alunoRepositorio.ConsultarPorNome(Request.Query["q"]) : 
-                _alunoRepositorio.Consultar();
+            var pessoas = !string.IsNullOrEmpty(Request.Query["q"]) ? 
+                _pessoaRepositorio.ConsultarPorNome(Request.Query["q"]) : 
+                _pessoaRepositorio.Consultar();
 
-            var alunosViewModel = alunos.Select(c => new AlunoParaListaViewModel(c));
-            return View(PaginatedList<AlunoParaListaViewModel>.Create(alunosViewModel, Request));
+            var alunosViewModel = pessoas.Where(a => a.TipoDePessoa == TipoDePessoa.Aluno).Select(c => new PessoaParaListaViewModel(c));
+            return View(PaginatedList<PessoaParaListaViewModel>.Create(alunosViewModel, Request));
         }
 
         public bool CpfJaCadastrado(string cpf)
         {
-            var alunos = _alunoRepositorio.ConsultarPorCpf(cpf);
+            var alunos = _pessoaRepositorio.ConsultarPorCpf(cpf);
 
             if (alunos != null && alunos.Any())
                 return true;
@@ -45,18 +45,18 @@ namespace Amesc.WebApp.Controllers
 
         public IActionResult Editar(int id)
         {
-            var aluno = _alunoRepositorio.ObterPorId(id);
+            var pessoa = _pessoaRepositorio.ObterPorId(id);
 
-            if (aluno == null)
+            if (pessoa == null)
                 return RedirectToAction("Index");
 
-            return View("NovoOuEditar", new AlunoParaCadastroViewModel(aluno));
+            return View("NovoOuEditar", new PessoaParaCadastroViewModel(pessoa));
         }
 
         [HttpPost]
-        public IActionResult Salvar(AlunoParaCadastroViewModel model)
+        public IActionResult Salvar(PessoaParaCadastroViewModel model)
         {
-            _armazenadorDeAluno.Armazenar(
+            _armazenadorDePessoa.Armazenar(
                 model.Id, 
                 model.Nome, 
                 model.Cpf, 
@@ -74,7 +74,8 @@ namespace Amesc.WebApp.Controllers
                 model.Estado, 
                 model.TipoDePublico,
                 model.Especialidade,
-                model.MidiaSocial);
+                model.MidiaSocial,
+                TipoDePessoa.Aluno);
 
             return Ok();
         }

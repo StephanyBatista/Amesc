@@ -9,7 +9,7 @@ namespace Amesc.WebApp.ViewModels
         public int IdAluno { get; set; }
         public bool EstaPago { get; set; }
         public string ValorPago { get; set; }
-        public IEnumerable<AlunoParaCadastroViewModel> Alunos { get; set; }
+        public IEnumerable<PessoaParaCadastroViewModel> Alunos { get; set; }
         public IEnumerable<CursoAbertoParaCadastroViewModel> CursosAbertos { get; set; }
     }
 }

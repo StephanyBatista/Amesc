@@ -1,5 +1,5 @@
-﻿using Amesc.Dominio.Cursos.Instrutores;
-using Amesc.Dominio.Cursos.Turma;
+﻿using Amesc.Dominio.Cursos.Turma;
+using Amesc.Dominio.Pessoas;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nosbor.FluentBuilder.Lib;
 
@@ -11,7 +11,7 @@ namespace Amesc.DominioTestes.Cursos.Turma
         [TestMethod]
         public void DeveCriar()
         {
-            var instrutor = FluentBuilder<Instrutor>.New().Build();
+            var instrutor = FluentBuilder<Pessoa>.New().Build();
             var cargo = CargoNaTurma.Coordenador;
 
             var instrutorDaTurma = new InstrutorDaTurma(instrutor, cargo);

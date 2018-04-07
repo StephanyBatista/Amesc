@@ -1,10 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using Amesc.Dominio.Alunos;
+using Amesc.Dominio.Pessoas;
 
 namespace Amesc.WebApp.ViewModels
 {
-    public class AlunoParaCadastroViewModel
+    public class PessoaParaCadastroViewModel
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Nome é obrigatório")]
@@ -38,9 +38,9 @@ namespace Amesc.WebApp.ViewModels
         public string MidiaSocial { get; set; }
         public string Especialidade { get; set; }
 
-        public AlunoParaCadastroViewModel() { }
+        public PessoaParaCadastroViewModel() { }
 
-        public AlunoParaCadastroViewModel(Aluno entidade)
+        public PessoaParaCadastroViewModel(Pessoa entidade)
         {
             Id = entidade.Id;
             Nome = entidade.Nome;

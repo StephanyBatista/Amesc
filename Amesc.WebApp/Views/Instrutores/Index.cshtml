@@ -1,8 +1,8 @@
 ﻿@using Amesc.WebApp.Util
 @using Amesc.WebApp.ViewModels
-@model PaginatedList<InstrutorParaListaViewModel>
+@model PaginatedList<PessoaParaListaViewModel>
 @{
-    ViewData["Title"] = "Cursos";
+    ViewData["Title"] = "Instrutores";
 }
 
 <div id="pad-wrapper">
@@ -32,12 +32,12 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover">
+            <table id="alunos" class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Código</th>
                     <th>Nome</th>
-                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Tipo de publico</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,13 +45,13 @@
                 {
                     <tr>
                         <td>
-                            @item.Codigo
-                        </td>
-                        <td>
                             @item.Nome
                         </td>
                         <td>
-                            @item.Email
+                            @item.Cpf
+                        </td>
+                        <td>
+                            @item.TipoDePublico
                         </td>
                         <td>
                             <a href="/Instrutores/Editar/@item.Id" class="btn">Editar</a>
@@ -76,6 +76,7 @@
                class="btn btn-default @nextDisabled">
                 Próximo
             </a>
+
         </div>
     </div>
 </div>

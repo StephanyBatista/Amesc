@@ -1,5 +1,5 @@
 using System.Linq;
-using Amesc.Dominio.Cursos.Instrutores;
+using Amesc.Dominio.Pessoas;
 using Amesc.WebApp.Util;
 using Microsoft.AspNetCore.Mvc;
 using Amesc.WebApp.ViewModels;
@@ -10,55 +10,65 @@ namespace Amesc.WebApp.Controllers
     [Authorize]
     public class InstrutoresController : Controller
     {
-        private readonly ArmazenadorDeInstrutor _armazenadorDeInstrutor;
-        private readonly IInstrutorRepositorio _isntrutorRepositorio;
+        private readonly ArmazenadorDePessoa _armazenadorDePessoa;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
 
-        public InstrutoresController(
-            ArmazenadorDeInstrutor armazenadorDeInstrutor, 
-            IInstrutorRepositorio isntrutorRepositorio)
+        public InstrutoresController(ArmazenadorDePessoa armazenadorDePessoa, IPessoaRepositorio pessoaRepositorio)
         {
-            _armazenadorDeInstrutor = armazenadorDeInstrutor;
-            _isntrutorRepositorio = isntrutorRepositorio;
+            _armazenadorDePessoa = armazenadorDePessoa;
+            _pessoaRepositorio = pessoaRepositorio;
         }
 
         public IActionResult Index()
         {
-            var instrutores = !string.IsNullOrEmpty(Request.Query["q"]) ?
-                _isntrutorRepositorio.ConsultarPorNome(Request.Query["q"]) :
-                _isntrutorRepositorio.Consultar();
+            var pessoas = !string.IsNullOrEmpty(Request.Query["q"]) ?
+                _pessoaRepositorio.ConsultarPorNome(Request.Query["q"]) :
+                _pessoaRepositorio.Consultar();
 
-            var models = instrutores.Select(c => 
-                new InstrutorParaListaViewModel
-                {
-                    Id = c.Id, Codigo = c.Codigo, Nome = c.Nome, Email = c.Email
-
-                });
-
-            return View(PaginatedList<InstrutorParaListaViewModel>.Create(models, Request));
+            var alunosViewModel = pessoas.Where(a => a.TipoDePessoa == TipoDePessoa.Instrutor).Select(c => new PessoaParaListaViewModel(c));
+            return View(PaginatedList<PessoaParaListaViewModel>.Create(alunosViewModel, Request));
         }
 
         public IActionResult Novo()
         {
-            return View("NovoOuEditar", new InstrutorParaCadastroViewModel());
+            return View("NovoOuEditar");
         }
 
         public IActionResult Editar(int id)
         {
-            var instrutor = _isntrutorRepositorio.ObterPorId(id);
+            var pessoa = _pessoaRepositorio.ObterPorId(id);
 
-            if (instrutor == null)
+            if (pessoa == null)
                 return RedirectToAction("Index");
 
-            return View("NovoOuEditar", new InstrutorParaCadastroViewModel(instrutor));
+            return View("NovoOuEditar", new PessoaParaCadastroViewModel(pessoa));
         }
 
         [HttpPost]
-        public IActionResult Salvar(InstrutorParaCadastroViewModel model)
+        public IActionResult Salvar(PessoaParaCadastroViewModel model)
         {
-            _armazenadorDeInstrutor.Armazenar(
-                model.Id, model.Codigo, model.Nome, model.Email);
+            _armazenadorDePessoa.Armazenar(
+                model.Id,
+                model.Nome,
+                model.Cpf,
+                model.OrgaoEmissorDoRg,
+                model.Rg,
+                model.DataDeNascimento,
+                model.RegistroProfissional,
+                model.Telefone,
+                model.Numero,
+                model.Logradouro,
+                model.Cep,
+                model.Bairro,
+                model.Complemento,
+                model.Cidade,
+                model.Estado,
+                model.TipoDePublico,
+                model.Especialidade,
+                model.MidiaSocial,
+                TipoDePessoa.Instrutor);
 
-            return RedirectToAction("Index");
+            return Ok();
         }
     }
 }

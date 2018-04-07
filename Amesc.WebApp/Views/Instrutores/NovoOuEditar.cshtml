@@ -1,4 +1,4 @@
-﻿@model Amesc.WebApp.ViewModels.InstrutorParaCadastroViewModel
+﻿@model Amesc.WebApp.ViewModels.PessoaParaCadastroViewModel
 @{
     ViewData["Title"] = "Instrutores";
 }
@@ -12,7 +12,7 @@
     </div>
     <div class="row header">
         <div class="col-md-1">
-            <h3>Instrutores</h3>
+            <h3>Instrutor</h3>
         </div>
     </div>
     <div class="row form-wrapper">
@@ -21,12 +21,6 @@
                   data-ajax="true" data-ajax-method="POST" data-ajax-failure="formQuandoFalha" data-ajax-success="window.location = '/Instrutores'">
                 <input type="hidden" class="form-control" asp-for="Id">
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Código</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" asp-for="Codigo">
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-md-2 control-label">Nome</label>
                     <div class="col-md-8">
                         <input type="text" class="form-control" asp-for="Nome">
@@ -34,10 +28,135 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">E-mail</label>
+                    <label class="col-md-2 control-label">CPF</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="Cpf">
+                        <span asp-validation-for="Cpf" class="text-danger"></span>
+                        <h3 id="cpfJaCadastrado" class="hidden"><span class="label label-warning">CPF Já Cadastrado</span></h3>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">RG</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="Rg">
+                        <span asp-validation-for="Rg" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Orgão emissor</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="OrgaoEmissorDoRg">
+                        <span asp-validation-for="OrgaoEmissorDoRg" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Data de nascimento</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="DataDeNascimento" placeholder="DD/MM/YYYY">
+                        <span asp-validation-for="DataDeNascimento" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Registro profissional</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="RegistroProfissional">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Telefone</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="Telefone" id="telefone">
+                        <span asp-validation-for="Telefone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Logradouro</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" asp-for="Email">
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <input type="text" class="form-control" asp-for="Logradouro">
+                        <span asp-validation-for="Logradouro" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Numero</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" asp-for="Numero">
+                        <span asp-validation-for="Numero" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Bairro</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" asp-for="Bairro">
+                        <span asp-validation-for="Bairro" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Complemento</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" asp-for="Complemento">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Cidade</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" asp-for="Cidade">
+                        <span asp-validation-for="Cidade" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Estado</label>
+                    <div class="col-md-2">
+                        <select class="form-control" asp-for="Estado">
+                            <option value="MS">MS</option>
+                            <option value="SP">SP</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MG">MG</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
+                        </select>
+                        <span asp-validation-for="Estado" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">CEP</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="Cep">
+                        <span asp-validation-for="Cep" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Especialidade</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="Especialidade">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Midia social</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" asp-for="MidiaSocial">
                     </div>
                 </div>
                 <div class="form-group">
@@ -54,7 +173,35 @@
     <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/jquery.validate.unobtrusive.js"></script>
     <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="/js/jquery.priceformat.min.js"></script>
+    <script src="/js/jquery.maskedinput.min.js"></script>
     <script src="/js/excecaoDeDominio.js"></script>
+    <script>
+        $(function() {
+            adicionarMascaras();
+            validarSeCpfJaCadastrado();
+        });
+
+        function adicionarMascaras() {
+            $("#Cep").mask("99999-999");
+            $("#Cpf").mask("999.999.999-99");
+            $("#telefone").mask("(99) 99999999?9");
+            $('#DataDeNascimento').mask("99/99/9999");
+        }
+
+        function validarSeCpfJaCadastrado() {
+            $("#Cpf").change(function () {
+                $.getJSON("/alunos/cpfJaCadastrado?cpf=" + $("#Cpf").val(),
+                    function (result) {
+                        if (result) {
+                            $("#cpfJaCadastrado").removeClass("hidden");
+                        } else {
+                            $("#cpfJaCadastrado").addClass("hidden");
+                        }
+                    });
+            });
+        }
+    </script>
 }
 
     

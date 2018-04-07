@@ -19,5 +19,14 @@
     <ProjectReference Include="..\Amesc.Data\Amesc.Data.csproj" />
     <ProjectReference Include="..\Amesc.Dominio\Amesc.Dominio.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Content Update="Views\Instrutores\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Instrutores\NovoOuEditar.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>

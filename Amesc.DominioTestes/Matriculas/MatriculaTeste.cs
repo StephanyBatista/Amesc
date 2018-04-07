@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Matriculas;
+using Amesc.Dominio.Pessoas;
 using Amesc.Dominio._Base;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nosbor.FluentBuilder.Lib;
@@ -13,7 +13,7 @@ namespace Amesc.DominioTestes.Matriculas
     public class MatriculaTeste
     {
         private CursoAberto _cursoAberto;
-        private Aluno _aluno;
+        private Pessoa _pessoa;
         private bool _estaPago;
         private FluentBuilder<Curso> _curso;
         private decimal _valorPago;
@@ -24,7 +24,7 @@ namespace Amesc.DominioTestes.Matriculas
             _curso = FluentBuilder<Curso>.New().With(c => c.PublicosAlvo,
                 new List<PublicoAlvoParaCurso> {new PublicoAlvoParaCurso("Medico(a)")});
             _cursoAberto = FluentBuilder<CursoAberto>.New().With(c => c.Curso, _curso).Build();
-            _aluno = FluentBuilder<Aluno>.New().With(a => a.TipoDePublico, "Medico(a)").Build();
+            _pessoa = FluentBuilder<Pessoa>.New().With(a => a.TipoDePublico, "Medico(a)").Build();
             _estaPago = true;
             _valorPago = 1050.30m;
         }
@@ -32,10 +32,10 @@ namespace Amesc.DominioTestes.Matriculas
         [TestMethod]
         public void DeveCriarMatricula()
         {
-            var matricula = new Matricula(_cursoAberto, _aluno, _estaPago, _valorPago);
+            var matricula = new Matricula(_cursoAberto, _pessoa, _estaPago, _valorPago);
 
             Assert.AreEqual(_cursoAberto, matricula.CursoAberto);
-            Assert.AreEqual(_aluno, matricula.Aluno);
+            Assert.AreEqual(_pessoa, matricula.Pessoa);
             Assert.AreEqual(DateTime.Now.Date, matricula.DataDeCriacao.Date);
             Assert.AreEqual(_estaPago, matricula.EstaPago);
             Assert.AreEqual(_valorPago, matricula.ValorPago);
@@ -47,7 +47,7 @@ namespace Amesc.DominioTestes.Matriculas
             var publicosAlvo = new List<PublicoAlvoParaCurso> {new PublicoAlvoParaCurso("Medico(a)")};
             var cursoParaMedico = FluentBuilder<Curso>.New().With(c => c.PublicosAlvo, publicosAlvo);
             var cursoAberto = FluentBuilder<CursoAberto>.New().With(c => c.Curso, cursoParaMedico).Build();
-            var alunoEnfermeiro = FluentBuilder<Aluno>.New().With(a => a.TipoDePublico, "Enfermeiro(a)").Build();
+            var alunoEnfermeiro = FluentBuilder<Pessoa>.New().With(a => a.TipoDePublico, "Enfermeiro(a)").Build();
 
             var message = Assert.ThrowsException<ExcecaoDeDominio>(() => new Matricula(cursoAberto, alunoEnfermeiro, _estaPago, _valorPago))
                 .Message;
@@ -57,7 +57,7 @@ namespace Amesc.DominioTestes.Matriculas
         [TestMethod]
         public void NaoDeveCriarMatriculaSemCursoAberto()
         {
-            var message = Assert.ThrowsException<ExcecaoDeDominio>(() => new Matricula(null, _aluno, _estaPago, _valorPago))
+            var message = Assert.ThrowsException<ExcecaoDeDominio>(() => new Matricula(null, _pessoa, _estaPago, _valorPago))
                 .Message;
 
             Assert.AreEqual("Curso é obrigatório", message);

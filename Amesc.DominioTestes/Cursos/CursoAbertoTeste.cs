@@ -2,6 +2,7 @@
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio.Cursos.Turma;
+using Amesc.Dominio.Pessoas;
 using Amesc.Dominio._Base;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nosbor.FluentBuilder.Lib;
@@ -69,7 +70,7 @@ namespace Amesc.DominioTestes.Cursos
         public void NaoDevePermitirInserirOMesmoInstrutorComMesmoCargo()
         {
             const int quantidadeEsperada = 1;
-            var instrutor = FluentBuilder<Instrutor>.New().With(i => i.Id, 5).Build();
+            var instrutor = FluentBuilder<Pessoa>.New().With(i => i.Id, 5).Build();
             var cargo = CargoNaTurma.Coordenador;
 
             _cursoAberto.AdicionarInstrutor(instrutor, cargo);

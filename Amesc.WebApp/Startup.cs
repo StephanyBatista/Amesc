@@ -3,7 +3,6 @@ using Amesc.Data.Contexts;
 using Amesc.Data.Identity;
 using Amesc.Data.Repositorios;
 using Amesc.Dominio;
-using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Contas;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Matriculas;
@@ -19,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using Amesc.Dominio.Cursos.Instrutores;
+using Amesc.Dominio.Pessoas;
 
 namespace Amesc.WebApp
 {
@@ -57,11 +57,11 @@ namespace Amesc.WebApp
             services.AddScoped(typeof(IRepositorio<>), typeof(RepositorioBase<>));
             services.AddScoped(typeof(ICursoRepositorio), typeof(CursoRepositorio));
             services.AddScoped(typeof(IInstrutorRepositorio), typeof(InstrutorRepositorio));
-            services.AddScoped(typeof(IAlunoRepositorio), typeof(AlunoRepositorio));
+            services.AddScoped(typeof(IPessoaRepositorio), typeof(PessoaRepositorio));
             services.AddScoped(typeof(ICursoAbertoRepositorio), typeof(CursoAbertoRepositorio));
             services.AddScoped(typeof(IMatriculaRepositorio), typeof(MatriculaRepositorio));
             services.AddScoped(typeof(IAutenticacao), typeof(Autenticacao));
-            services.AddScoped(typeof(ArmazenadorDeAluno));
+            services.AddScoped(typeof(ArmazenadorDePessoa));
             services.AddScoped(typeof(CanceladorDeMatricula));
             services.AddScoped(typeof(ArmazenadorDeCurso));
             services.AddScoped(typeof(ArmazenadorDeInstrutor));

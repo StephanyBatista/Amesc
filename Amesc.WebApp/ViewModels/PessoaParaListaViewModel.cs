@@ -1,17 +1,17 @@
-using Amesc.Dominio.Alunos;
+using Amesc.Dominio.Pessoas;
 
 namespace Amesc.WebApp.ViewModels
 {
-    public class AlunoParaListaViewModel
+    public class PessoaParaListaViewModel
     {
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string TipoDePublico { get; set; }
 
-        public AlunoParaListaViewModel() { }
+        public PessoaParaListaViewModel() { }
 
-        public AlunoParaListaViewModel(Aluno entidade)
+        public PessoaParaListaViewModel(Pessoa entidade)
         {
             Id = entidade.Id;
             Nome = entidade.Nome;

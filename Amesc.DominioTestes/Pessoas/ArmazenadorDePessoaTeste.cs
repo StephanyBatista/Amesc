@@ -1,24 +1,21 @@
-﻿using System;
-using System.Linq;
-using Amesc.Dominio;
-using Amesc.Dominio.Alunos;
-using Amesc.Dominio.Cursos;
+﻿using Amesc.Dominio;
+using Amesc.Dominio.Pessoas;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Nosbor.FluentBuilder.Lib;
 
-namespace Amesc.DominioTestes.Alunos
+namespace Amesc.DominioTestes.Pessoas
 {
     [TestClass]
-    public class ArmazenadorDeAlunoTeste
+    public class ArmazenadorDePessoaTeste
     {
         private string _nome;
         private string _cpf;
         private string _telefone;
         private string _numero;
-        private Mock<IRepositorio<Aluno>> _alunoRepositorio;
+        private Mock<IRepositorio<Pessoa>> _alunoRepositorio;
         private string _publicoAlvo;
-        private ArmazenadorDeAluno _armazenador;
+        private ArmazenadorDePessoa _armazenador;
         private string _logradouro;
         private string _cep;
         private string _bairro;
@@ -53,8 +50,8 @@ namespace Amesc.DominioTestes.Alunos
             _midiaSocial = "facebook";
             _especialidade = "medico";
 
-            _alunoRepositorio = new Mock<IRepositorio<Aluno>>();
-            _armazenador = new ArmazenadorDeAluno(_alunoRepositorio.Object);
+            _alunoRepositorio = new Mock<IRepositorio<Pessoa>>();
+            _armazenador = new ArmazenadorDePessoa(_alunoRepositorio.Object);
         }
 
         [TestMethod]
@@ -64,9 +61,9 @@ namespace Amesc.DominioTestes.Alunos
 
             _armazenador.Armazenar(
                 id, _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _numero, _logradouro, _cep, _bairro, _complemento, _cidade, _estado, 
-                _publicoAlvo, _especialidade, _midiaSocial);
+                _publicoAlvo, _especialidade, _midiaSocial, TipoDePessoa.Aluno);
 
-            _alunoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<Aluno>()));
+            _alunoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<Pessoa>()));
         }
 
         [TestMethod]
@@ -74,12 +71,12 @@ namespace Amesc.DominioTestes.Alunos
         {
             const int id = 1;
             _alunoRepositorio.Setup(repositorio => repositorio.ObterPorId(id))
-                .Returns(FluentBuilder<Aluno>.New().Build());
+                .Returns(FluentBuilder<Pessoa>.New().Build());
 
             _armazenador.Armazenar(id, _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _numero, _logradouro, _cep, _bairro, _complemento, _cidade, _estado,
-                _publicoAlvo, _especialidade, _midiaSocial);
+                _publicoAlvo, _especialidade, _midiaSocial, TipoDePessoa.Aluno);
 
-            _alunoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<Aluno>()), Times.Never);
+            _alunoRepositorio.Verify(repositorio => repositorio.Adicionar(It.IsAny<Pessoa>()), Times.Never);
         }
     }
 }

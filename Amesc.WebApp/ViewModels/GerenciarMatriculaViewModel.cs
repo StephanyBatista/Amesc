@@ -21,7 +21,7 @@ namespace Amesc.WebApp.ViewModels
         public GerenciarMatriculaViewModel(Matricula entidade)
         {
             Id = entidade.Id;
-            Aluno = entidade.Aluno.Nome;
+            Aluno = entidade.Pessoa.Nome;
             Curso = entidade.CursoAberto.Curso.Nome;
             DataDoCurso = entidade.CursoAberto.InicioDoCurso.ToString("dd/MM/yyyy");
             EstaPago = entidade.EstaPago;

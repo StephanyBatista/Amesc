@@ -20,8 +20,8 @@ namespace Amesc.WebApp.ViewModels
             Id = entidade.Id;
             Curso = entidade.CursoAberto.Curso.Nome;
             DataDoCurso = entidade.CursoAberto.InicioDoCurso;
-            Aluno = entidade.Aluno.Nome;
-            Cpf = entidade.Aluno.Cpf;
+            Aluno = entidade.Pessoa.Nome;
+            Cpf = entidade.Pessoa.Cpf;
             EstaPago = entidade.EstaPago ? "Sim" : "Não";
             Cancelada = entidade.Cancelada ? "Sim": "Não";
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio.Cursos.Turma;
+using Amesc.Dominio.Pessoas;
 using Amesc.Dominio._Base;
 
 namespace Amesc.Dominio.Cursos
@@ -101,7 +102,7 @@ namespace Amesc.Dominio.Cursos
             return Curso.ContemPublicoAlvo(publicoAlvo);
         }
 
-        public void AdicionarInstrutor(Instrutor instrutor, CargoNaTurma cargo)
+        public void AdicionarInstrutor(Pessoa instrutor, CargoNaTurma cargo)
         {
             if(Instrutores == null)
                 Instrutores = new List<InstrutorDaTurma>();
@@ -111,7 +112,7 @@ namespace Amesc.Dominio.Cursos
             Instrutores.Add(new InstrutorDaTurma(instrutor, cargo));
         }
 
-        public void RemoverInstrutor(Instrutor instrutor, CargoNaTurma cargo)
+        public void RemoverInstrutor(Pessoa instrutor, CargoNaTurma cargo)
         {
             Instrutores.RemoveAll(i => i.Instrutor.Id == instrutor.Id && i.Cargo == cargo);
         }

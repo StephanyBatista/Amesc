@@ -15,7 +15,7 @@ namespace Amesc.Data.Repositorios
         public override Matricula ObterPorId(int id)
         {
             var query = Context.Set<Matricula>()
-                .Include(p => p.Aluno)
+                .Include(p => p.Pessoa)
                 .Include(p => p.CursoAberto)
                 .Include(p => p.CursoAberto.Curso)
                 .Where(entidade => entidade.Id == id);
@@ -25,7 +25,7 @@ namespace Amesc.Data.Repositorios
         public override List<Matricula> Consultar()
         {
             var query = Context.Set<Matricula>()
-                .Include(p => p.Aluno)
+                .Include(p => p.Pessoa)
                 .Include(p => p.CursoAberto)
                 .Include(p => p.CursoAberto.Curso);
             return query.Any() ? query.OrderBy(m => m.DataDeCriacao).ToList() : new List<Matricula>();
@@ -34,13 +34,13 @@ namespace Amesc.Data.Repositorios
         public List<Matricula> ConsultarPor(string nomeDoAluno, string nomeDoCurso, bool pago, bool validadeExpirada)
         {
             var select = Context.Set<Matricula>()
-                .Include(p => p.Aluno)
+                .Include(p => p.Pessoa)
                 .Include(p => p.CursoAberto)
                 .Include(p => p.CursoAberto.Curso);
 
             var query = select.AsQueryable();
             if(!string.IsNullOrEmpty(nomeDoAluno))
-                query = query.Where(p => p.Aluno.Nome.Contains(nomeDoAluno));
+                query = query.Where(p => p.Pessoa.Nome.Contains(nomeDoAluno));
             
             if(!string.IsNullOrEmpty(nomeDoCurso))
                 query = query.Where(p => p.CursoAberto.Curso.Nome.Contains(nomeDoCurso));

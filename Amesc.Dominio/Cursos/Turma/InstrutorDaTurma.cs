@@ -1,4 +1,4 @@
-﻿using Amesc.Dominio.Cursos.Instrutores;
+﻿using Amesc.Dominio.Pessoas;
 
 namespace Amesc.Dominio.Cursos.Turma
 {
@@ -6,13 +6,13 @@ namespace Amesc.Dominio.Cursos.Turma
     {
         public InstrutorDaTurma() { }
 
-        public InstrutorDaTurma(Instrutor instrutor, CargoNaTurma cargo)
+        public InstrutorDaTurma(Pessoa instrutor, CargoNaTurma cargo)
         {
             Instrutor = instrutor;
             Cargo = cargo;
         }
 
-        public Instrutor Instrutor { get; set; }
+        public Pessoa Instrutor { get; set; }
         public CargoNaTurma Cargo { get; set; }
     }
 }

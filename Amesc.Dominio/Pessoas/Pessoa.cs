@@ -1,9 +1,15 @@
 ﻿using System;
 using Amesc.Dominio._Base;
 
-namespace Amesc.Dominio.Alunos
+namespace Amesc.Dominio.Pessoas
 {
-    public class Aluno : Entidade
+    public enum TipoDePessoa
+    {
+        Aluno,
+        Instrutor
+    }
+
+    public class Pessoa : Entidade
     {
         public string Nome { get; private set; }
         public string Cpf { get; private set; }
@@ -16,26 +22,29 @@ namespace Amesc.Dominio.Alunos
         public string RegistroProfissional { get; private set; }
         public string MidiaSocial { get; private set; }
         public string Especialidade { get; set; }
+        public TipoDePessoa TipoDePessoa { get; set; }
 
-        public Aluno() { }
+        public Pessoa() { }
 
-        public Aluno(
-            string nome, string cpf, string orgaoEmissorDoRg, string rg, DateTime dataDeNascimento, string registroProfissional, 
-            string telefone, Endereco endereco, string tipoDePublico, string especialidade, string midiaSocial)
+        public Pessoa(string nome, string cpf, string orgaoEmissorDoRg, string rg, DateTime dataDeNascimento,
+            string registroProfissional,
+            string telefone, Endereco endereco, string tipoDePublico, string especialidade, string midiaSocial,
+            TipoDePessoa tipoDePessoa)
         {
-            Validar(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, telefone, endereco, tipoDePublico);
+            Validar(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, telefone, endereco);
             Atribuir(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereco, tipoDePublico, especialidade, midiaSocial);
+            TipoDePessoa = tipoDePessoa;
         }
 
         public void Editar(
             string nome, string cpf, string orgaoEmissorDoRg, string rg, DateTime dataDeNascimento, string registroProfissional, 
             string telefone, Endereco endereco, string tipoDePublico, string especialide, string midiaSocial)
         {
-            Validar(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, telefone, endereco, tipoDePublico);
+            Validar(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, telefone, endereco);
             Atribuir(nome, cpf, orgaoEmissorDoRg, rg, dataDeNascimento, registroProfissional, telefone, endereco, tipoDePublico, especialide, midiaSocial);
         }
 
-        private static void Validar(string nome, string cpf, string orgaoEmissorDoRg, string rg, DateTime dataDeNascimento, string telefone, Endereco endereco, string tipoDePublico)
+        private static void Validar(string nome, string cpf, string orgaoEmissorDoRg, string rg, DateTime dataDeNascimento, string telefone, Endereco endereco)
         {
             ExcecaoDeDominio.Quando(string.IsNullOrEmpty(nome), "Nome é obrigatório");
             ExcecaoDeDominio.Quando(string.IsNullOrEmpty(cpf), "CPF é obrigatório");
@@ -44,7 +53,6 @@ namespace Amesc.Dominio.Alunos
             ExcecaoDeDominio.Quando(dataDeNascimento == DateTime.MinValue, "Data de nascimento é obrigatório");
             ExcecaoDeDominio.Quando(string.IsNullOrEmpty(telefone), "Telefone é obrigatório");
             ExcecaoDeDominio.Quando(endereco == null, "Endereço é obrigatório");
-            ExcecaoDeDominio.Quando(tipoDePublico == null, "Tipo de publico é obrigatório");
         }
 
         private void Atribuir(

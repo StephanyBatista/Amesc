@@ -1,8 +1,8 @@
 using System.Linq;
-using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio.Matriculas;
+using Amesc.Dominio.Pessoas;
 using Amesc.WebApp.Util;
 using Amesc.WebApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -18,7 +18,7 @@ namespace Amesc.WebApp.Controllers
         private readonly AlteracaoDeDadosDaMatricula _alteracaoDeDadosDaMatricula;
         private readonly CanceladorDeMatricula _canceladorDeMatricula;
         private readonly ICursoAbertoRepositorio _cursoAbertoRepositorio;
-        private readonly IAlunoRepositorio _alunoRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IMatriculaRepositorio _matriculaRepositorio;
 
         public MatriculasController(
@@ -26,13 +26,13 @@ namespace Amesc.WebApp.Controllers
             AlteracaoDeDadosDaMatricula alteracaoDeDadosDaMatricula,
             CanceladorDeMatricula canceladorDeMatricula,
             ICursoAbertoRepositorio cursoAbertoRepositorio, 
-            IAlunoRepositorio alunoRepositorio, IMatriculaRepositorio matriculaRepositorio)
+            IPessoaRepositorio pessoaRepositorio, IMatriculaRepositorio matriculaRepositorio)
         {
             _criacaoDeMatricula = criacaoDeMatricula;
             _alteracaoDeDadosDaMatricula = alteracaoDeDadosDaMatricula;
             _canceladorDeMatricula = canceladorDeMatricula;
             _cursoAbertoRepositorio = cursoAbertoRepositorio;
-            _alunoRepositorio = alunoRepositorio;
+            _pessoaRepositorio = pessoaRepositorio;
             _matriculaRepositorio = matriculaRepositorio;
         }
 
@@ -55,8 +55,8 @@ namespace Amesc.WebApp.Controllers
 
         public IActionResult Novo()
         {
-            var alunos = _alunoRepositorio.Consultar();
-            var alunosViewModel = alunos.Select(a => new AlunoParaCadastroViewModel(a)).ToList();
+            var alunos = _pessoaRepositorio.Consultar();
+            var alunosViewModel = alunos.Select(a => new PessoaParaCadastroViewModel(a)).ToList();
 
             var cursoAbertos = _cursoAbertoRepositorio.Consultar();
             var cursosAbertosViewModel = cursoAbertos.Select(c => new CursoAbertoParaCadastroViewModel(c)).ToList();

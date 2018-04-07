@@ -3,6 +3,7 @@ using System.Linq;
 using Amesc.Dominio;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Cursos.Instrutores;
+using Amesc.Dominio.Pessoas;
 using Amesc.WebApp.Util;
 using Amesc.WebApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -16,18 +17,18 @@ namespace Amesc.WebApp.Controllers
         private readonly ArmazenadorDeCursoAberto _armazenadorDeCursoAberto;
         private readonly IRepositorio<Curso> _cursoRepositorio;
         private readonly ICursoAbertoRepositorio _cursoAbertoRepositorio;
-        private readonly IInstrutorRepositorio _instrutorRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
 
         public AbrirCursoController(
             ArmazenadorDeCursoAberto armazenadorDeCursoAberto,
             ICursoAbertoRepositorio cursoAbertoRepositorio,
-            IRepositorio<Curso> cursoRepositorio, 
-            IInstrutorRepositorio instrutorRepositorio)
+            IRepositorio<Curso> cursoRepositorio,
+            IPessoaRepositorio pessoaRepositorio)
         {
             _armazenadorDeCursoAberto = armazenadorDeCursoAberto;
             _cursoAbertoRepositorio = cursoAbertoRepositorio;
             _cursoRepositorio = cursoRepositorio;
-            _instrutorRepositorio = instrutorRepositorio;
+            _pessoaRepositorio = pessoaRepositorio;
         }
 
         [Route("AbrirCurso/{idCurso}")]
@@ -49,7 +50,7 @@ namespace Amesc.WebApp.Controllers
 
         private void BuscarInstrutoresEDeclararNaViewBag()
         {
-            var instrutores = _instrutorRepositorio.Consultar();
+            var instrutores = _pessoaRepositorio.Consultar();
 
             if (!instrutores.Any())
             {
@@ -58,7 +59,7 @@ namespace Amesc.WebApp.Controllers
             }
 
             var instrutoresParaLista =
-                instrutores.Select(i => new InstrutorParaListaViewModel {Id = i.Id, Nome = i.Nome}).ToList();
+                instrutores.Where(i => i.TipoDePessoa == TipoDePessoa.Instrutor).OrderBy(i => i.Nome).Select(i => new InstrutorParaListaViewModel {Id = i.Id, Nome = i.Nome}).ToList();
             ViewBag.Instrutores = instrutoresParaLista;
         }
 

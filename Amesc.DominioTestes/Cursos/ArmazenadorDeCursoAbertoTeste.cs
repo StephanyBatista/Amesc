@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio.Cursos.Turma;
+using Amesc.Dominio.Pessoas;
 using Nosbor.FluentBuilder.Lib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -19,8 +20,8 @@ namespace Amesc.DominioTestes.Cursos
         private Mock<ICursoAbertoRepositorio> _cursoAbertoRepositorio;
         private ArmazenadorDeCursoAberto _armazenador;
         private CursoAbertoParaCadastroViewModel _dto;
-        private Mock<IInstrutorRepositorio> _instrutorRepositorio;
-        private Instrutor _instrutor;
+        private Mock<IPessoaRepositorio> _instrutorRepositorio;
+        private Pessoa _instrutor;
 
         [TestInitialize]
         public void Setup()
@@ -42,8 +43,8 @@ namespace Amesc.DominioTestes.Cursos
                 .Returns(FluentBuilder<Curso>.New().Build);
             _cursoAbertoRepositorio = new Mock<ICursoAbertoRepositorio>();
 
-            _instrutorRepositorio = new Mock<IInstrutorRepositorio>();
-            _instrutor = FluentBuilder<Instrutor>.New().With(i => i.Id, InstrutorId).Build();
+            _instrutorRepositorio = new Mock<IPessoaRepositorio>();
+            _instrutor = FluentBuilder<Pessoa>.New().With(i => i.Id, InstrutorId).Build();
             _instrutorRepositorio.Setup(r => r.ObterPorId(InstrutorId)).Returns(_instrutor);
 
             _armazenador = new ArmazenadorDeCursoAberto(_cursoRepositorio.Object, _cursoAbertoRepositorio.Object, _instrutorRepositorio.Object);
@@ -112,7 +113,7 @@ namespace Amesc.DominioTestes.Cursos
             {
                 new InstrutorDaTurmaViewModel{ Cargo = "Diretor", Id = InstrutorId}
             };
-            var instrutorParaRemocao = FluentBuilder<Instrutor>.New().With(i => i.Id, 56).Build();
+            var instrutorParaRemocao = FluentBuilder<Pessoa>.New().With(i => i.Id, 56).Build();
             var cursoAberto = FluentBuilder<CursoAberto>.New().Build();
             cursoAberto.AdicionarInstrutor(instrutorParaRemocao, CargoNaTurma.Coordenador);
 

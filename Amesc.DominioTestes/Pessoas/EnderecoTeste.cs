@@ -1,8 +1,8 @@
-﻿using Amesc.Dominio.Alunos;
+﻿using Amesc.Dominio.Pessoas;
 using Amesc.Dominio._Base;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Amesc.DominioTestes.Alunos
+namespace Amesc.DominioTestes.Pessoas
 {
     [TestClass]
     public class EnderecoTeste

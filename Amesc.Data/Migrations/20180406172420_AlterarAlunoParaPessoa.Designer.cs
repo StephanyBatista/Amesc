@@ -15,9 +15,10 @@ using System;
 namespace Amesc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180406172420_AlterarAlunoParaPessoa")]
+    partial class AlterarAlunoParaPessoa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -373,7 +374,7 @@ namespace Amesc.Data.Migrations
                         .WithMany("Instrutores")
                         .HasForeignKey("CursoAbertoId");
 
-                    b.HasOne("Amesc.Dominio.Pessoas.Pessoa", "Instrutor")
+                    b.HasOne("Amesc.Dominio.Cursos.Instrutores.Instrutor", "Instrutor")
                         .WithMany()
                         .HasForeignKey("InstrutorId");
                 });

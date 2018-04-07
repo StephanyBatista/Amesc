@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Matriculas;
 using Amesc.Data.Identity;
 using Amesc.Dominio.Cursos.Instrutores;
+using Amesc.Dominio.Pessoas;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +16,7 @@ namespace Amesc.Data.Contexts
 
         }
 
-        public DbSet<Aluno> Alunos { get; set; }
+        public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Instrutor> Instrutores { get; set; }
         public DbSet<CursoAberto> CursosAbertos { get; set; }
@@ -26,7 +26,7 @@ namespace Amesc.Data.Contexts
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Aluno>().OwnsOne(p => p.Endereco);
+            modelBuilder.Entity<Pessoa>().OwnsOne(p => p.Endereco);
         }
 
         public async Task Commit()

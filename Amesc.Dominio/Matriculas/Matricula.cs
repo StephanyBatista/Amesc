@@ -1,6 +1,6 @@
 ﻿using System;
-using Amesc.Dominio.Alunos;
 using Amesc.Dominio.Cursos;
+using Amesc.Dominio.Pessoas;
 using Amesc.Dominio._Base;
 
 namespace Amesc.Dominio.Matriculas
@@ -15,7 +15,7 @@ namespace Amesc.Dominio.Matriculas
     public class Matricula : Entidade
     {
         public CursoAberto CursoAberto { get; private set; }
-        public Aluno Aluno { get; private set; }
+        public Pessoa Pessoa { get; private set; }
         public DateTime DataDeCriacao { get; private set; }
         public bool EstaPago { get; private set; }
         public string Observacao { get; private set; }
@@ -27,14 +27,14 @@ namespace Amesc.Dominio.Matriculas
 
         public Matricula() { }
 
-        public Matricula(CursoAberto cursoAberto, Aluno aluno, bool estaPago, decimal valorPago)
+        public Matricula(CursoAberto cursoAberto, Pessoa pessoa, bool estaPago, decimal valorPago)
         {
             ExcecaoDeDominio.Quando(cursoAberto == null, "Curso é obrigatório");
-            ExcecaoDeDominio.Quando(aluno == null, "Aluno é obrigatório");
-            ExcecaoDeDominio.Quando(!cursoAberto.ContemPublicoAlvo(aluno.TipoDePublico), "Tipo de publíco alvo do Curso e do Aluno são diferentes");
+            ExcecaoDeDominio.Quando(pessoa == null, "Aluno é obrigatório");
+            ExcecaoDeDominio.Quando(!cursoAberto.ContemPublicoAlvo(pessoa.TipoDePublico), "Tipo de publíco alvo do Curso e do Aluno são diferentes");
 
             CursoAberto = cursoAberto;
-            Aluno = aluno;
+            Pessoa = pessoa;
             EstaPago = estaPago;
             DataDeCriacao = DateTime.Now;
             if(valorPago > 0)

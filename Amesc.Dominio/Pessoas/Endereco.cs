@@ -1,7 +1,6 @@
-﻿using System;
-using Amesc.Dominio._Base;
+﻿using Amesc.Dominio._Base;
 
-namespace Amesc.Dominio.Alunos
+namespace Amesc.Dominio.Pessoas
 {
     public class Endereco
     {

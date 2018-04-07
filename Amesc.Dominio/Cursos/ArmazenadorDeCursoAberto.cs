@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio.Cursos.Turma;
+using Amesc.Dominio.Pessoas;
 using Amesc.Dominio._Base;
 
 namespace Amesc.Dominio.Cursos
@@ -11,16 +12,16 @@ namespace Amesc.Dominio.Cursos
     {
         private readonly IRepositorio<Curso> _cursoRepositorio;
         private readonly ICursoAbertoRepositorio _cursoAbertoRepositorio;
-        private readonly IInstrutorRepositorio _instrutorRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
 
         public ArmazenadorDeCursoAberto(
             IRepositorio<Curso> cursoRepositorio,
             ICursoAbertoRepositorio cursoAbertoRepositorio, 
-            IInstrutorRepositorio instrutorRepositorio)
+            IPessoaRepositorio pessoaRepositorio)
         {
             _cursoRepositorio = cursoRepositorio;
             _cursoAbertoRepositorio = cursoAbertoRepositorio;
-            _instrutorRepositorio = instrutorRepositorio;
+            _pessoaRepositorio = pessoaRepositorio;
         }
 
         public void Armazenar(CursoAbertoParaCadastroViewModel model)
@@ -65,7 +66,7 @@ namespace Amesc.Dominio.Cursos
         {
             foreach (var instrutorDaTurmaViewModel in model.Instrutores)
             {
-                var instrutor = _instrutorRepositorio.ObterPorId(instrutorDaTurmaViewModel.Id);
+                var instrutor = _pessoaRepositorio.ObterPorId(instrutorDaTurmaViewModel.Id);
                 Enum.TryParse<CargoNaTurma>(instrutorDaTurmaViewModel.Cargo, out var cargo);
                 cursoAberto.AdicionarInstrutor(instrutor, cargo);
             }

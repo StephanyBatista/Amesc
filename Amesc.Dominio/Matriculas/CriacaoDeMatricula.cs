@@ -1,5 +1,5 @@
-﻿using Amesc.Dominio.Alunos;
-using Amesc.Dominio.Cursos;
+﻿using Amesc.Dominio.Cursos;
+using Amesc.Dominio.Pessoas;
 
 namespace Amesc.Dominio.Matriculas
 {
@@ -7,21 +7,21 @@ namespace Amesc.Dominio.Matriculas
     {
         private readonly IMatriculaRepositorio _matriculaRepositorio;
         private readonly ICursoAbertoRepositorio _cursoAbertoRepositorio;
-        private readonly IAlunoRepositorio _alunoRepositorio;
+        private readonly IPessoaRepositorio _pessoaRepositorio;
 
         public CriacaoDeMatricula(
             IMatriculaRepositorio matriculaRepositorio,
             ICursoAbertoRepositorio cursoAbertoRepositorio,
-            IAlunoRepositorio alunoRepositorio)
+            IPessoaRepositorio pessoaRepositorio)
         {
             _matriculaRepositorio = matriculaRepositorio;
             _cursoAbertoRepositorio = cursoAbertoRepositorio;
-            _alunoRepositorio = alunoRepositorio;
+            _pessoaRepositorio = pessoaRepositorio;
         }
 
         public void Criar(int idCursoAberto, int idAluno, bool estaPago, string valorPagoEmString)
         {
-            var aluno = _alunoRepositorio.ObterPorId(idAluno);
+            var aluno = _pessoaRepositorio.ObterPorId(idAluno);
             var cursoAberto = _cursoAbertoRepositorio.ObterPorId(idCursoAberto);
             decimal.TryParse(valorPagoEmString, out var valorPago);
 
