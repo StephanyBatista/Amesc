@@ -2,7 +2,6 @@
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Matriculas;
 using Amesc.Data.Identity;
-using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio.Pessoas;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +17,6 @@ namespace Amesc.Data.Contexts
 
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Curso> Cursos { get; set; }
-        public DbSet<Instrutor> Instrutores { get; set; }
         public DbSet<CursoAberto> CursosAbertos { get; set; }
         public DbSet<Matricula> Matriculas { get; set; }
 

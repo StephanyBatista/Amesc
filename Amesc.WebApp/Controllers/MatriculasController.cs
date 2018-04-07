@@ -1,6 +1,6 @@
 using System.Linq;
 using Amesc.Dominio.Cursos;
-using Amesc.Dominio.Cursos.Instrutores;
+using Amesc.Dominio.Cursos.Turma;
 using Amesc.Dominio.Matriculas;
 using Amesc.Dominio.Pessoas;
 using Amesc.WebApp.Util;

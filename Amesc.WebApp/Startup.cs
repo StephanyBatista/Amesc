@@ -10,14 +10,12 @@ using Amesc.WebApp.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio.Pessoas;
 
 namespace Amesc.WebApp
@@ -56,7 +54,6 @@ namespace Amesc.WebApp
 
             services.AddScoped(typeof(IRepositorio<>), typeof(RepositorioBase<>));
             services.AddScoped(typeof(ICursoRepositorio), typeof(CursoRepositorio));
-            services.AddScoped(typeof(IInstrutorRepositorio), typeof(InstrutorRepositorio));
             services.AddScoped(typeof(IPessoaRepositorio), typeof(PessoaRepositorio));
             services.AddScoped(typeof(ICursoAbertoRepositorio), typeof(CursoAbertoRepositorio));
             services.AddScoped(typeof(IMatriculaRepositorio), typeof(MatriculaRepositorio));
@@ -64,7 +61,6 @@ namespace Amesc.WebApp
             services.AddScoped(typeof(ArmazenadorDePessoa));
             services.AddScoped(typeof(CanceladorDeMatricula));
             services.AddScoped(typeof(ArmazenadorDeCurso));
-            services.AddScoped(typeof(ArmazenadorDeInstrutor));
             services.AddScoped(typeof(ArmazenadorDeCursoAberto));
             services.AddScoped(typeof(CriacaoDeMatricula));
             services.AddScoped(typeof(AlteracaoDeDadosDaMatricula));

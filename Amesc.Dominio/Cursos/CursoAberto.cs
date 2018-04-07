@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio.Cursos.Turma;
 using Amesc.Dominio.Pessoas;
 using Amesc.Dominio._Base;

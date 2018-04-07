@@ -4,7 +4,6 @@ using Amesc.Dominio._Base;
 using Moq;
 using System;
 using System.Collections.Generic;
-using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio.Cursos.Turma;
 using Amesc.Dominio.Pessoas;
 using Nosbor.FluentBuilder.Lib;

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Amesc.Dominio.Cursos.Instrutores;
+using Amesc.Dominio.Cursos.Turma;
 
 namespace Amesc.WebApp.ViewModels
 {

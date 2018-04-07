@@ -1,6 +1,5 @@
 ﻿using System;
 using Amesc.Dominio.Cursos;
-using Amesc.Dominio.Cursos.Instrutores;
 using Amesc.Dominio.Cursos.Turma;
 using Amesc.Dominio.Pessoas;
 using Amesc.Dominio._Base;

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Amesc.Dominio;
 using Amesc.Dominio.Cursos;
-using Amesc.Dominio.Cursos.Instrutores;
+using Amesc.Dominio.Cursos.Turma;
 using Amesc.Dominio.Pessoas;
 using Amesc.WebApp.Util;
 using Amesc.WebApp.ViewModels;

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Amesc.Dominio.Cursos.Turma;
 
-namespace Amesc.Dominio.Cursos.Instrutores
+namespace Amesc.Dominio.Cursos.Turma
 {
     public class CursoAbertoParaCadastroViewModel
     {
