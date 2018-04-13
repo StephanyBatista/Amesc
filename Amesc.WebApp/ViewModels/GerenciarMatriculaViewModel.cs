@@ -15,6 +15,7 @@ namespace Amesc.WebApp.ViewModels
         public string StatusDaAprovacao { get; set; }
         public bool Ip { get; set; }
         public bool Cancelada { get; set; }
+        public string ComoFicouSabendo { get; }
 
         public GerenciarMatriculaViewModel() { }
 
@@ -31,6 +32,8 @@ namespace Amesc.WebApp.ViewModels
             Ip = entidade.Ip;
             Observacao = entidade.Observacao;
             Cancelada = entidade.Cancelada;
+            if(entidade.ComoFicouSabendo != null)
+                ComoFicouSabendo = entidade.ComoFicouSabendo.Nome;
         }
     }
 }

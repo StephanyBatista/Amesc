@@ -46,7 +46,10 @@ namespace Amesc.DominioTestes.Cursos
             _instrutor = FluentBuilder<Pessoa>.New().With(i => i.Id, InstrutorId).Build();
             _instrutorRepositorio.Setup(r => r.ObterPorId(InstrutorId)).Returns(_instrutor);
 
-            _armazenador = new ArmazenadorDeCursoAberto(_cursoRepositorio.Object, _cursoAbertoRepositorio.Object, _instrutorRepositorio.Object);
+            _armazenador = new ArmazenadorDeCursoAberto(
+                _cursoRepositorio.Object, 
+                _cursoAbertoRepositorio.Object, 
+                _instrutorRepositorio.Object);
         }
 
         [TestMethod]

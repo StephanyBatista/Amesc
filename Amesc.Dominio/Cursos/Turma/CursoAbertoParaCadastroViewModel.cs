@@ -28,6 +28,7 @@ namespace Amesc.Dominio.Cursos.Turma
         public DateTime FimDoCurso { set; get; }
         [Required(ErrorMessage = "Preço é obrigatório")]
         public string Preco { get; set; }
+        public int ComoFicouSabendoId { get; set; }
 
         public CursoAbertoParaCadastroViewModel()
         {

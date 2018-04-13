@@ -34,6 +34,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-md-2 control-label">Curso</label>
+                    <div class="col-md-10">
+                        <select class="form-control" asp-for="IdComoFicouSabendo" asp-items="@(new SelectList(@Model.ComoFicouSabendo,"Id","Nome"))"></select>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-md-2 control-label">Está pago?</label>
                     <div class="col-md-4">
                         <input type="checkbox" asp-for="EstaPago" id="estaPago" />

@@ -1,4 +1,5 @@
 using System.Linq;
+using Amesc.Dominio;
 using Amesc.Dominio.Cursos;
 using Amesc.Dominio.Cursos.Turma;
 using Amesc.Dominio.Matriculas;
@@ -20,13 +21,15 @@ namespace Amesc.WebApp.Controllers
         private readonly ICursoAbertoRepositorio _cursoAbertoRepositorio;
         private readonly IPessoaRepositorio _pessoaRepositorio;
         private readonly IMatriculaRepositorio _matriculaRepositorio;
+        private readonly IRepositorio<ComoFicouSabendo> _comoFicouSabendoRepositorio;
 
         public MatriculasController(
             CriacaoDeMatricula criacaoDeMatricula, 
             AlteracaoDeDadosDaMatricula alteracaoDeDadosDaMatricula,
             CanceladorDeMatricula canceladorDeMatricula,
             ICursoAbertoRepositorio cursoAbertoRepositorio, 
-            IPessoaRepositorio pessoaRepositorio, IMatriculaRepositorio matriculaRepositorio)
+            IPessoaRepositorio pessoaRepositorio, IMatriculaRepositorio matriculaRepositorio, 
+            IRepositorio<ComoFicouSabendo> comoFicouSabendoRepositorio)
         {
             _criacaoDeMatricula = criacaoDeMatricula;
             _alteracaoDeDadosDaMatricula = alteracaoDeDadosDaMatricula;
@@ -34,6 +37,7 @@ namespace Amesc.WebApp.Controllers
             _cursoAbertoRepositorio = cursoAbertoRepositorio;
             _pessoaRepositorio = pessoaRepositorio;
             _matriculaRepositorio = matriculaRepositorio;
+            _comoFicouSabendoRepositorio = comoFicouSabendoRepositorio;
         }
 
         public IActionResult Index()
@@ -61,10 +65,14 @@ namespace Amesc.WebApp.Controllers
             var cursoAbertos = _cursoAbertoRepositorio.Consultar();
             var cursosAbertosViewModel = cursoAbertos.Select(c => new CursoAbertoParaCadastroViewModel(c)).ToList();
 
+            var comoFicouSabendo = _comoFicouSabendoRepositorio.Consultar();
+            var comoFicouSabendoViewModel = comoFicouSabendo.OrderBy(i => i.Nome).Select(i => new InstrutorParaListaViewModel { Id = i.Id, Nome = i.Nome }).ToList();
+
             var model = new MatriculaParaCadastroViewModel
             {
                 Alunos = alunosViewModel.OrderBy(a => a.Nome),
-                CursosAbertos = cursosAbertosViewModel.OrderBy(c => c.NomeCurso)
+                CursosAbertos = cursosAbertosViewModel.OrderBy(c => c.NomeCurso),
+                ComoFicouSabendo = comoFicouSabendoViewModel
             };
 
             return View(model);
@@ -73,7 +81,7 @@ namespace Amesc.WebApp.Controllers
         [HttpPost]
         public IActionResult Novo(MatriculaParaCadastroViewModel model)
         {
-            _criacaoDeMatricula.Criar(model.IdCursoAberto, model.IdAluno, model.EstaPago, model.ValorPago);
+            _criacaoDeMatricula.Criar(model.IdCursoAberto, model.IdAluno, model.EstaPago, model.ValorPago, model.IdComoFicouSabendo);
 
             return Ok();
         }

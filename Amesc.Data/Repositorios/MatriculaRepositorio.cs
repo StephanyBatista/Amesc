@@ -18,6 +18,7 @@ namespace Amesc.Data.Repositorios
                 .Include(p => p.Pessoa)
                 .Include(p => p.CursoAberto)
                 .Include(p => p.CursoAberto.Curso)
+                .Include(p => p.ComoFicouSabendo)
                 .Where(entidade => entidade.Id == id);
             return query.Any() ? query.First() : null;
         }

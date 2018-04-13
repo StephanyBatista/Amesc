@@ -1,5 +1,6 @@
 ﻿using System;
 using Amesc.Dominio.Cursos;
+using Amesc.Dominio.Cursos.Turma;
 using Amesc.Dominio.Pessoas;
 using Amesc.Dominio._Base;
 
@@ -24,10 +25,12 @@ namespace Amesc.Dominio.Matriculas
         public bool Ip { get; private set; }
         public decimal? ValorPago { get; private set; }
         public bool Cancelada { get; private set; }
+        public ComoFicouSabendo ComoFicouSabendo { get; set; }
 
         public Matricula() { }
 
-        public Matricula(CursoAberto cursoAberto, Pessoa pessoa, bool estaPago, decimal valorPago)
+        public Matricula(CursoAberto cursoAberto, Pessoa pessoa, bool estaPago, decimal valorPago,
+            ComoFicouSabendo comoFicouSabendo)
         {
             ExcecaoDeDominio.Quando(cursoAberto == null, "Curso é obrigatório");
             ExcecaoDeDominio.Quando(pessoa == null, "Aluno é obrigatório");
@@ -39,6 +42,7 @@ namespace Amesc.Dominio.Matriculas
             DataDeCriacao = DateTime.Now;
             if(valorPago > 0)
                 ValorPago = valorPago;
+            ComoFicouSabendo = comoFicouSabendo;
         }
 
         public void AdicionarObservacao(string observacao)
