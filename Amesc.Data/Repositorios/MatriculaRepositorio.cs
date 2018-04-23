@@ -51,5 +51,16 @@ namespace Amesc.Data.Repositorios
                 
             return query.Any() ? query.OrderBy(m => m.DataDeCriacao).ToList() : new List<Matricula>();
         }
+
+        public List<Matricula> ConsultarTodosAlunosPor(int turmaId)
+        {
+            return Context.Set<Matricula>()
+                .Where(m => m.CursoAberto.Id == turmaId)
+                .Include(p => p.Pessoa)
+                .ThenInclude(p => p.Endereco)
+                .Include(p => p.CursoAberto)
+                .Include(p => p.CursoAberto.Curso)
+                .ToList();
+        }
     }
 }
