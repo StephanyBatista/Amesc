@@ -53,7 +53,7 @@ namespace Amesc.Dominio.Matriculas
 
         public void AdicionarNotaDoAlunoNoCurso(float notaDoAlunoNoCurso, StatusDaAprovacaoDaMatricula status)
         {
-            ExcecaoDeDominio.Quando(notaDoAlunoNoCurso < 1 || notaDoAlunoNoCurso > 10, "Nota do aluno no curso é inválido");
+            ExcecaoDeDominio.Quando(notaDoAlunoNoCurso < 1 || notaDoAlunoNoCurso > 100, "Nota do aluno no curso é inválido");
             ExcecaoDeDominio.Quando(status == StatusDaAprovacaoDaMatricula.Nenhum, "Status da aprovação é inválido");
             NotaDoAlunoNoCurso = notaDoAlunoNoCurso;
             StatusDaAprovacao = status;

@@ -25,7 +25,7 @@ namespace Amesc.WebApp.Views
             Telefone = pessoa.Telefone;
             OrgaoEmissor = pessoa.OrgaoEmissorDoRg;
             RG = pessoa.Rg;
-            DataDeNascimento = pessoa.DataDeNascimento.ToString("dd/mm/yyyy");
+            DataDeNascimento = pessoa.DataDeNascimento.ToString("dd/MM/yyyy");
             RegistroProfissional = pessoa.RegistroProfissional;
             Especialidade = pessoa.Especialidade;
         }

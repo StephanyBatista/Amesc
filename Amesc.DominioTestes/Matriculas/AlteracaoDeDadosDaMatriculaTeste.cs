@@ -13,7 +13,7 @@ namespace Amesc.DominioTestes.Matriculas
         private bool _ip;
         private int _idMatricula;
         private string _observacao;
-        private float? _notaDoAlunoNoCurso;
+        private string _notaDoAlunoNoCursoEmString;
         private string _statusDaAprovacao;
         private Matricula _matricula;
         private Mock<IRepositorio<Matricula>> _matriculaRepositorio;
@@ -37,7 +37,7 @@ namespace Amesc.DominioTestes.Matriculas
             const int idMatriculaInvalida = 999;
 
             var message = Assert.ThrowsException<ExcecaoDeDominio>(() =>
-                _alteracaoDeDadosDaMatricula.Alterar(idMatriculaInvalida, _observacao, _notaDoAlunoNoCurso, _statusDaAprovacao, _ip))
+                _alteracaoDeDadosDaMatricula.Alterar(idMatriculaInvalida, _observacao, _notaDoAlunoNoCursoEmString, _statusDaAprovacao, _ip))
                 .Message.StartsWith("Matricula não encontrada");
         }
 
@@ -46,7 +46,7 @@ namespace Amesc.DominioTestes.Matriculas
         {
             _observacao = "Observação";
 
-            _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, _observacao, _notaDoAlunoNoCurso, _statusDaAprovacao, _ip);
+            _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, _observacao, _notaDoAlunoNoCursoEmString, _statusDaAprovacao, _ip);
 
             Assert.AreEqual(_observacao, _matricula.Observacao);
         }
@@ -54,7 +54,7 @@ namespace Amesc.DominioTestes.Matriculas
         [TestMethod]
         public void DeveInformarQueAlunoTemPotencialParaSerInstrutor()
         {
-            _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, _observacao, _notaDoAlunoNoCurso, _statusDaAprovacao, _ip);
+            _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, _observacao, _notaDoAlunoNoCursoEmString, _statusDaAprovacao, _ip);
 
             Assert.AreEqual(_ip, _matricula.Ip);
         }
@@ -62,17 +62,17 @@ namespace Amesc.DominioTestes.Matriculas
         [TestMethod]
         public void NaoDeveAlterarObservacaoQuandoNaoExistirInformacao()
         {
-            _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, null, _notaDoAlunoNoCurso, _statusDaAprovacao, _ip);
+            _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, null, _notaDoAlunoNoCursoEmString, _statusDaAprovacao, _ip);
         }
 
         [TestMethod]
         public void DeveAlterarNotaDoAlunoEStatusDaAprovacaoNoCursoQuandoExistirInformacao()
         {
-            _notaDoAlunoNoCurso = 7;
+            _notaDoAlunoNoCursoEmString = "7";
 
-            _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, null, _notaDoAlunoNoCurso, "Reprovado", _ip);
+            _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, null, _notaDoAlunoNoCursoEmString, "Reprovado", _ip);
 
-            Assert.AreEqual(_notaDoAlunoNoCurso, _matricula.NotaDoAlunoNoCurso);
+            Assert.AreEqual(float.Parse(_notaDoAlunoNoCursoEmString), _matricula.NotaDoAlunoNoCurso);
             Assert.AreEqual(StatusDaAprovacaoDaMatricula.Reprovado, _matricula.StatusDaAprovacao);
         }
 
@@ -85,7 +85,7 @@ namespace Amesc.DominioTestes.Matriculas
         [TestMethod]
         public void NaoDeveAlterarNotaDoAlunoEStatusDaAprovacaoNoCursoQuandoStatusEhInvalido()
         {
-            Assert.ThrowsException<ExcecaoDeDominio>(() => _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, null, 7, "STATUS_INVALIDO", _ip))
+            Assert.ThrowsException<ExcecaoDeDominio>(() => _alteracaoDeDadosDaMatricula.Alterar(_idMatricula, null, "7", "STATUS_INVALIDO", _ip))
                 .Message.StartsWith("Status da aprovação é inválido");
         }
     }

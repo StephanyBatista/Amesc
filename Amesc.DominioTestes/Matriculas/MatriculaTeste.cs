@@ -99,7 +99,7 @@ namespace Amesc.DominioTestes.Matriculas
         [TestMethod]
         public void DevePoderAdicionarNotaDoAlunoNoCursoESeAprovado()
         {
-            const float notaDoAlunoNoCurso = 7.5f;
+            const float notaDoAlunoNoCurso = 97.50f;
             var matricula = FluentBuilder<Matricula>.New().Build();
 
             matricula.AdicionarNotaDoAlunoNoCurso(notaDoAlunoNoCurso, StatusDaAprovacaoDaMatricula.Aprovado);
@@ -116,7 +116,7 @@ namespace Amesc.DominioTestes.Matriculas
             var message0 = Assert.ThrowsException<ExcecaoDeDominio>(() => matricula.AdicionarNotaDoAlunoNoCurso(0, StatusDaAprovacaoDaMatricula.Aprovado)).Message;
             Assert.AreEqual("Nota do aluno no curso é inválido", message0);
 
-            var message11 = Assert.ThrowsException<ExcecaoDeDominio>(() => matricula.AdicionarNotaDoAlunoNoCurso(11, StatusDaAprovacaoDaMatricula.Aprovado)).Message;
+            var message11 = Assert.ThrowsException<ExcecaoDeDominio>(() => matricula.AdicionarNotaDoAlunoNoCurso(101, StatusDaAprovacaoDaMatricula.Aprovado)).Message;
             Assert.AreEqual("Nota do aluno no curso é inválido", message11);
         }
 

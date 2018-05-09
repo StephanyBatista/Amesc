@@ -11,7 +11,7 @@ namespace Amesc.WebApp.ViewModels
         public bool EstaPago { get; set; }
         public string ValorPago { get; set; }
         public string Observacao { get; set; }
-        public float? NotaDoAlunoNoCurso { get; set; }
+        public string NotaDoAlunoNoCurso { get; set; }
         public string StatusDaAprovacao { get; set; }
         public bool Ip { get; set; }
         public bool Cancelada { get; set; }
@@ -27,7 +27,7 @@ namespace Amesc.WebApp.ViewModels
             DataDoCurso = entidade.CursoAberto.InicioDoCurso.ToString("dd/MM/yyyy");
             EstaPago = entidade.EstaPago;
             ValorPago = entidade.ValorPago.ToString();
-            NotaDoAlunoNoCurso = entidade.NotaDoAlunoNoCurso;
+            NotaDoAlunoNoCurso = entidade.NotaDoAlunoNoCurso.ToString();
             StatusDaAprovacao = entidade.StatusDaAprovacao.ToString();
             Ip = entidade.Ip;
             Observacao = entidade.Observacao;

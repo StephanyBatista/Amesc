@@ -16,13 +16,13 @@ using NPOI.XSSF.UserModel;
 
 namespace Amesc.WebApp.Controllers
 {
-    public class RelatorioDeDadosDoAlunoPorTurmaController : Controller
+    public class RelatorioAlunoPorTurmaController : Controller
     {
         private readonly ICursoAbertoRepositorio _cursoAbertoRepositorio;
         private readonly IMatriculaRepositorio _matriculaRepositorio;
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public RelatorioDeDadosDoAlunoPorTurmaController(
+        public RelatorioAlunoPorTurmaController(
             ICursoAbertoRepositorio cursoAbertoRepositorio, 
             IMatriculaRepositorio matriculaRepositorio, 
             IHostingEnvironment hostingEnvironment)
@@ -47,7 +47,7 @@ namespace Amesc.WebApp.Controllers
         public async Task<IActionResult> GerarExcel(IEnumerable<RelatorioDeDadosDoAlunoPorTurmaViewModel> alunos)
         {
             var sWebRootFolder = _hostingEnvironment.WebRootPath;
-            var sFileName = $"dados_por_turma_{DateTime.Now:dd_MM_YYY_ss}.xlsx";
+            var sFileName = $"dados_por_turma_{DateTime.Now:dd_MM_YYYY_ss}.xlsx";
             var memory = new MemoryStream();
 
             using (var fs = new FileStream(Path.Combine(sWebRootFolder, sFileName), FileMode.Create, FileAccess.Write))

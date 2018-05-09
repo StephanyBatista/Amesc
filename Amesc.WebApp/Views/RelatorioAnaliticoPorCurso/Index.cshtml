@@ -1,0 +1,179 @@
+﻿@model Amesc.Dominio._Consultas.DadosAnaliticosPorCurso
+@{
+    ViewData["Title"] = "Alunos";
+}
+
+<div id="pad-wrapper">
+
+    <div class="row header">
+        <div class="col-md-8">
+            <h3>Relatório analítico por curso</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Index" method="get">
+                <div class="form-group">
+                    <label class="col-md-1 control-label">Curso</label>
+                    <div class="col-md-3">
+                        <select class="form-control"
+                                name="cursoId"
+                                asp-items="@ViewBag.Cursos"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-1">
+                        <button class="btn btn-success">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <canvas id="aprovacao"></canvas>
+        </div>
+        <div class="col-md-4">
+            <canvas id="publico"></canvas>
+        </div>
+        <div class="col-md-4">
+            <canvas id="cidade"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script src="https://codepen.io/anon/pen/aWapBE.js"></script>
+
+    <script type="text/javascript">
+
+        $(function() {
+
+            carregarGraficoDeAprovacao();
+            carregarGraficoDePublico();
+            carregarGraficoDeCidade();
+        });
+
+        function carregarGraficoDeAprovacao() {
+
+            const aprovacaoQuantidade = [];
+            const aprovacaoNome = [];
+
+            @if (Model != null &&
+                 Model.AprovacaoPorCurso != null)
+            {
+                @:aprovacaoQuantidade.push(@Model?.AprovacaoPorCurso?.QuantidadeDeAprovados);
+                @:aprovacaoNome.push('Aprovados');
+                @:aprovacaoQuantidade.push(@Model?.AprovacaoPorCurso?.QuantidadeDeReprovados);
+                @:aprovacaoNome.push('Reprovados');
+                @:aprovacaoQuantidade.push(@Model?.AprovacaoPorCurso?.QuantidadeDeSemNotas);
+                @:aprovacaoNome.push('Sem notas');
+            }
+
+            const configDeAprovacao = {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: aprovacaoQuantidade,
+                        backgroundColor: palette('tol', aprovacaoQuantidade.length).map(function (hex) {
+                            return '#' + hex;
+                        }),
+                        label: 'Dataset 1'
+                    }],
+                    labels: aprovacaoNome
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Aprovações'
+                    }
+                }
+            };
+
+            const ctxDeAprovacao = document.getElementById('aprovacao').getContext('2d');
+            new Chart(ctxDeAprovacao, configDeAprovacao);
+        }
+
+        function carregarGraficoDePublico() {
+            const publicosQuantidade = [];
+            const publicosNome = [];
+
+            @if (Model != null)
+            {
+                foreach (var publico in Model.PublicoAlvoPorCursos)
+                {
+                    @:publicosQuantidade.push(@publico.Quantidade);
+                    @:publicosNome.push('@Html.Raw(publico.Nome)');
+                }
+            }
+
+            const configDePublico = {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: publicosQuantidade,
+                        backgroundColor: palette('tol', publicosQuantidade.length).map(function(hex) {
+                            return '#' + hex;
+                        }),
+                        label: 'Dataset 1'
+                    }],
+                    labels: publicosNome
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Publicos'
+                    },
+                }
+            };
+
+            const ctxDePublico = document.getElementById('publico').getContext('2d');
+            window.myPie = new Chart(ctxDePublico, configDePublico);
+        }
+
+        function carregarGraficoDeCidade() {
+            const cidadesQuantidade = [];
+            const cidadesNome = [];
+
+            @if (Model != null)
+            {
+                foreach (var cidade in Model.CidadesDosAlunosPorCursos)
+                {
+                    @:cidadesQuantidade.push(@cidade.Quantidade);
+                    @:cidadesNome.push('@Html.Raw(cidade.Nome)');
+                }
+            }
+
+            const configDePublico = {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: cidadesQuantidade,
+                        backgroundColor: palette('tol', cidadesQuantidade.length).map(function (hex) {
+                            return '#' + hex;
+                        }),
+                        label: 'Dataset 1'
+                    }],
+                    labels: cidadesNome
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Cidades'
+                    },
+                }
+            };
+
+            const ctxDePublico = document.getElementById('cidade').getContext('2d');
+            window.myPie = new Chart(ctxDePublico, configDePublico);
+        }
+
+    </script>
+}
+
+
+

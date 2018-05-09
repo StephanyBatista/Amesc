@@ -16,7 +16,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using Amesc.Data.Consultas;
 using Amesc.Dominio.Pessoas;
+using Amesc.Dominio._Consultas;
 
 namespace Amesc.WebApp
 {
@@ -58,6 +60,7 @@ namespace Amesc.WebApp
             services.AddScoped(typeof(ICursoAbertoRepositorio), typeof(CursoAbertoRepositorio));
             services.AddScoped(typeof(IMatriculaRepositorio), typeof(MatriculaRepositorio));
             services.AddScoped(typeof(IAutenticacao), typeof(Autenticacao));
+            services.AddScoped(typeof(IDadosAnaliticosPorCursoConsulta), typeof(DadosAnaliticosPorCursoConsulta));
             services.AddScoped(typeof(ArmazenadorDePessoa));
             services.AddScoped(typeof(CanceladorDeMatricula));
             services.AddScoped(typeof(ArmazenadorDeCurso));

@@ -15,7 +15,7 @@ namespace Amesc.Dominio.Matriculas
         public void Alterar(
             int idMatricula, 
             string observacao, 
-            float? notaDoAlunoNoCurso, 
+            string notaDoAlunoNoCursoEmString, 
             string statusDaAprovacaoEmString, 
             bool ip)
         {
@@ -25,10 +25,10 @@ namespace Amesc.Dominio.Matriculas
             if(!string.IsNullOrEmpty(observacao))
                 matricula.AdicionarObservacao(observacao);
             
-            if(notaDoAlunoNoCurso.HasValue)
+            if(!string.IsNullOrEmpty(notaDoAlunoNoCursoEmString) && float.TryParse(notaDoAlunoNoCursoEmString, out float notaDoAluno))
             {
                 ExcecaoDeDominio.Quando(!Enum.TryParse(statusDaAprovacaoEmString, out StatusDaAprovacaoDaMatricula status), "Status da aprovação é inválido");
-                matricula.AdicionarNotaDoAlunoNoCurso(notaDoAlunoNoCurso.Value, status);
+                matricula.AdicionarNotaDoAlunoNoCurso(notaDoAluno, status);
             }
 
             matricula.EhInstrutorEmPotencial(ip);
