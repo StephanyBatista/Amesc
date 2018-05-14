@@ -32,7 +32,7 @@ namespace Amesc.Data.Repositorios
             return query.Any() ? query.OrderBy(m => m.DataDeCriacao).ToList() : new List<Matricula>();
         }
 
-        public List<Matricula> ConsultarPor(string nomeDoAluno, string nomeDoCurso, bool pago, bool validadeExpirada)
+        public List<Matricula> ConsultarPor(string nomeDoAluno, int? turmaId, bool cancelada, bool pago, bool validadeExpirada)
         {
             var select = Context.Set<Matricula>()
                 .Include(p => p.Pessoa)
@@ -43,19 +43,21 @@ namespace Amesc.Data.Repositorios
             if(!string.IsNullOrEmpty(nomeDoAluno))
                 query = query.Where(p => p.Pessoa.Nome.Contains(nomeDoAluno));
             
-            if(!string.IsNullOrEmpty(nomeDoCurso))
-                query = query.Where(p => p.CursoAberto.Curso.Nome.Contains(nomeDoCurso));
+            if(turmaId.HasValue)
+                query = query.Where(p => p.CursoAberto.Id == turmaId.Value);
 
             if(!pago)
                 query = query.Where(p => p.EstaPago);
-                
+
+            query = cancelada ? query.Where(p => p.Cancelada) : query.Where(p => !p.Cancelada);
+
             return query.Any() ? query.OrderBy(m => m.DataDeCriacao).ToList() : new List<Matricula>();
         }
 
-        public List<Matricula> ConsultarTodosAlunosPor(int turmaId)
+        public List<Matricula> ConsultarTodosAlunosPor(int turmaId, int ano)
         {
             return Context.Set<Matricula>()
-                .Where(m => m.CursoAberto.Id == turmaId)
+                .Where(m => m.CursoAberto.Id == turmaId && m.DataDeCriacao.Year == ano)
                 .Include(p => p.Pessoa)
                 .ThenInclude(p => p.Endereco)
                 .Include(p => p.CursoAberto)

@@ -22,7 +22,7 @@ namespace Amesc.WebApp.Controllers
             _cursoRepositorio = cursoRepositorio;
         }
 
-        public async Task<IActionResult> Index(int? cursoId)
+        public async Task<IActionResult> Index(int? cursoId, int? ano)
         {
             var cursos = _cursoRepositorio.Consultar();
             ViewBag.Cursos = cursos.Select(c => new SelectListItem
@@ -32,10 +32,17 @@ namespace Amesc.WebApp.Controllers
                 Selected = cursoId.HasValue && c.Id == cursoId.Value
             }).ToList();
 
+            ViewBag.Anos = new List<int> { 2017, 2018, 2019, 2020 }.Select(c => new SelectListItem
+            {
+                Value = c.ToString(),
+                Text = c.ToString(),
+                Selected = ano == c
+            }).ToList();
+
             if (!cursoId.HasValue)
                 return View(null);
 
-            var consulta = await _dadosAnaliticosPorCursoConsulta.Consultar(cursoId.Value);
+            var consulta = await _dadosAnaliticosPorCursoConsulta.Consultar(cursoId.Value, ano.Value);
             return View(consulta);
         }
     }

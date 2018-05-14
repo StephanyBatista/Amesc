@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Amesc.Dominio;
 using Amesc.Dominio.Cursos;
@@ -9,6 +10,7 @@ using Amesc.WebApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Amesc.WebApp.Controllers
 {
@@ -40,15 +42,27 @@ namespace Amesc.WebApp.Controllers
             _comoFicouSabendoRepositorio = comoFicouSabendoRepositorio;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string nomeDoAluno, int? turmaId, bool? cancelado, bool? pago, bool? expirado)
         {
-            var somenteMatriculasPagas = string.IsNullOrEmpty(Request.Query["naopago"]);
-            var validadeDoCursoExpirada = !string.IsNullOrEmpty(Request.Query["expirado"]);
+            var cursoAbertos = _cursoAbertoRepositorio.Consultar();
+            ViewBag.Turmas = cursoAbertos.Select(c => new SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = $"{c.Curso.Nome} - {c.InicioDoCurso:dd/MM/yyyy}",
+                Selected = turmaId.HasValue && c.Id == turmaId.Value
+            }).ToList();
+
+            ((List<SelectListItem>)ViewBag.Turmas).Insert(0, new SelectListItem { Value = "", Text = ""});
+
+            var somenteCanceladas = cancelado.HasValue && cancelado.Value;
+            var somenteMatriculasPagas = pago.HasValue && pago.Value;
+            var validadeDoCursoExpirada = expirado.HasValue && expirado.Value;
             
             var matriculas = _matriculaRepositorio
                 .ConsultarPor(
-                    Request.Query["aluno"], 
-                    Request.Query["curso"], 
+                    nomeDoAluno,
+                    turmaId,
+                    somenteCanceladas,
                     somenteMatriculasPagas, 
                     validadeDoCursoExpirada);
 

@@ -4,14 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Amesc.Dominio.Cursos;
-using Amesc.Dominio.Cursos.Turma;
 using Amesc.Dominio.Matriculas;
 using Amesc.WebApp.Views;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using NPOI.SS.Formula.Functions;
-using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 
 namespace Amesc.WebApp.Controllers
@@ -32,11 +29,26 @@ namespace Amesc.WebApp.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public async Task<IActionResult> Index(int? turmaId, bool? gerarEmExcel)
+        public async Task<IActionResult> Index(int? turmaId, int? ano, bool? gerarEmExcel)
         {
             ViewBag.TurmaSelecionada = turmaId;
 
-            var alunos = BuscarRelatorio(turmaId);
+            var cursoAbertos = _cursoAbertoRepositorio.Consultar();
+            ViewBag.Turmas = cursoAbertos.Select(c => new SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = $"{c.Curso.Nome} - {c.InicioDoCurso:dd/MM/yyyy}",
+                Selected = c.Id == turmaId
+            }).ToList();
+
+            ViewBag.Anos = new List<int> { 2017, 2018, 2019, 2020 }.Select(c => new SelectListItem
+            {
+                Value = c.ToString(),
+                Text = c.ToString(),
+                Selected = ano == c
+            }).ToList();
+
+            var alunos = BuscarRelatorio(turmaId, ano);
 
             if (gerarEmExcel.HasValue && gerarEmExcel.Value)
                 return await GerarExcel(alunos);
@@ -97,21 +109,13 @@ namespace Amesc.WebApp.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
         }
 
-        private List<RelatorioDeDadosDoAlunoPorTurmaViewModel> BuscarRelatorio(int? turmaId)
+        private List<RelatorioDeDadosDoAlunoPorTurmaViewModel> BuscarRelatorio(int? turmaId, int? ano)
         {
-            var cursoAbertos = _cursoAbertoRepositorio.Consultar();
-            ViewBag.Turmas = cursoAbertos.Select(c => new SelectListItem
-            {
-                Value = c.Id.ToString(),
-                Text = $"{c.Curso.Nome} - {c.InicioDoCurso:dd/MM/yyyy}",
-                Selected = c.Id == turmaId
-            }).ToList();
-
             var alunos = new List<RelatorioDeDadosDoAlunoPorTurmaViewModel>();
 
             if (turmaId.HasValue)
             {
-                var matriculas = _matriculaRepositorio.ConsultarTodosAlunosPor(turmaId.Value);
+                var matriculas = _matriculaRepositorio.ConsultarTodosAlunosPor(turmaId.Value, ano.Value);
                 alunos = matriculas.Select(m => new RelatorioDeDadosDoAlunoPorTurmaViewModel(m.Pessoa)).ToList();
             }
 

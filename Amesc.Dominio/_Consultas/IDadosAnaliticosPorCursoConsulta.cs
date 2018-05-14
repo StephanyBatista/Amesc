@@ -4,6 +4,6 @@ namespace Amesc.Dominio._Consultas
 {
     public interface IDadosAnaliticosPorCursoConsulta
     {
-        Task<DadosAnaliticosPorCurso> Consultar(int cursoId);
+        Task<DadosAnaliticosPorCurso> Consultar(int cursoId, int ano);
     }
 }

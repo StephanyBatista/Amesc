@@ -18,7 +18,7 @@ namespace Amesc.Data.Consultas
             _context = context;
         }
 
-        public async Task<DadosAnaliticosPorCurso> Consultar(int cursoId)
+        public async Task<DadosAnaliticosPorCurso> Consultar(int cursoId, int ano)
         {
             var dadosAnaliticosPorCurso = new DadosAnaliticosPorCurso();
             using (var connection = _context.Database.GetDbConnection())
@@ -28,9 +28,9 @@ namespace Amesc.Data.Consultas
                     await connection.OpenAsync();
                     using (var command = connection.CreateCommand())
                     {
-                        dadosAnaliticosPorCurso.AprovacaoPorCurso = await AprovacaoPorCurso(command, cursoId);
-                        dadosAnaliticosPorCurso.PublicoAlvoPorCursos = await PublicoAlvo(command, cursoId);
-                        dadosAnaliticosPorCurso.CidadesDosAlunosPorCursos = await CidadesDosAlunosPorCurso(command, cursoId);
+                        dadosAnaliticosPorCurso.AprovacaoPorCurso = await AprovacaoPorCurso(command, cursoId, ano);
+                        dadosAnaliticosPorCurso.PublicoAlvoPorCursos = await PublicoAlvo(command, cursoId, ano);
+                        dadosAnaliticosPorCurso.CidadesDosAlunosPorCursos = await CidadesDosAlunosPorCurso(command, cursoId, ano);
                     }
                 }
                 finally
@@ -42,15 +42,15 @@ namespace Amesc.Data.Consultas
             return dadosAnaliticosPorCurso;
         }
 
-        private async Task<AprovacaoPorCurso> AprovacaoPorCurso(DbCommand command, int cursoId)
+        private async Task<AprovacaoPorCurso> AprovacaoPorCurso(DbCommand command, int cursoId, int ano)
         {
             var query = 
                 $@"select
                     c.id,
                     c.nome,
-                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where StatusDaAprovacao = 1) as aprovados,
-                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where StatusDaAprovacao = 2) as reprovados,
-                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where StatusDaAprovacao = 0) as semNotas
+                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where StatusDaAprovacao = 1 and year(DataDeCriacao) = {ano}) as aprovados,
+                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where StatusDaAprovacao = 2 and year(DataDeCriacao) = {ano}) as reprovados,
+                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where StatusDaAprovacao = 0 and year(DataDeCriacao) = {ano}) as semNotas
                 FROM
                     Cursos c
                 WHERE c.Id = {cursoId}";
@@ -71,7 +71,7 @@ namespace Amesc.Data.Consultas
             }
         }
 
-        private async Task<List<PublicoAlvoPorCurso>> PublicoAlvo(DbCommand command, int cursoId)
+        private async Task<List<PublicoAlvoPorCurso>> PublicoAlvo(DbCommand command, int cursoId, int ano)
         {
             var publicoAlvosPorCurso = new List<PublicoAlvoPorCurso>();
 
@@ -96,7 +96,7 @@ namespace Amesc.Data.Consultas
                     on t.id = m.CursoAbertoId
                     inner join Pessoas p
                     on m.PessoaId = p.Id
-                WHERE c.Id = {cursoId}";
+                WHERE c.Id = {cursoId} and year(DataDeCriacao) = {ano}";
 
             command.CommandText = query;
             using (var reader = await command.ExecuteReaderAsync())
@@ -113,7 +113,7 @@ namespace Amesc.Data.Consultas
             return publicoAlvosPorCurso;
         }
 
-        private async Task<List<CidadesDosAlunosPorCurso>> CidadesDosAlunosPorCurso(DbCommand command, int cursoId)
+        private async Task<List<CidadesDosAlunosPorCurso>> CidadesDosAlunosPorCurso(DbCommand command, int cursoId, int ano)
         {
             var cidadesDosAlunosPorCursos = new List<CidadesDosAlunosPorCurso>();
 
@@ -138,7 +138,7 @@ namespace Amesc.Data.Consultas
                     on t.id = m.CursoAbertoId
                     inner join Pessoas p
                     on m.PessoaId = p.Id
-                WHERE c.Id = {cursoId}";
+                WHERE c.Id = {cursoId} and year(DataDeCriacao) = {ano}";
 
             command.CommandText = query;
             using (var reader = await command.ExecuteReaderAsync())

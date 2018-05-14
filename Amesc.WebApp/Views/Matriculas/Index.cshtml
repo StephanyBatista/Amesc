@@ -20,16 +20,48 @@
     <div class="row">
         <div class="col-md-12">
             <form asp-action="Index" method="get">
-                <div class="form-actions no-color">
-                    <p>
-                        <input type="text" name="aluno" placeholder="Aluno" class="form-control col-xs-12" />
-                        <input type="text" name="curso" placeholder="Curso" class="form-control col-xs-12"/>
-                        Não Pago? <input type="checkbox" name="naopago" value="sim"  />
-                        Validade expirada? <input type="checkbox" name="expirado" value="sim" />
-                        <input type="submit" value="Buscar" class="btn btn-default" /> |
-                        <a asp-action="Index">Remover filtro</a>
-                    </p>
+
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <input type="text" name="nomeDoAluno" placeholder="Aluno" class="form-control col-xs-12" />
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <select class="form-control"
+                                name="turmaId"
+                                asp-items="@ViewBag.Turmas">
+                            <options value=""></options>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2">
+                        Cancelado <input type="checkbox" name="cancelado" value="true" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-1">
+                        Pago <input type="checkbox" name="pago" value="true" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2">
+                        Expirado <input type="checkbox" name="expirado" value="true" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-8">
+                        <input type="submit" value="Buscar" class="btn btn-default" />
+                        <a asp-action="Index">Remover filtro</a>
+                    </div>
+                </div>
+                
             </form>
         </div>
     </div>
@@ -47,35 +79,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @item.Aluno
-                        </td>
-                        <td>
-                            @item.Cpf
-                        </td>
-                        <td>
-                            @item.Curso
-                        </td>
-                        <td>
-                            @item.DataDoCurso.ToString("dd/MM/yyyy")
-                        </td>
-                        <td>
-                            @item.EstaPago
-                        </td>
-                        <td>
-                            @item.Cancelada
-                        </td>
-                        <td>
-                            <a href="/Matriculas/Gerenciar/@item.Id" class="btn">Gerenciar</a>
-                        </td>
-                    </tr>   
-                }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Aluno
+                            </td>
+                            <td>
+                                @item.Cpf
+                            </td>
+                            <td>
+                                @item.Curso
+                            </td>
+                            <td>
+                                @item.DataDoCurso.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @item.EstaPago
+                            </td>
+                            <td>
+                                @item.Cancelada
+                            </td>
+                            <td>
+                                <a href="/Matriculas/Gerenciar/@item.Id" class="btn">Gerenciar</a>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
-            
+
             @{
                 var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
                 var nextDisabled = !Model.HasNextPage ? "disabled" : "";
@@ -83,17 +115,54 @@
 
             <a asp-action="Index"
                asp-route-page="@(Model.PageIndex - 1)"
-               class="btn btn-default @prevDisabled">
+               class="paginationPrev btn btn-default @prevDisabled">
                 Anterior
             </a>
             <a asp-action="Index"
                asp-route-page="@(Model.PageIndex + 1)"
-               class="btn btn-default @nextDisabled">
+               class="paginationNext btn btn-default @nextDisabled">
                 Próximo
             </a>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(function() {
+
+            let urlWithParameters = '';
+
+            if (getParameterByName('nomeDoAluno'))
+                urlWithParameters = '&nomeDoAluno=' + getParameterByName('nomeDoAluno');
+
+            if (getParameterByName('turmaId'))
+                urlWithParameters = '&turmaId=' + getParameterByName('turmaId');
+
+            if (getParameterByName('pago'))
+                urlWithParameters = '&pago=' + getParameterByName('pago');
+
+            if (getParameterByName('expirado'))
+                urlWithParameters = '&expirado=' + getParameterByName('expirado');
+
+            if (getParameterByName('cancelado'))
+                urlWithParameters = '&cancelado=' + getParameterByName('cancelado');
+
+            $('.paginationPrev').attr('href', $('.paginationPrev').attr('href') + urlWithParameters);
+            $('.paginationNext').attr('href', $('.paginationNext').attr('href') + urlWithParameters);
+        });
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+}
 
 
 
