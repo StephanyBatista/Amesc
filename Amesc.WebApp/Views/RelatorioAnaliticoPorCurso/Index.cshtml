@@ -34,13 +34,15 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <canvas id="aprovacao"></canvas>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <canvas id="publico"></canvas>
         </div>
-        <div class="col-md-4">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <canvas id="cidade"></canvas>
         </div>
     </div>
@@ -76,14 +78,19 @@
             }
 
             const configDeAprovacao = {
-                type: 'pie',
+                type: 'bar',
                 data: {
                     datasets: [{
                         data: aprovacaoQuantidade,
-                        backgroundColor: palette('tol', aprovacaoQuantidade.length).map(function (hex) {
-                            return '#' + hex;
-                        }),
-                        label: 'Dataset 1'
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        label: 'Quantidade'
                     }],
                     labels: aprovacaoNome
                 },
@@ -92,6 +99,9 @@
                     title: {
                         display: true,
                         text: 'Aprovações'
+                    },
+                    legend: {
+                        display: false,
                     }
                 }
             };
@@ -114,14 +124,20 @@
             }
 
             const configDePublico = {
-                type: 'pie',
+                type: 'bar',
                 data: {
                     datasets: [{
                         data: publicosQuantidade,
-                        backgroundColor: palette('tol', publicosQuantidade.length).map(function(hex) {
-                            return '#' + hex;
-                        }),
-                        label: 'Dataset 1'
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            
+                        ],
+                        label: 'Quantidade'
                     }],
                     labels: publicosNome
                 },
@@ -131,6 +147,9 @@
                         display: true,
                         text: 'Publicos'
                     },
+                    legend: {
+                        display: false,
+                    }
                 }
             };
 
@@ -152,14 +171,30 @@
             }
 
             const configDePublico = {
-                type: 'pie',
+                type: 'bar',
                 data: {
                     datasets: [{
                         data: cidadesQuantidade,
-                        backgroundColor: palette('tol', cidadesQuantidade.length).map(function (hex) {
-                            return '#' + hex;
-                        }),
-                        label: 'Dataset 1'
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            '##436EEE',
+                            '#27408B',
+                            '#1E90FF',
+                            '#5CACEE',
+                            '#00BFFF',
+                            '#6CA6CD',
+                            '#607B8B',
+                            '#E0FFFF',
+                            '#00868B',
+                            '#7FFFD4',
+                            '#00FF7F',
+                        ],
+                        label: 'Quantidade'
                     }],
                     labels: cidadesNome
                 },
@@ -169,6 +204,9 @@
                         display: true,
                         text: 'Cidades'
                     },
+                    legend: {
+                        display: false,
+                    }
                 }
             };
 
