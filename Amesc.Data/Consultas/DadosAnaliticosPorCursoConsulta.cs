@@ -46,9 +46,12 @@ namespace Amesc.Data.Consultas
                 $@"select
                     c.id,
                     c.nome,
-                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where StatusDaAprovacao = 1 and year(DataDeCriacao) = {ano}) as aprovados,
-                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where StatusDaAprovacao = 2 and year(DataDeCriacao) = {ano}) as reprovados,
-                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where StatusDaAprovacao = 0 and year(DataDeCriacao) = {ano}) as semNotas
+                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where 
+                        StatusDaAprovacao = 1 and year(DataDeCriacao) = {ano} and Cancelada = 0) as aprovados,
+                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id 
+                        where StatusDaAprovacao = 2 and year(DataDeCriacao) = {ano} and Cancelada = 0) as reprovados,
+                    (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id 
+                        where StatusDaAprovacao = 0 and year(DataDeCriacao) = {ano} and Cancelada = 0) as semNotas
                 FROM
                     Cursos c
                 WHERE c.Id = {cursoId}";
@@ -85,7 +88,7 @@ namespace Amesc.Data.Consultas
                         on m2.CursoAbertoId = t2.Id
                         inner join Pessoas p2
                         on m2.PessoaId = p2.Id
-                        where t2.CursoId = c.id and p2.TipoDePublico = p.TipoDePublico)
+                        where t2.CursoId = c.id and p2.TipoDePublico = p.TipoDePublico and Cancelada = 0)
                 FROM
                     Cursos c
                     inner join CursosAbertos t
@@ -136,7 +139,7 @@ namespace Amesc.Data.Consultas
                     on t.id = m.CursoAbertoId
                     inner join Pessoas p
                     on m.PessoaId = p.Id
-                WHERE c.Id = {cursoId} and year(DataDeCriacao) = {ano}";
+                WHERE c.Id = {cursoId} and year(DataDeCriacao) = {ano} and Cancelada = 0";
 
             command.CommandText = query;
             using (var reader = await command.ExecuteReaderAsync())

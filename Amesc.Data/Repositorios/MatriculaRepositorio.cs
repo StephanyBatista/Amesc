@@ -57,7 +57,7 @@ namespace Amesc.Data.Repositorios
         public List<Matricula> ConsultarTodosAlunosPor(int turmaId, int ano)
         {
             return Context.Set<Matricula>()
-                .Where(m => m.CursoAberto.Id == turmaId && m.DataDeCriacao.Year == ano)
+                .Where(m => m.CursoAberto.Id == turmaId && m.DataDeCriacao.Year == ano && !m.Cancelada)
                 .Include(p => p.Pessoa)
                 .ThenInclude(p => p.Endereco)
                 .Include(p => p.CursoAberto)

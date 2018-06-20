@@ -81,19 +81,10 @@ namespace Amesc.WebApp
         {
             app.Use(async (context, next) =>
             {
-                //Request
-                try
-                {
-                    await next.Invoke();
-
-                    var applicationDbContext = (ApplicationDbContext)context.RequestServices.GetService(typeof(ApplicationDbContext));
-                    //Response
-                    await applicationDbContext.Commit();
-                }
-                catch(Exception ex)
-                {
-
-                }
+                await next.Invoke();
+                var applicationDbContext = (ApplicationDbContext)context.RequestServices.GetService(typeof(ApplicationDbContext));
+                //Response
+                await applicationDbContext.Commit();
                 
             });
 
