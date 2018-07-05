@@ -47,11 +47,11 @@ namespace Amesc.Data.Consultas
                     c.id,
                     c.nome,
                     (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id where 
-                        StatusDaAprovacao = 1 and year(DataDeCriacao) = {ano} and Cancelada = 0) as aprovados,
+                        StatusDaAprovacao = 1 and year(InicioDoCurso) = {ano} and Cancelada = 0) as aprovados,
                     (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id 
-                        where StatusDaAprovacao = 2 and year(DataDeCriacao) = {ano} and Cancelada = 0) as reprovados,
+                        where StatusDaAprovacao = 2 and year(InicioDoCurso) = {ano} and Cancelada = 0) as reprovados,
                     (select count(*) from matriculas m inner join CursosAbertos t on m.CursoAbertoId = t.id and t.CursoId = c.id 
-                        where StatusDaAprovacao = 0 and year(DataDeCriacao) = {ano} and Cancelada = 0) as semNotas
+                        where StatusDaAprovacao = 0 and year(InicioDoCurso) = {ano} and Cancelada = 0) as semNotas
                 FROM
                     Cursos c
                 WHERE c.Id = {cursoId}";
@@ -97,7 +97,7 @@ namespace Amesc.Data.Consultas
                     on t.id = m.CursoAbertoId
                     inner join Pessoas p
                     on m.PessoaId = p.Id
-                WHERE c.Id = {cursoId} and year(DataDeCriacao) = {ano}";
+                WHERE c.Id = {cursoId} and year(InicioDoCurso) = {ano}";
 
             command.CommandText = query;
             using (var reader = await command.ExecuteReaderAsync())
@@ -139,7 +139,7 @@ namespace Amesc.Data.Consultas
                     on t.id = m.CursoAbertoId
                     inner join Pessoas p
                     on m.PessoaId = p.Id
-                WHERE c.Id = {cursoId} and year(DataDeCriacao) = {ano} and Cancelada = 0";
+                WHERE c.Id = {cursoId} and year(InicioDoCurso) = {ano} and Cancelada = 0";
 
             command.CommandText = query;
             using (var reader = await command.ExecuteReaderAsync())
