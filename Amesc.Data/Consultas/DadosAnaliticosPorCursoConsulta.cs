@@ -97,7 +97,7 @@ namespace Amesc.Data.Consultas
                     on t.id = m.CursoAbertoId
                     inner join Pessoas p
                     on m.PessoaId = p.Id
-                WHERE c.Id = {cursoId} and year(InicioDoCurso) = {ano}";
+                WHERE c.Id = {cursoId} and year(InicioDoCurso) = {ano} and Cancelada = 0";
 
             command.CommandText = query;
             using (var reader = await command.ExecuteReaderAsync())
@@ -130,7 +130,7 @@ namespace Amesc.Data.Consultas
                     on m2.CursoAbertoId = t2.Id
                     inner join Pessoas p2
                     on m2.PessoaId = p2.Id
-                    where t2.CursoId = c.id and p2.Endereco_Cidade = p.Endereco_Cidade)
+                    where t2.CursoId = c.id and p2.Endereco_Cidade = p.Endereco_Cidade and Cancelada = 0)
                 FROM
                     Cursos c
                     inner join CursosAbertos t
