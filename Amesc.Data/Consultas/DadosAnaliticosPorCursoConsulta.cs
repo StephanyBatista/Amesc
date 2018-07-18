@@ -88,7 +88,7 @@ namespace Amesc.Data.Consultas
                         on m2.CursoAbertoId = t2.Id
                         inner join Pessoas p2
                         on m2.PessoaId = p2.Id
-                        where t2.CursoId = c.id and p2.TipoDePublico = p.TipoDePublico and Cancelada = 0)
+                        where t2.CursoId = c.id and p2.TipoDePublico = p.TipoDePublico and Cancelada = 0 and year(InicioDoCurso) = {ano})
                 FROM
                     Cursos c
                     inner join CursosAbertos t
@@ -125,12 +125,12 @@ namespace Amesc.Data.Consultas
                     c.nome,
                     p.Endereco_Cidade,
                     (select count(*)
-                    from Matriculas m2
-                    inner join CursosAbertos t2
-                    on m2.CursoAbertoId = t2.Id
-                    inner join Pessoas p2
-                    on m2.PessoaId = p2.Id
-                    where t2.CursoId = c.id and p2.Endereco_Cidade = p.Endereco_Cidade and Cancelada = 0)
+                        from Matriculas m2
+                        inner join CursosAbertos t2
+                        on m2.CursoAbertoId = t2.Id
+                        inner join Pessoas p2
+                        on m2.PessoaId = p2.Id
+                        where t2.CursoId = c.id and p2.Endereco_Cidade = p.Endereco_Cidade and Cancelada = 0 and year(InicioDoCurso) = {ano})
                 FROM
                     Cursos c
                     inner join CursosAbertos t
