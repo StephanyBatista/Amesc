@@ -54,10 +54,10 @@ namespace Amesc.Data.Repositorios
             return query.Any() ? query.OrderBy(m => m.DataDeCriacao).ToList() : new List<Matricula>();
         }
 
-        public List<Matricula> ConsultarTodosAlunosPor(int turmaId, int ano)
+        public List<Matricula> ConsultarTodosAlunosPor(int turmaId)
         {
             return Context.Set<Matricula>()
-                .Where(m => m.CursoAberto.Id == turmaId && m.DataDeCriacao.Year == ano && !m.Cancelada)
+                .Where(m => m.CursoAberto.Id == turmaId && !m.Cancelada)
                 .Include(p => p.Pessoa)
                 .ThenInclude(p => p.Endereco)
                 .Include(p => p.CursoAberto)

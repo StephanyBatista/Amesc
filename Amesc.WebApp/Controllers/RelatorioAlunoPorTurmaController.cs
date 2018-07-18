@@ -29,7 +29,7 @@ namespace Amesc.WebApp.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public async Task<IActionResult> Index(int? turmaId, int? ano, bool? gerarEmExcel)
+        public async Task<IActionResult> Index(int? turmaId, bool? gerarEmExcel)
         {
             ViewBag.TurmaSelecionada = turmaId;
 
@@ -41,14 +41,7 @@ namespace Amesc.WebApp.Controllers
                 Selected = c.Id == turmaId
             }).ToList();
 
-            ViewBag.Anos = new List<int> { 2017, 2018, 2019, 2020 }.Select(c => new SelectListItem
-            {
-                Value = c.ToString(),
-                Text = c.ToString(),
-                Selected = ano == c
-            }).ToList();
-
-            var alunos = BuscarRelatorio(turmaId, ano);
+            var alunos = BuscarRelatorio(turmaId);
 
             if (gerarEmExcel.HasValue && gerarEmExcel.Value)
                 return await GerarExcel(alunos);
@@ -109,13 +102,13 @@ namespace Amesc.WebApp.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
         }
 
-        private List<RelatorioDeDadosDoAlunoPorTurmaViewModel> BuscarRelatorio(int? turmaId, int? ano)
+        private List<RelatorioDeDadosDoAlunoPorTurmaViewModel> BuscarRelatorio(int? turmaId)
         {
             var alunos = new List<RelatorioDeDadosDoAlunoPorTurmaViewModel>();
 
             if (turmaId.HasValue)
             {
-                var matriculas = _matriculaRepositorio.ConsultarTodosAlunosPor(turmaId.Value, ano.Value);
+                var matriculas = _matriculaRepositorio.ConsultarTodosAlunosPor(turmaId.Value);
                 alunos = matriculas.Select(m => new RelatorioDeDadosDoAlunoPorTurmaViewModel(m.Pessoa)).ToList();
             }
 
