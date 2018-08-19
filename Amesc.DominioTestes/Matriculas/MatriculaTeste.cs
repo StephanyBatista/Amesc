@@ -97,7 +97,7 @@ namespace Amesc.DominioTestes.Matriculas
         }
 
         [TestMethod]
-        public void DevePoderAdicionarNotaDoAlunoNoCursoESeAprovado()
+        public void DevePoderAdicionarNotaDoAlunoNoCursoEStatusDeAprovacao()
         {
             const float notaDoAlunoNoCurso = 97.50f;
             var matricula = FluentBuilder<Matricula>.New().Build();
@@ -106,6 +106,28 @@ namespace Amesc.DominioTestes.Matriculas
 
             Assert.AreEqual(notaDoAlunoNoCurso, matricula.NotaDoAlunoNoCurso);
             Assert.AreEqual(StatusDaAprovacaoDaMatricula.Aprovado, matricula.StatusDaAprovacao);
+        }
+
+        [TestMethod]
+        public void DevePoderAdicionarStatusDeReprovadoESemNota()
+        {
+            var matricula = FluentBuilder<Matricula>.New().Build();
+
+            matricula.AdicionarNotaDoAlunoNoCurso(0, StatusDaAprovacaoDaMatricula.Reprovado);
+
+            Assert.AreEqual(StatusDaAprovacaoDaMatricula.Reprovado, matricula.StatusDaAprovacao);
+        }
+
+        [TestMethod]
+        public void DeveNotaDoAlunoSerZeroQuandoStatusDeAprovacaoEhReprovado()
+        {
+            const int notaEsperada = 0;
+            const int notaInvalida = 100;
+            var matricula = FluentBuilder<Matricula>.New().Build();
+
+            matricula.AdicionarNotaDoAlunoNoCurso(notaInvalida, StatusDaAprovacaoDaMatricula.Reprovado);
+
+            Assert.AreEqual(notaEsperada, matricula.NotaDoAlunoNoCurso);
         }
 
         [TestMethod]
