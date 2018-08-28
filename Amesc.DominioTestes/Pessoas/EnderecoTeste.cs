@@ -33,11 +33,11 @@ namespace Amesc.DominioTestes.Pessoas
             var endereco = new Endereco(_numero, _logradouro, _cep, _bairro, _complemento, _cidade, _estado);
 
             Assert.AreEqual(_numero, endereco.Numero);
-            Assert.AreEqual(_logradouro, endereco.Logradouro);
+            Assert.AreEqual(_logradouro.ToUpper(), endereco.Logradouro);
             Assert.AreEqual(_cep, endereco.Cep);
             Assert.AreEqual(_bairro, endereco.Bairro);
             Assert.AreEqual(_complemento, endereco.Complemento);
-            Assert.AreEqual(_cidade, endereco.Cidade);
+            Assert.AreEqual(_cidade.ToUpper(), endereco.Cidade);
             Assert.AreEqual(_estado, endereco.Estado);
         }
 

@@ -59,7 +59,7 @@ namespace Amesc.Dominio.Pessoas
             string nome, string cpf, string orgaoEmissorDoRg, string rg, DateTime dataDeNascimento, string registroProfissional, 
             string telefone, Endereco endereco, string tipoDePublico, string especialidade, string midiaSocial)
         {
-            Nome = nome;
+            Nome = nome.ToUpper();
             Cpf = cpf;
             Telefone = telefone;
             TipoDePublico = tipoDePublico;

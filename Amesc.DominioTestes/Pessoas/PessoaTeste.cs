@@ -41,34 +41,56 @@ namespace Amesc.DominioTestes.Pessoas
             _tipoDePessoa = TipoDePessoa.Aluno;
         }
 
+        private Pessoa CriarPessoa(){
+            return new Pessoa(
+                _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
+                _tipoDePublico, _especialidade, _midiaSocial, _tipoDePessoa);
+        }
+
+        private Pessoa EditarPessoa(){
+            var pessoa = FluentBuilder<Pessoa>.New().Build();
+
+            pessoa.Editar(
+                _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, 
+                _endereco, _tipoDePublico, _especialidade, _midiaSocial);
+
+            return pessoa;
+        }
+
         [TestMethod]
         public void DeveCriarAluno()
         {
-            var aluno = new Pessoa(
-                _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                _tipoDePublico, _especialidade, _midiaSocial, _tipoDePessoa);
+            var pessoa = CriarPessoa();
 
-            Assert.AreEqual(_nome, aluno.Nome);
-            Assert.AreEqual(_cpf, aluno.Cpf);
-            Assert.AreEqual(_orgaoEmissorDoRg, aluno.OrgaoEmissorDoRg);
-            Assert.AreEqual(_rg, aluno.Rg);
-            Assert.AreEqual(_dataDeNascimento, aluno.DataDeNascimento);
-            Assert.AreEqual(_registroProfissional, aluno.RegistroProfissional);
-            Assert.AreEqual(_telefone, aluno.Telefone);
-            Assert.AreEqual(_endereco, aluno.Endereco);
-            Assert.AreEqual(_tipoDePublico, aluno.TipoDePublico);
-            Assert.AreEqual(_midiaSocial, aluno.MidiaSocial);
-            Assert.AreEqual(_especialidade, aluno.Especialidade);
-            Assert.AreEqual(_tipoDePessoa, aluno.TipoDePessoa);
+            Assert.AreEqual(_nome, pessoa.Nome);
+            Assert.AreEqual(_cpf, pessoa.Cpf);
+            Assert.AreEqual(_orgaoEmissorDoRg, pessoa.OrgaoEmissorDoRg);
+            Assert.AreEqual(_rg, pessoa.Rg);
+            Assert.AreEqual(_dataDeNascimento, pessoa.DataDeNascimento);
+            Assert.AreEqual(_registroProfissional, pessoa.RegistroProfissional);
+            Assert.AreEqual(_telefone, pessoa.Telefone);
+            Assert.AreEqual(_endereco, pessoa.Endereco);
+            Assert.AreEqual(_tipoDePublico, pessoa.TipoDePublico);
+            Assert.AreEqual(_midiaSocial, pessoa.MidiaSocial);
+            Assert.AreEqual(_especialidade, pessoa.Especialidade);
+            Assert.AreEqual(_tipoDePessoa, pessoa.TipoDePessoa);
+        }
+
+        [TestMethod]
+        public void DeveNomeDaPessoaFicarNoMaiusculo()
+        {
+            var pessoa = CriarPessoa();
+
+            Assert.Equals(_nome.ToUpper(), pessoa.Nome);
         }
 
         [TestMethod]
         public void NaoDeveCriarAlunoSemNome()
         {
+            _nome = string.Empty;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new Pessoa(
-                        null, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial, TipoDePessoa.Aluno))
+                    () => CriarPessoa())
                 .Message;
 
             Assert.AreEqual("Nome é obrigatório", message);
@@ -77,10 +99,10 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveCriarAlunoSemCpf()
         {
+            _cpf = string.Empty;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new Pessoa(
-                        _nome, null, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial, TipoDePessoa.Aluno))
+                    () => CriarPessoa())
                 .Message;
 
             Assert.AreEqual("CPF é obrigatório", message);
@@ -89,10 +111,10 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveCriarAlunoSemOrgaoEmissorDoRg()
         {
+            _orgaoEmissorDoRg = string.Empty;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new Pessoa(
-                        _nome, _cpf, null, _rg, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial, TipoDePessoa.Aluno))
+                    () => CriarPessoa())
                 .Message;
 
             Assert.AreEqual("Orgão emissor do RG é obrigatório", message);
@@ -101,10 +123,10 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveCriarAlunoSemRg()
         {
+            _rg = string.Empty;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new Pessoa(
-                        _nome, _cpf, _orgaoEmissorDoRg, null, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial, TipoDePessoa.Aluno))
+                    () => CriarPessoa())
                 .Message;
 
             Assert.AreEqual("RG é obrigatório", message);
@@ -113,10 +135,10 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveCriarAlunoSemDataDeNascimento()
         {
+            _dataDeNascimento = DateTime.MinValue;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new Pessoa(
-                        _nome, _cpf, _orgaoEmissorDoRg, _rg, DateTime.MinValue, _registroProfissional, _telefone, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial, TipoDePessoa.Aluno))
+                    () => CriarPessoa())
                 .Message;
 
             Assert.AreEqual("Data de nascimento é obrigatório", message);
@@ -125,10 +147,10 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveCriarAlunoSemTelefone()
         {
+            _telefone = string.Empty;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new Pessoa(
-                        _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, null, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial, TipoDePessoa.Aluno))
+                    () => CriarPessoa())
                 .Message;
 
             Assert.AreEqual("Telefone é obrigatório", message);
@@ -137,55 +159,39 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveCriarAlunoSemEndereco()
         {
+            _endereco = null;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new Pessoa(
-                        _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, null, 
-                        _tipoDePublico, _especialidade, _midiaSocial, TipoDePessoa.Aluno))
+                    () => CriarPessoa())
                 .Message;
 
             Assert.AreEqual("Endereço é obrigatório", message);
         }
 
         [TestMethod]
-        public void NaoDeveCriarAlunoSemTipoDePublico()
+        public void DeveEditarPessoa()
         {
-            var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => new Pessoa(
-                        _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                        null, _especialidade, _midiaSocial, TipoDePessoa.Aluno))
-                .Message;
+            var pessoa = EditarPessoa();
 
-            Assert.AreEqual("Tipo de publico é obrigatório", message);
-        }
-
-        [TestMethod]
-        public void DeveEditarAluno()
-        {
-            var aluno = FluentBuilder<Pessoa>.New().Build();
-
-            aluno.Editar(
-                _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, 
-                _endereco, _tipoDePublico, _especialidade, _midiaSocial);
-
-            Assert.AreEqual(_nome, aluno.Nome);
-            Assert.AreEqual(_cpf, aluno.Cpf);
-            Assert.AreEqual(_orgaoEmissorDoRg, aluno.OrgaoEmissorDoRg);
-            Assert.AreEqual(_rg, aluno.Rg);
-            Assert.AreEqual(_dataDeNascimento, aluno.DataDeNascimento);
-            Assert.AreEqual(_registroProfissional, aluno.RegistroProfissional);
-            Assert.AreEqual(_telefone, aluno.Telefone);
-            Assert.AreEqual(_endereco, aluno.Endereco);
-            Assert.AreEqual(_tipoDePublico, aluno.TipoDePublico);
-            Assert.AreEqual(_midiaSocial, aluno.MidiaSocial);
+            Assert.AreEqual(_nome, pessoa.Nome);
+            Assert.AreEqual(_cpf, pessoa.Cpf);
+            Assert.AreEqual(_orgaoEmissorDoRg, pessoa.OrgaoEmissorDoRg);
+            Assert.AreEqual(_rg, pessoa.Rg);
+            Assert.AreEqual(_dataDeNascimento, pessoa.DataDeNascimento);
+            Assert.AreEqual(_registroProfissional, pessoa.RegistroProfissional);
+            Assert.AreEqual(_telefone, pessoa.Telefone);
+            Assert.AreEqual(_endereco, pessoa.Endereco);
+            Assert.AreEqual(_tipoDePublico, pessoa.TipoDePublico);
+            Assert.AreEqual(_midiaSocial, pessoa.MidiaSocial);
         }
 
         [TestMethod]
         public void NaoDeveEditarAlunoSemNome()
         {
+            _nome = string.Empty;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _pessoa.Editar(
-                        null, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial))
+                    () => EditarPessoa())
                 .Message;
 
             Assert.AreEqual("Nome é obrigatório", message);
@@ -194,10 +200,10 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveEditarAlunoSemCpf()
         {
+            _cpf = string.Empty;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _pessoa.Editar(
-                        _nome, null, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial))
+                    () => EditarPessoa())
                 .Message;
 
             Assert.AreEqual("CPF é obrigatório", message);
@@ -206,10 +212,10 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveEditarAlunoSemOrgaoEmissorDoRg()
         {
+            _orgaoEmissorDoRg = string.Empty;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _pessoa.Editar(
-                        _nome, _cpf, null, _rg, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial))
+                    () => EditarPessoa())
                 .Message;
 
             Assert.AreEqual("Orgão emissor do RG é obrigatório", message);
@@ -218,10 +224,10 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveEditarAlunoSemRg()
         {
+            _rg = string.Empty;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _pessoa.Editar(
-                        _nome, _cpf, _orgaoEmissorDoRg, null, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial))
+                    () => EditarPessoa())
                 .Message;
 
             Assert.AreEqual("RG é obrigatório", message);
@@ -230,10 +236,10 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveEditarAlunoSemDataDeNascimento()
         {
+            _dataDeNascimento = DateTime.MinValue;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _pessoa.Editar(
-                        _nome, _cpf, _orgaoEmissorDoRg, _rg, DateTime.MinValue, _registroProfissional, _telefone, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial))
+                    () => EditarPessoa())
                 .Message;
 
             Assert.AreEqual("Data de nascimento é obrigatório", message);
@@ -242,10 +248,10 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveEditarAlunoSemTelefone()
         {
+            _telefone = string.Empty;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _pessoa.Editar(
-                        _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, null, _endereco, 
-                        _tipoDePublico, _especialidade, _midiaSocial))
+                    () => EditarPessoa())
                 .Message;
 
             Assert.AreEqual("Telefone é obrigatório", message);
@@ -254,25 +260,13 @@ namespace Amesc.DominioTestes.Pessoas
         [TestMethod]
         public void NaoDeveEditarAlunoSemEndereco()
         {
+            _endereco = null;
+            
             var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _pessoa.Editar(
-                        _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, null, 
-                        _tipoDePublico, _especialidade, _midiaSocial))
+                    () => EditarPessoa())
                 .Message;
 
             Assert.AreEqual("Endereço é obrigatório", message);
-        }
-
-        [TestMethod]
-        public void NaoDeveEditarAlunoSemTipoDePublico()
-        {
-            var message = Assert.ThrowsException<ExcecaoDeDominio>(
-                    () => _pessoa.Editar(
-                        _nome, _cpf, _orgaoEmissorDoRg, _rg, _dataDeNascimento, _registroProfissional, _telefone, _endereco, 
-                        null, _especialidade, _midiaSocial))
-                .Message;
-
-            Assert.AreEqual("Tipo de publico é obrigatório", message);
         }
     }
 }

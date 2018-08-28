@@ -24,11 +24,11 @@ namespace Amesc.Dominio.Pessoas
             ExcecaoDeDominio.Quando(string.IsNullOrEmpty(estado), "Estado do endereço é obrigatório");
 
             Numero = numero;
-            Logradouro = logradouro;
+            Logradouro = logradouro.ToUpper();
             Cep = cep;
             Bairro = bairro;
             Complemento = complemento;
-            Cidade = cidade;
+            Cidade = cidade.ToUpper();
             Estado = estado;
         }
 
